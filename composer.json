@@ -1,0 +1,24 @@
+{
+    "name": "pingpong/presenters",
+    "description": "Laravel 4 - Simple Presenters",
+    "keywords":["laravel", "pingpong", "simple", "presenters"],
+    "license":"MIT",
+    "authors": [
+        {
+            "name": "PiNGPONG LABS",
+            "email": "pingpong.labs@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "require-dev":{
+        "illuminate/support": "4.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pingpong\\Presenters\\": "src/Pingpong/Presenters"
+        }
+    },
+    "minimum-stability": "stable"
+}
