@@ -66,7 +66,7 @@ Your can all that as a method. Like this.
 
 **Now, how about get all user ?**
 You can use `Pingpong\Presenters\PresenterCollection` class for this case.
-Maybe something like this.
+Like this.
 
 ```php
 <?php
@@ -97,7 +97,7 @@ On view, you can access your presenter as property or method.
 
 **Now, how if i have paginated data ?**
 You can your `Pingpong\Presenters\PresenterPagination` class.
-Maybe somethind like this.
+Like this.
 
 ```php
 <?php
