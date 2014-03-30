@@ -57,7 +57,7 @@ Simple access presenter property on view.
 ```
 
 **How about argument on presenter method ?**
-Your can all that as a method. Like this.
+Your can call that method like this.
 ```php
 <div>
 	{{ $presenter->email(['class' => 'btn btn-primary']) }}
