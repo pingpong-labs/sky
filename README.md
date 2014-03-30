@@ -75,7 +75,6 @@ use Pingpong\Presenters\PresenterCollection;
 
 class UsersController extends BaseController
 {
-	
 	public function index()
 	{
 		$users = User::all();
@@ -106,7 +105,6 @@ use Pingpong\Presenters\PresenterPagination;
 
 class UsersController extends BaseController
 {
-	
 	public function index()
 	{
 		$users = User::paginate(10);
