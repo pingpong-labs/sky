@@ -95,7 +95,7 @@ On view, you can access your presenter as property or method.
 ```
 
 **Now, how if i have paginated data ?**
-You can your `Pingpong\Presenters\PresenterPagination` class.
+You can use `Pingpong\Presenters\PresenterPagination` class.
 Like this.
 
 ```php

@@ -38,26 +38,26 @@ abstract class Presenter
 	{
 		if(method_exists($this, $name))
 		{
-			return call_user_func_array([$this, $name], []);
+			return call_user_func_array(array($this, $name), array());
 		}
 		$resource = $this->resource;
 		return isset($resource->$name) ? $resource->$name : null;
 	}
 
 	/**
-	 * Get called method.
+	 * Magic call method.
 	 *
 	 * @param  string  $name
 	 * @param  array   $args
 	 * @return mixed
 	 */
-	public function __call($method, $args = [])
+	public function __call($method, $args = array())
 	{
 		if(method_exists($this, $method))
 		{
-			return call_user_func_array([$this, $method], $args);
+			return call_user_func_array(array($this, $method), $args);
 		}
-		return $this->resource->$method($args);
+		return call_user_func_array(array($this->resource, $method), $args);
 	}
 }
 
