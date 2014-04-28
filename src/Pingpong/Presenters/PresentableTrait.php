@@ -18,7 +18,6 @@ trait PresentableTrait
 		{
 			throw new \InvalidArgumentException("Presenter class must be defined.");
 		}
-
 		return App::make($this->presenter, array($this));
 	}
 }
