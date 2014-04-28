@@ -48,10 +48,15 @@ class User extends Model
 
 That's it! You're done. Now, within your view, you can do:
 
-    <h1>Your email is {{ $user->present()->email }}</h1>
+```php
+<h1>Your email is {{ $user->present()->email }}</h1>
+```
 
 Or, call the presenter as method.
-    <h1>Your email is {{ $user->present()->email() }}</h1>
+
+```php
+<h1>Your email is {{ $user->present()->email(['width' => 140]) }}</h1>
+```
 
 ### License
 
