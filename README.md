@@ -21,11 +21,15 @@ Next, open a terminal and run.
 
 After the composer updated. Add new service provider in app/config/app.php.
 
+```php
     'Pingpong\Oembed\OembedServiceProvider'
+```
 
 Next, Add new alias.
 
+```php
     'Oembed'           => 'Pingpong\Oembed\Facades\Oembed',
+```
 
 Done.
 
@@ -62,8 +66,8 @@ $info->providerIcon; //The icon choosen as main icon
 
 ### Documentation
 
-Because this package using the library [oscarotero / Embed] (https://github.com/oscarotero/Embed), please refer to its documentation for more info.
+Because this package using the library [oscarotero/Embed] (https://github.com/oscarotero/Embed), please refer to its documentation for more info.
 
 ### License
 
-This package is open-sourced software licensed under the [MIT license](https://github.com/pingpong-labs/oembed/blob/master/LICENSE).
+This package is open-sourced software licensed under [the MIT license](https://github.com/pingpong-labs/oembed/blob/master/LICENSE).
