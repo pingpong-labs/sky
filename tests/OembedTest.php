@@ -24,8 +24,10 @@ class OembedTest extends PHPUnit_Framework_TestCase {
 	public function test_get_info_from_a_specify_url()
 	{
 		$url = 'https://github.com/gravitano';
-		$this->embed->shouldReceive('get')->once()->with($url, '')->andReturn(array('url' => $url));
-		$info = $this->oembed->get($url);
+
+        $this->embed->shouldReceive('get')->once()->with($url, '')->andReturn(array('url' => $url));
+
+        $info = $this->oembed->get($url);
 
 		$this->assertTrue(is_array($info));
 		$this->assertArrayHasKey('url', $info);
@@ -34,8 +36,10 @@ class OembedTest extends PHPUnit_Framework_TestCase {
 	public function test_get_info_from_a_specify_url_but_false_returned()
 	{
 		$url = 'foo';
-		$this->embed->shouldReceive('get')->once()->with($url, '')->andReturn(false);
-		$info = $this->oembed->get($url);
+
+        $this->embed->shouldReceive('get')->once()->with($url, '')->andReturn(false);
+
+        $info = $this->oembed->get($url);
 
 		$this->assertFalse($info);
 	}
@@ -44,8 +48,10 @@ class OembedTest extends PHPUnit_Framework_TestCase {
     {
 
         $url = 'https://www.youtube.com/watch?v=PP1xn5wHtxE';
-        $this->embed->shouldReceive('get')->once()->with($url, '')->andReturn(['url' => $url]);
-        $this->cache->shouldReceive('remember')->once()->andReturn(['url' => $url]);
+
+        $this->embed->shouldReceive('get')->once()->with($url, '')->andReturn(array('url' => $url));
+        $this->cache->shouldReceive('remember')->once()->andReturn(array('url' => $url));
+
         $info = $this->oembed->cache($url);
 
         $this->assertTrue(is_array($info));
