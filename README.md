@@ -3,6 +3,32 @@ Oembed
 
 Laravel 4 - Retrieve page info using oembed, opengraph, etc
 
+[![Build Status](https://travis-ci.org/pingpong-labs/oembed.svg?branch=master)](https://travis-ci.org/pingpong-labs/oembed)
+
+Server Requirements
+
+    Require PHP 5.4+ or higher.
+
+### Installation
+
+Open your composer.json file, and add the new required package.
+
+    "pingpong/oembed": "1.0.*"
+
+Next, open a terminal and run.
+
+    composer update
+
+After the composer updated. Add new service provider in app/config/app.php.
+
+    'Pingpong\Oembed\OembedServiceProvider'
+
+Next, Add new alias.
+
+    'Oembed'           => 'Pingpong\Oembed\Facades\Oembed',
+
+Done.
+
 ### Usage
 
 ```php
@@ -33,3 +59,7 @@ $info->providerUrl; //The provider url
 $info->providerIcons; //All provider icons found in the page
 $info->providerIcon; //The icon choosen as main icon
 ```
+
+### License
+
+This package is open-sourced software licensed under the MIT license.
