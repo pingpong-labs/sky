@@ -35,6 +35,8 @@ Done.
 
 ### Usage
 
+Basic Usage
+
 ```php
 $info = Oembed::get('https://www.youtube.com/watch?v=PP1xn5wHtxE');
 
@@ -62,6 +64,12 @@ $info->providerName; //The provider name of the page (youtube, twitter, instagra
 $info->providerUrl; //The provider url
 $info->providerIcons; //All provider icons found in the page
 $info->providerIcon; //The icon choosen as main icon
+```
+
+Caching the results.
+
+```php
+$info = Oembed::cache($url, $options);
 ```
 
 ### Documentation
