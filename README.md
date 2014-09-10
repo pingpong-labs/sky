@@ -1,11 +1,11 @@
 Oembed
 ======
 
-Laravel 4 - Retrieve page info using oembed, opengraph, etc
+Laravel 4 - Retrieve page info using oembed, opengraph, etc.
 
 [![Build Status](https://travis-ci.org/pingpong-labs/oembed.svg?branch=master)](https://travis-ci.org/pingpong-labs/oembed)
 
-Server Requirements
+### Server Requirements
 
     Require PHP 5.4+ or higher.
 
@@ -60,6 +60,10 @@ $info->providerIcons; //All provider icons found in the page
 $info->providerIcon; //The icon choosen as main icon
 ```
 
+### Documentation
+
+Because this package using the library [oscarotero / Embed] (https://github.com/oscarotero/Embed), please refer to its documentation for more info.
+
 ### License
 
-This package is open-sourced software licensed under the MIT license.
+This package is open-sourced software licensed under the [MIT license](https://github.com/pingpong-labs/oembed/blob/master/LICENSE).
