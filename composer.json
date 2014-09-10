@@ -12,6 +12,7 @@
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": "4.2.*",
+        "illuminate/cache": "4.2.*",
         "embed/embed": "1.7.0"
     },
     "require-dev": {

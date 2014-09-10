@@ -1,5 +1,6 @@
 <?php namespace Pingpong\Oembed;
 
+use Embed\Embed;
 use Illuminate\Support\ServiceProvider;
 
 class OembedServiceProvider extends ServiceProvider {
@@ -30,7 +31,7 @@ class OembedServiceProvider extends ServiceProvider {
 	{
 		$this->app->bindShared('oembed', function ($app)
 		{
-			return new Oembed;
+			return new Oembed(new Embed, $app['cache']);
 		});
 	}
 
