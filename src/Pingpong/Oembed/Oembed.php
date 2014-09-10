@@ -58,14 +58,14 @@ class Oembed {
 
         array_forget($options, 'lifetime');
 
-        $info = $this->get($url, $options);
+        $self = $this;
 
-        return $this->cache->remember($url, $lifetime, function() use ($info)
+        return $this->cache->remember($url, $lifetime, function() use ($self, $url, $options)
         {
-            return $info;
+			return $self->get($url, $options);
         });
     }
-
+    
 	/**
 	 * Gets the info from a source (list of urls).
 	 * 
