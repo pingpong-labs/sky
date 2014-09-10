@@ -1,10 +1,21 @@
-<?php namespace Pingpong\Oembed\Facade;
+<?php namespace Pingpong\Oembed\Facades;
 
+use Illuminate\Support\Facades\Facade;
+
+/**
+ * Class Oembed
+ * @package Pingpong\Oembed\Facades
+ */
 class Oembed extends Facade {
 
-	protected static function getFacadeAccessor()
-	{
-		return 'oembed';
-	}
+    /**
+     * Get the registered name of the component.
+     *
+     * @return string
+     */
+    protected static function getFacadeAccessor()
+    {
+        return 'oembed';
+    }
 
 }
