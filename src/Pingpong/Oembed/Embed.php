@@ -4,15 +4,19 @@ use Embed\Embed as BaseEmbed;
 
 /**
  * Class Embed
+ * 
  * @package Pingpong\Oembed
+ * @author  Pingpong Labs <pingpong.labs@gmail.com>
+ * @author  Gravitano <gravitano16@gmail.com>
+ * @license https://github.com/pingpong-labs/oembed/blob/master/LICENSE MIT
  */
-class Embed extends BaseEmbed
-{
+class Embed extends BaseEmbed {
+
     /**
      * Get info from a specify url.
      *
-     * @param $url
-     * @param array $options
+     * @param  string|Request   $url     The url or a request with the url
+     * @param  array            $options
      * @return \Embed\Adapters\AdapterInterface|false
      */
     public function get($url, array $options = null)
@@ -23,7 +27,7 @@ class Embed extends BaseEmbed
     /**
      * Gets the info from a source (list of urls)
      *
-     * @param $url
+     * @param  string|Request  $url  The url or a request with the source url
      * @return \Embed\Sources\SourceInterface|false
      */
     public function source($url)

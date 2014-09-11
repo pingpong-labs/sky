@@ -4,7 +4,11 @@ use Illuminate\Cache\Repository;
 
 /**
  * Class Oembed
+ * 
  * @package Pingpong\Oembed
+ * @author  Pingpong Labs <pingpong.labs@gmail.com>
+ * @author  Gravitano <gravitano16@gmail.com>
+ * @license https://github.com/pingpong-labs/oembed/blob/master/LICENSE MIT
  */
 class Oembed {
 	
