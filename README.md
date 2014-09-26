@@ -74,8 +74,8 @@ $info = Oembed::cache($url, $options);
 
 ### Documentation
 
-Because this package using the library [oscarotero/Embed] (https://github.com/oscarotero/Embed), please refer to its documentation for more info.
+Because this package using the library [oscarotero/Embed](https://github.com/oscarotero/Embed), please refer to its documentation for more info.
 
 ### License
 
-This package is open-sourced software licensed under [the MIT license](https://github.com/pingpong-labs/oembed/blob/master/LICENSE).
+This package is open-sourced software licensed under [The BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause)
