@@ -4,7 +4,7 @@ Simple Validator Class for Laravel
 ### Quick Installation Via Composer
 
 ```
-composer require "pingpong/validator:dev-master"
+composer require "pingpong/validator:1.*"
 ```
 
 ### Example
