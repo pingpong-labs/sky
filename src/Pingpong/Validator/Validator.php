@@ -160,7 +160,7 @@ abstract class Validator {
     }
 
     /**
-     * Handle magic method __call to the class.
+     * Handle magic method __get to the class.
      *
      * @param $name
      * @return string
