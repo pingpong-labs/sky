@@ -1,0 +1,27 @@
+{
+    "name": "pingpong/testing",
+    "description": "Unit Testing Helper for Laravel",
+    "keywords": ["laravel"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pingpong Labs",
+            "email": "pingpong.labs@gmail.com",
+            "homepage": "http://pingpong.web.id"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Pingpong\\Testing\\": "src/Pingpong/Testing"
+        }
+    },
+    "require": {
+        "php": ">=5.4.0",
+        "laravel/framework": "4.2.*"
+    },
+    "require-dev": {
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "4.1.*"
+    },
+    "minimum-stability": "stable"
+}
