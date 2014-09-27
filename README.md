@@ -9,7 +9,7 @@ composer require "pingpong/validator:dev-master"
 
 ### Example
 
-Your validator class.
+Your validator class must extends to `Pingpong\Validator\Validator` class.
 
 ```php
 use Pingpong\Validator\Validator;
@@ -29,7 +29,7 @@ class RegisterValidator extends Validator {
 }
 ```
 
-In your controller.
+Now, inject the validator class to your controller.
 
 ```php
 
@@ -42,7 +42,7 @@ class RegisterController extends BaseController {
         $this->validator = $validator;
     }
 
-    public function postIndex()
+    public function store()
     {
         $this->validator->validate();
 
