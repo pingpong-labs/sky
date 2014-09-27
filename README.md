@@ -1,4 +1,4 @@
-Simple Form Validator
+Simple Validator Class for Laravel
 =========
 
 ### Quick Installation Via Composer
