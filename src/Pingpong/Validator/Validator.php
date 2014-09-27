@@ -63,12 +63,11 @@ abstract class Validator {
     /**
      * Handle validation failed.
      *
-     * @param IlluminateValidator $validator
      * @throws ValidationException
      */
-    public function failed(IlluminateValidator $validator)
+    public function failed()
     {
-        throw new ValidationException($validator->messages(), "Validation failed");
+        throw new ValidationException($this->getErrors(), "Validation failed");
     }
 
     /**
@@ -86,7 +85,7 @@ abstract class Validator {
 
         if ($this->validation->fails())
         {
-            $this->failed($this->validation);
+            $this->failed();
         }
 
         return true;
@@ -135,7 +134,7 @@ abstract class Validator {
     /**
      * Get validation errors.
      *
-     * @return mixed
+     * @return \Illuminate\Support\MessageBag
      */
     public function getErrors()
     {
