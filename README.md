@@ -75,9 +75,9 @@ class RegisterValidator extends Validator {
         ];
     }
 
-    public function failed(Illuminate\Validation\Validator $validator)
+    public function failed()
     {
-        return Redirect::back()->withInput()->withErrors($validator->getErrors());
+        return Redirect::back()->withInput()->withErrors($this->getErrors());
     }
 
 }
