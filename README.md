@@ -55,6 +55,34 @@ class RegisterController extends BaseController {
 
 ```
 
+### Custom Validation Messages
+
+You can also specify the custom validation messages as you want. For example :
+
+```
+use Pingpong\Validator\Validator;
+
+class RegisterValidator extends Validator {
+
+    public function rules()
+    {
+        return [
+            'name' => 'required',
+            'username' => 'required|unique:users,username',
+            'email' => 'required|unique:users,email',
+            'password' => 'required|min:6|max:20',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Please enter your name',
+        ];
+    }
+
+}
+```
 
 ### Handling Failed Validation
 
