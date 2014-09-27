@@ -22,7 +22,6 @@ abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase {
      */
     public function createApplication()
     {
-
         $app = new Application;
 
         $app->detectEnvironment(array(
