@@ -1,6 +1,6 @@
 {
     "name": "pingpong/testing",
-    "description": "Unit Testing Helper for Laravel",
+    "description": "Unit Testing Helper for Laravel's Package",
     "keywords": ["laravel"],
     "license": "MIT",
     "authors": [
