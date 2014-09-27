@@ -4,7 +4,7 @@ Simple Form Validator
 ### Quick Installation Via Composer
 
 ```
-composer create-project "pingpong/validator:dev-master"
+composer require "pingpong/validator:dev-master"
 ```
 
 ### Example
