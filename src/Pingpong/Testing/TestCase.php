@@ -186,7 +186,7 @@ abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase {
         return [];
     }
 
-    private function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app)
     {
     }
 
