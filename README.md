@@ -59,7 +59,7 @@ class RegisterController extends BaseController {
 
 You can also specify the custom validation messages as you want. For example :
 
-```
+```php
 use Pingpong\Validator\Validator;
 
 class RegisterValidator extends Validator {
@@ -67,10 +67,7 @@ class RegisterValidator extends Validator {
     public function rules()
     {
         return [
-            'name' => 'required',
-            'username' => 'required|unique:users,username',
-            'email' => 'required|unique:users,email',
-            'password' => 'required|min:6|max:20',
+            'name' => 'required'
         ];
     }
 
