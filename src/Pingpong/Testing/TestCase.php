@@ -59,7 +59,10 @@ abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase {
         return $app;
     }
 
-    private function getApplicationPaths()
+    /**
+     * @return array
+     */
+    protected function getApplicationPaths()
     {
         $basePath = realpath(__DIR__.'/../../fixture');
 
@@ -131,16 +134,6 @@ abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase {
     }
 
     /**
-     * Get package aliases.
-     *
-     * @return array
-     */
-    protected function getPackageAliases()
-    {
-        return [];
-    }
-
-    /**
      * Get application providers.
      *
      * @return array
@@ -177,6 +170,15 @@ abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase {
     }
 
     /**
+     * Get package aliases.
+     *
+     * @return array
+     */
+    protected function getPackageAliases()
+    {
+        return [];
+    }
+    /**
      * Get package providers.
      *
      * @return array
@@ -186,8 +188,12 @@ abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase {
         return [];
     }
 
+    /**
+     * @param $app
+     */
     protected function getEnvironmentSetUp($app)
     {
+        //
     }
 
 }
