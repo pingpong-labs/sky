@@ -1,6 +1,8 @@
 Simple Validator Class for Laravel
 =========
 
+[![Build Status](https://travis-ci.org/pingpong-labs/validator.svg)](https://travis-ci.org/pingpong-labs/validator)
+
 ### Quick Installation Via Composer
 
 ```
