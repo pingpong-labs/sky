@@ -61,7 +61,7 @@ abstract class Validator {
     }
 
     /**
-     * Handle validation failed.
+     * Handle failed validation.
      *
      * @throws ValidationException
      */
