@@ -48,7 +48,7 @@ class RegisterController extends BaseController {
 
         $user = User::create($this->validator->getInput());
 
-        return Redirect::to('admin/login');
+        return Redirect::to('login');
     }
 
 }
