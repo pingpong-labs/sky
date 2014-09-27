@@ -16,7 +16,7 @@ use Pingpong\Testing\TestCase;
 
 class LoginControllerTest extends TestCase {
 
-    public function testOk()
+    public function testGetLogin()
     {
         $this->call('GET', '/login');
         $this->assertResponseOk();
