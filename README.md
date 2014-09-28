@@ -3,6 +3,8 @@ Unit Testing Helper for Laravel's Package
 
 This package is inspired from orchestra/testbench package
 
+[![Build Status](https://travis-ci.org/pingpong-labs/testing.svg)](https://travis-ci.org/pingpong-labs/testing)
+
 ### Quick Installation Via Composer
 
 ```
