@@ -54,7 +54,7 @@ abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase {
         $providers = array_merge($this->getApplicationProviders(), $this->getPackageProviders());
         $app->getProviderRepository()->load($app, $providers);
 
-        $this->getEnvironmentSetUp($app);
+        $this->registerBootedCallback($app);
 
         return $app;
     }
@@ -191,7 +191,7 @@ abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase {
     /**
      * @param $app
      */
-    protected function getEnvironmentSetUp($app)
+    protected function registerBootedCallback($app)
     {
         //
     }
