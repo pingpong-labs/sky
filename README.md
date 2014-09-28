@@ -11,7 +11,9 @@ This package is inspired from orchestra/testbench package
 composer require "pingpong/testing:1.*"
 ```
 
-### Your First Test
+### Example Usage
+
+Your First Test.
 
 ```php
 use Pingpong\Testing\TestCase;
@@ -26,7 +28,7 @@ class LoginControllerTest extends TestCase {
 }
 ```
 
-### Register The Package's Providers And Aliases
+Register The Package's Providers And Aliases.
 
 ```php
 use Pingpong\Testing\TestCase;
@@ -49,7 +51,7 @@ class MasterTestCase extends TestCase {
 }
 ```
 
-### Register custom booted callback.
+Register custom booted callback.
 
 ```php
 use Pingpong\Testing\TestCase;
@@ -59,6 +61,21 @@ class MasterTestCase extends TestCase {
     protected function registerBootedCallback($app)
     {
         include __DIR__ . '/../routes.php';
+    }
+}
+```
+
+Setup Your Application Timezone.
+
+```php
+
+use Pingpong\Testing\TestCase;
+
+class MasterTestCase extends TestCase {
+
+    protected function getApplicationTimezone()
+    {
+        return 'Asia/Jakarta';
     }
 }
 ```
