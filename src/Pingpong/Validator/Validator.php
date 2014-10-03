@@ -86,6 +86,8 @@ abstract class Validator {
         if ($this->validation->fails())
         {
             $this->failed();
+
+            return false;
         }
 
         return true;
