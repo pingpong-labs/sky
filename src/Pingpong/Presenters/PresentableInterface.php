@@ -1,9 +1,5 @@
 <?php namespace Pingpong\Presenters;
 
-/**
- * Interface PresentableInterface
- * @package Acme\Presenters
- */
 interface PresentableInterface
 {
     /**

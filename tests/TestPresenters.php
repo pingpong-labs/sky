@@ -22,10 +22,18 @@ class UserModel implements PresentableInterface
 
 class TestPresenters extends PHPUnit_Framework_TestCase
 {
-	public function test_the_presenter()
+	public function setUp()
 	{
-		$userModel = new UserModel;
+		$this->model = new UserModel;
+	}
 
-		return $this->assertEquals('foo@domain.com', $userModel->present()->email);
+	public function testPresenterUsingMagicAccess()
+	{
+		return $this->assertEquals('foo@domain.com', $this->model->present()->email);
+	}
+
+	public function testCallMethod()
+	{
+		return $this->assertEquals('foo@domain.com', $this->model->present()->email());	
 	}
 }

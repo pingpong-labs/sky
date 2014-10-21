@@ -1,13 +1,16 @@
 <?php namespace Pingpong\Presenters;
 
-use Illuminate\Support\Facades\App;
+use Illuminate\Container\Container;
 
-/**
- * Class PresenterTrait
- * @package Acme\Presenters
- */
-trait PresentableTrait
-{
+trait PresentableTrait{
+	
+	/**
+	 * The container instance.
+	 * 
+	 * @var Container
+	 */
+	protected $container;
+
     /**
      * @return mixed
      * @throws \InvalidArgumentException
@@ -16,8 +19,48 @@ trait PresentableTrait
 	{
 		if(is_null($this->presenter))
 		{
-			throw new \InvalidArgumentException("Presenter class must be defined.");
+			throw new \InvalidArgumentException("Presenter is not defined.");
 		}
-		return App::make($this->presenter, array($this));
+
+		return $this->getContainer()->make($this->presenter, array($this));
 	}
+
+	/**
+	 * @param mixed $presenter 
+	 */
+	public function setPresenter($presenter)
+	{
+		$this->presenter = $presenter;
+
+		return $this;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getPresenter()
+	{
+		return $this->presenter;
+	}
+
+	/**
+	 * Set container instance.
+	 * 
+	 * @param Container $container
+	 */
+	public function setContainer(Container $container)
+	{
+		$this->container = $container;
+	}
+
+	/**
+	 * Get container instance.
+	 * 
+	 * @return Container 
+	 */
+	public function getContainer()
+	{
+		return $this->container ?: new Container;
+	}
+	
 }

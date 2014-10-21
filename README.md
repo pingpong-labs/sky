@@ -1,4 +1,4 @@
-Laravel 4 - Simple Presenters
+View Presenter For Laravel
 =============================
 
 ### Installation

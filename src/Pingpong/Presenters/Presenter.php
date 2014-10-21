@@ -1,11 +1,7 @@
 <?php namespace Pingpong\Presenters;
 
-/**
- * Class Presenter
- * @package Acme\Presenters
- */
-abstract class Presenter
-{
+abstract class Presenter {
+
     /**
      * @var PresentableInterface
      */
@@ -40,19 +36,5 @@ abstract class Presenter
 
 		return $this->resource->{$key};
 	}
-
-    /**
-     * @param $method
-     * @param array $parameters
-     * @return mixed
-     */
-    public function __call($method, $parameters = array())
-	{
-		if(method_exists($this, $method))
-		{
-			return call_user_func_array(array($this, $method), $parameters);
-		}
-
-		return call_user_func_array(array($this, $method), $parameters);
-	}
+    
 }
