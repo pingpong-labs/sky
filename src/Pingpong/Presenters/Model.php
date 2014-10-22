@@ -1,8 +1,8 @@
 <?php namespace Pingpong\Presenters;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Model extends Model implements PresentableInterface {
+class Model extends Eloquent implements PresentableInterface {
 
 	use PresentableTrait;
 
