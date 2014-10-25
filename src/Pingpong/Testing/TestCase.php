@@ -11,8 +11,6 @@ use Illuminate\Foundation\Testing\ApplicationTrait;
 
 abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase {
 
-    use AssertionsTrait, ApplicationTrait;
-
     /**
      * Creates the application.
      *
