@@ -4,75 +4,75 @@ use Mockery as m;
 use Pingpong\Menus\Menu;
 use Pingpong\Menus\MenuBuilder as Builder;
 
-class MenuTest extends PHPUnit_Framework_TestCase
-{
-	protected $styles;
+class MenuTest extends PHPUnit_Framework_TestCase {
 
-	protected $views;
+    protected $styles;
 
-	protected $config;
+    protected $views;
 
-	protected $menus;
+    protected $config;
 
-	public function tearDown()
-	{
-		m::close();
-	}
+    protected $menus;
 
-	public function setUp()
-	{
-		$this->views = m::mock('Illuminate\View\Factory');
-		$this->config = m::mock('Illuminate\Config\Repository');
-		
-		$this->menu = new Menu($this->views, $this->config);
-	}
+    public function tearDown()
+    {
+        m::close();
+    }
 
-	public function testItInitialize()
-	{
-		$this->assertInstanceOf('Pingpong\Menus\Menu', $this->menu);
-	}
+    public function setUp()
+    {
+        $this->views = m::mock('Illuminate\View\Factory');
+        $this->config = m::mock('Illuminate\Config\Repository');
 
-	public function testCreateMenuBuilderObject()
-	{
-		$builder = new Builder('top', $this->config);
-		$this->assertInstanceOf('Illuminate\Config\Repository', $this->config);
-		$this->assertInstanceOf('Pingpong\Menus\MenuBuilder', $builder);
-	}
+        $this->menu = new Menu($this->views, $this->config);
+    }
 
-	public function testCreateMenuFromBuilder()
-	{
-		$builder = new Builder('top', $this->config);
+    public function testItInitialize()
+    {
+        $this->assertInstanceOf('Pingpong\Menus\Menu', $this->menu);
+    }
 
-		$home = $builder->add([
-			'title'	=>	'Home',
-			'url'	=>	'/',
-			'icon'	=>	'fa fa-dashboard'
-		]);
+    public function testCreateMenuBuilderObject()
+    {
+        $builder = new Builder('top', $this->config);
+        $this->assertInstanceOf('Illuminate\Config\Repository', $this->config);
+        $this->assertInstanceOf('Pingpong\Menus\MenuBuilder', $builder);
+    }
 
-		$settings = $builder->add([
-			'title'	=>	'Settings',
-			'url'	=>	'/settings',
-			'icon'	=>	'fa fa-tools'
-		]);
+    public function testCreateMenuFromBuilder()
+    {
+        $builder = new Builder('top', $this->config);
 
-		$this->assertInstanceOf('Pingpong\Menus\MenuItem', $home);
-		$this->assertEquals($builder->count(), 2);
-	}
+        $home = $builder->add([
+            'title' => 'Home',
+            'url' => '/',
+            'icon' => 'fa fa-dashboard'
+        ]);
 
-	public function testCreateMenu()
-	{
-		$topMenu = $this->menu->make('top-menu');
-		$topMenu->add([
-			'title'	=>	'Home',
-			'url'	=>	'/',
-			'icon'	=>	'fa fa-dashboard'
-		]);
-		$topMenu->add([
-			'title'	=>	'Profile',
-			'url'	=>	'/profile',
-			'icon'	=>	'fa fa-profile'
-		]);
+        $settings = $builder->add([
+            'title' => 'Settings',
+            'url' => '/settings',
+            'icon' => 'fa fa-tools'
+        ]);
 
-		$this->assertEquals(1, $this->menu->count());
-	}
+        $this->assertInstanceOf('Pingpong\Menus\MenuItem', $home);
+        $this->assertEquals($builder->count(), 2);
+    }
+
+    public function testCreateMenu()
+    {
+        $topMenu = $this->menu->make('top-menu');
+        $topMenu->add([
+            'title' => 'Home',
+            'url' => '/',
+            'icon' => 'fa fa-dashboard'
+        ]);
+        $topMenu->add([
+            'title' => 'Profile',
+            'url' => '/profile',
+            'icon' => 'fa fa-profile'
+        ]);
+
+        $this->assertEquals(1, $this->menu->count());
+    }
 }
