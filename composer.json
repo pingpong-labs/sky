@@ -1,0 +1,13 @@
+{
+    "name": "pingpong/sky",
+    "description": "Sky - A Missing Laravel Components",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Pingpong Labs",
+            "email": "pingpong.labs@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
