@@ -1,7 +1,7 @@
 <?php namespace Pingpong\Presenters;
 
-interface PresentableInterface
-{
+interface PresentableInterface {
+
     /**
      * @return mixed
      */

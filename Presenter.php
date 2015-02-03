@@ -11,30 +11,30 @@ abstract class Presenter {
      * @param PresentableInterface $resource
      */
     public function __construct(PresentableInterface $resource)
-	{
-		$this->resource = $resource;
-	}
+    {
+        $this->resource = $resource;
+    }
 
     /**
      * @return mixed
      */
     public function getResource()
-	{
-		return $this->resource;
-	}
+    {
+        return $this->resource;
+    }
 
     /**
      * @param $key
      * @return mixed
      */
     public function __get($key)
-	{
-		if(method_exists($this, $key))
-		{
-			return call_user_func(array($this, $key));
-		}
+    {
+        if (method_exists($this, $key))
+        {
+            return call_user_func(array($this, $key));
+        }
 
-		return $this->resource->{$key};
-	}
-    
+        return $this->resource->{$key};
+    }
+
 }
