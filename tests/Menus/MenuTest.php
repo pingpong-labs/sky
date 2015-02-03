@@ -2,7 +2,7 @@
 
 use Mockery as m;
 use Pingpong\Menus\Menu;
-use Pingpong\Menus\Builder;
+use Pingpong\Menus\MenuBuilder as Builder;
 
 class MenuTest extends PHPUnit_Framework_TestCase
 {
@@ -36,7 +36,7 @@ class MenuTest extends PHPUnit_Framework_TestCase
 	{
 		$builder = new Builder('top', $this->config);
 		$this->assertInstanceOf('Illuminate\Config\Repository', $this->config);
-		$this->assertInstanceOf('Pingpong\Menus\Builder', $builder);
+		$this->assertInstanceOf('Pingpong\Menus\MenuBuilder', $builder);
 	}
 
 	public function testCreateMenuFromBuilder()
