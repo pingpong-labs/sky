@@ -4,7 +4,7 @@
 
  Laravel  | Pingpong Sky     | PHP 
 :---------|:-----------------|:----
- 4.x      | 1.2.x            |>= 5.3
+ 4.x      | dev-master       |>= 5.3
  5.0.x    | 2.0.*@dev        |>= 5.4
  
 ### Documentation
