@@ -27,7 +27,9 @@ require __DIR__.'/../vendor/autoload.php';
 |
 */
 
-$app = (new PingpongTestCase)->createApplication();
+class DummyApp extends PingpongTestCase {}
+
+$app = (new DummyApp)->createApplication();
 
 /*
 |--------------------------------------------------------------------------
