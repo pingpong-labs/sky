@@ -1,4 +1,4 @@
-<?php namespace Pingpong\Oembed\Facades;
+<?php namespace Pingpong\Oembed;
 
 use Illuminate\Support\Facades\Facade;
 
