@@ -1,5 +1,7 @@
 # Sky - The Missing Laravel Packages 
 
+[![Build Status](https://travis-ci.org/pingpong-labs/sky.svg)](https://travis-ci.org/pingpong-labs/sky)
+
 ### Version Compability
 
  Laravel  | Pingpong Sky     | PHP    | Status
