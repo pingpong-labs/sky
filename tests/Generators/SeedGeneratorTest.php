@@ -2,7 +2,7 @@
 
 use Pingpong\Generators\SeedGenerator;
 
-class SeedGeneratorTest extends TestCase {
+class SeedGeneratorTest extends GeneratorTestCase {
 
 	public function testGenerateWithoutOptions()
 	{

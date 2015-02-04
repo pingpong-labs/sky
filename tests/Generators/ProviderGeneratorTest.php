@@ -2,7 +2,7 @@
 
 use Pingpong\Generators\ProviderGenerator;
 
-class ProviderGeneratorTest extends TestCase {
+class ProviderGeneratorTest extends GeneratorTestCase {
 
 	public function testGenerateWithoutOptions()
 	{

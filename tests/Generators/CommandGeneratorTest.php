@@ -2,7 +2,7 @@
 
 use Pingpong\Generators\CommandGenerator;
 
-class CommandGeneratorTest extends TestCase {
+class CommandGeneratorTest extends GeneratorTestCase {
 
 	public function testGenerateCommand()
 	{

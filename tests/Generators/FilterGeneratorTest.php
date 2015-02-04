@@ -2,7 +2,7 @@
 
 use Pingpong\Generators\FilterGenerator;
 
-class FilterGeneratorTest extends TestCase {
+class FilterGeneratorTest extends GeneratorTestCase {
 
 	public function testGenerateWithoutOptions()
 	{

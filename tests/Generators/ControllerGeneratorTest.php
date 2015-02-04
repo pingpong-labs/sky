@@ -2,7 +2,7 @@
 
 use Pingpong\Generators\ControllerGenerator;
 
-class ControllerGeneratorTest extends TestCase {
+class ControllerGeneratorTest extends GeneratorTestCase {
 
 	public function testGenerateWithoutOptions()
 	{

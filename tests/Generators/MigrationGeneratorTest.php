@@ -3,7 +3,7 @@
 use Pingpong\Generators\MigrationGenerator;
 use Mockery as m;
 
-class MigrationGeneratorTest extends TestCase {
+class MigrationGeneratorTest extends GeneratorTestCase {
 
 	public function testGenerateMigrationTable()
 	{
