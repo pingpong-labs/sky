@@ -6,3 +6,5 @@ git subtree push --prefix=src/Pingpong/Shortcode git@github.com:pingpong-labs/sh
 git subtree push --prefix=src/Pingpong/Menus git@github.com:pingpong-labs/menus.git master
 git subtree push --prefix=src/Pingpong/Presenters git@github.com:pingpong-labs/presenters.git master
 git subtree push --prefix=src/Pingpong/Modules git@github.com:pingpong-labs/modules.git master
+git subtree push --prefix=src/Pingpong/Testing git@github.com:pingpong-labs/testing.git master
+git subtree push --prefix=src/Pingpong/Generators git@github.com:pingpong-labs/generators.git master
