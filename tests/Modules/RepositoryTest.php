@@ -2,7 +2,7 @@
 
 use Pingpong\Modules\Repository;
 
-class RepositoryTest extends ModuleTestCase {
+class RepositoryTest extends PingpongTestCase {
 
     /**
      * @var Repository
@@ -16,7 +16,10 @@ class RepositoryTest extends ModuleTestCase {
         $this->repository = new Repository($this->app, $this->getPath());
     }
 
-    public function getPath() { return __DIR__ . '/../../../fixture/Modules'; }
+    public function getPath()
+    {
+        return $this->app['path.base'] . '/modules';
+    }
 
     public function testGetAllModules()
     {
@@ -58,7 +61,7 @@ class RepositoryTest extends ModuleTestCase {
         $this->assertTrue($status);
 
         $this->repository->disable('user');
-        
+
         $status = $this->repository->active('user');
         $this->assertFalse($status);
 
