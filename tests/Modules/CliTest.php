@@ -1,6 +1,6 @@
-<?php namespace Tests\Pingpong\Modules;
+<?php
 
-class CliTest extends TestCase {
+class CliTest extends ModuleTestCase {
 
 	public function testCommands()
 	{

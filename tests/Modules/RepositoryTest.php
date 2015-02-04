@@ -1,9 +1,11 @@
-<?php namespace Tests\Pingpong\Modules;
+<?php
 
-class RepositoryTest extends TestCase {
+use Pingpong\Modules\Repository;
+
+class RepositoryTest extends ModuleTestCase {
 
     /**
-     * @var \Pingpong\Modules\Repository
+     * @var Repository
      */
     protected $repository;
 
@@ -11,7 +13,7 @@ class RepositoryTest extends TestCase {
     {
         parent::setUp();
 
-        $this->repository = new \Pingpong\Modules\Repository($this->app, $this->getPath());
+        $this->repository = new Repository($this->app, $this->getPath());
     }
 
     public function getPath() { return __DIR__ . '/../../../fixture/Modules'; }

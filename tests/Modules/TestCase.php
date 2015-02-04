@@ -1,8 +1,8 @@
-<?php namespace Tests\Pingpong\Modules;
+<?php
 
 use Illuminate\Support\Facades\Log;
 
-abstract class TestCase extends \Pingpong\Testing\TestCase {
+abstract class ModuleTestCase extends \Pingpong\Testing\TestCase {
 
     public static function getLaravel()
     {

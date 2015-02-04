@@ -1,4 +1,4 @@
-<?php namespace Tests\Pingpong\Modules;
+<?php
 
 use Pingpong\Modules\Json;
 
