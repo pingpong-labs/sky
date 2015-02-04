@@ -1,4 +1,4 @@
-<?php namespace Pingpong\Validator\Exceptions;
+<?php namespace Pingpong\Validator;
 
 use Illuminate\Support\MessageBag;
 

@@ -3,7 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Validation\Factory;
 use Illuminate\Validation\Validator as IlluminateValidator;
-use Pingpong\Validator\Exceptions\ValidationException;
 
 abstract class Validator {
 
