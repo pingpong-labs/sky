@@ -2,7 +2,7 @@
 
 use Pingpong\Generators\FormRequestGenerator;
 
-class FormRequestGeneratorTest extends TestCase {
+class FormRequestGeneratorTest extends GeneratorTestCase {
 
 	public function testGenerateWithoutOptions()
 	{

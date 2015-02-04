@@ -29,6 +29,7 @@ class PingpongTestCase extends \Pingpong\Testing\TestCase {
     protected function getPackageProviders()
     {
         return [
+            'Pingpong\Generators\GeneratorsServiceProvider',
             'Pingpong\Modules\ModulesServiceProvider',
         ];
     }

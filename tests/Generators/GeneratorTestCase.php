@@ -4,15 +4,15 @@ use Illuminate\Filesystem\Filesystem;
 use Pingpong\Generators\Generator;
 use Pingpong\Generators\Stub;
 
-class TestCase extends PHPUnit_Framework_TestCase {
+class GeneratorTestCase extends PHPUnit_Framework_TestCase {
 
 	protected $path;
 
 	public function setUp()
 	{
-		Stub::setPath(__DIR__ . '/../src/Pingpong/Generators/Stubs');
-		
-		$this->path = __DIR__ . '/../fixture';
+		Stub::register();
+
+		$this->path = __DIR__ . '/../../fixture/generators';
 	}
 	
 	public function tearDown()
