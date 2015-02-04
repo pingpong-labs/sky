@@ -18,7 +18,7 @@ class RepositoryTest extends PingpongTestCase {
 
     public function getPath()
     {
-        return $this->app['path.base'] . '/modules';
+        return realpath(__DIR__. '/../../fixture/Modules');
     }
 
     public function testGetAllModules()

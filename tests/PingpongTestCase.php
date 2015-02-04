@@ -1,6 +1,6 @@
 <?php
 
-class PingpongTestCase extends \Pingpong\Testing\TestCase {
+abstract class PingpongTestCase extends \Pingpong\Testing\TestCase {
 
     /**
      * @return string
@@ -29,7 +29,6 @@ class PingpongTestCase extends \Pingpong\Testing\TestCase {
     protected function getPackageProviders()
     {
         return [
-            'Pingpong\Generators\GeneratorsServiceProvider',
             'Pingpong\Modules\ModulesServiceProvider',
         ];
     }
