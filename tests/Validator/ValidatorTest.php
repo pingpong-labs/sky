@@ -36,7 +36,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase {
             'passsword' => 'Password is required'
         ]));
 
-        $this->setExpectedException("Pingpong\\Validator\\Exceptions\\ValidationException");
+        $this->setExpectedException("Pingpong\\Validator\\ValidationException");
 
         $isValid = $this->validator->validate();
 
