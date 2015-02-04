@@ -4,7 +4,7 @@ use Illuminate\Filesystem\Filesystem;
 use Pingpong\Generators\Generator;
 use Pingpong\Generators\Stub;
 
-class GeneratorTestCase extends PHPUnit_Framework_TestCase {
+abstract class GeneratorTestCase extends PHPUnit_Framework_TestCase {
 
 	protected $path;
 
