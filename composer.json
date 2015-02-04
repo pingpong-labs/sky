@@ -12,7 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Pingpong\\Testing\\": "src/Pingpong/Testing"
+            "Pingpong\\Testing\\": ""
         }
     },
     "require": {
