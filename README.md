@@ -4,7 +4,7 @@
 
  Laravel  | Pingpong Sky     | PHP    | Status
 :---------|:-----------------|:-------|:--------
- 4.x      | dev-master       |>= 5.3  | Ready
+ 4.x      | dev-master       |>= 5.4  | Ready
  5.0.x    | 2.0.*@dev        |>= 5.4  | Planned
  
 ### Documentation
