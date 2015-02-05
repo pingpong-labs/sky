@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Facade;
  * @author  Gravitano <gravitano16@gmail.com>
  * @license https://github.com/pingpong-labs/oembed/blob/master/LICENSE MIT
  */
-class Oembed extends Facade {
+class OembedFacade extends Facade {
 
     /**
      * Get the registered name of the component.
