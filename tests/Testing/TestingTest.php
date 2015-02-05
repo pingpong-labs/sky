@@ -4,7 +4,7 @@ class TestingTest extends PingpongTestCase {
 
     protected function registerBootedCallback($app)
     {
-        include $app['path'] . '/routes.php';
+        include $app['path'] . '/Http/routes.php';
     }
 
     public function tearDown()
@@ -25,9 +25,8 @@ class TestingTest extends PingpongTestCase {
 
     public function testPostDataAndWillThrowRuntimeException()
     {
-        $this->setExpectedException('RuntimeException', 'Validation failed');
         $this->call('POST', '/post/data');
-        $this->assertResponseOk();
+        $this->assertResponseStatus(500);
     }
 
     public function testPostDataAdnWillReturnAResponse()
