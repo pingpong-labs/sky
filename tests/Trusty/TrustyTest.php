@@ -25,6 +25,11 @@ class TrustyTest extends PHPUnit_Framework_TestCase {
 		$this->provider = new TrustyServiceProvider($this->app);
 	}
 
+	public function tearDown()
+	{
+		m::close();
+	}
+
 	public function test_initialize()
 	{
 		$this->assertInstanceOf('Pingpong\Trusty\Trusty', $this->trusty);	
@@ -45,7 +50,6 @@ class TrustyTest extends PHPUnit_Framework_TestCase {
 	public function test_registers_all_permissions()
 	{
 		$permissions = ['manage_posts', 'manage_users'];
-		$this->auth->shouldReceive('check')->once()->andReturn(true);
 		$this->router->shouldReceive('filter')->times(2);
 		$this->trusty->registerPermissions($permissions);	
 	}
