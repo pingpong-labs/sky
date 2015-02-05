@@ -26,7 +26,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Pingpong\\Oembed": ""
+      "Pingpong\\Oembed\\": ""
     }
   },
   "minimum-stability": "stable"
