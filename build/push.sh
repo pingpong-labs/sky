@@ -11,3 +11,4 @@ git subtree push --prefix=src/Pingpong/Generators git@github.com:pingpong-labs/g
 git subtree push --prefix=src/Pingpong/Validator git@github.com:pingpong-labs/validator.git master
 git subtree push --prefix=src/Pingpong/Oembed git@github.com:pingpong-labs/oembed.git master
 git subtree push --prefix=src/Pingpong/Trusty git@github.com:pingpong-labs/trusty.git master
+git subtree push --prefix=src/Pingpong/Themes git@github.com:pingpong-labs/themes.git master
