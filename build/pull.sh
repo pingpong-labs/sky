@@ -10,3 +10,4 @@ git subtree pull --prefix=src/Pingpong/Testing git@github.com:pingpong-labs/test
 git subtree pull --prefix=src/Pingpong/Generators git@github.com:pingpong-labs/generators.git master
 git subtree pull --prefix=src/Pingpong/Validator git@github.com:pingpong-labs/validator.git master
 git subtree pull --prefix=src/Pingpong/Oembed git@github.com:pingpong-labs/oembed.git master
+git subtree pull --prefix=src/Pingpong/Trusty git@github.com:pingpong-labs/trusty.git master
