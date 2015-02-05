@@ -3,8 +3,8 @@
 use Mockery as m;
 use Pingpong\Themes\Theme;
 
-class ThemeTest extends PHPUnit_Framework_TestCase
-{
+class ThemeTest extends PHPUnit_Framework_TestCase {
+
     function tearDown()
     {
         m::close();
@@ -12,7 +12,7 @@ class ThemeTest extends PHPUnit_Framework_TestCase
 
     protected function getPath()
     {
-        return __DIR__ . '/../public/themes/';
+        return __DIR__ . '/../../fixture/themes/';
     }
 
     function testInitialize()
