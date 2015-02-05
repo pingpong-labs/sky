@@ -7,6 +7,11 @@ class TestingTest extends PingpongTestCase {
         include $app['path'] . '/routes.php';
     }
 
+    public function tearDown()
+    {
+        Mockery::close();
+    }
+
     public function testOk()
     {
         $this->assertInstanceOf('Illuminate\Foundation\Application', $this->app);
