@@ -18,6 +18,11 @@ class OembedTest extends PHPUnit_Framework_TestCase {
         $this->oembed = new Oembed($this->embed, $this->cache);
     }
 
+    public function tearDown()
+    {
+        m::close();
+    }
+
     public function test_initialize()
     {
         $this->assertInstanceOf('Pingpong\Oembed\Oembed', $this->oembed);
@@ -48,10 +53,9 @@ class OembedTest extends PHPUnit_Framework_TestCase {
 
     public function test_get_info_from_a_specify_url_and_also_use_laravel_cache_manager()
     {
-
         $url = 'https://www.youtube.com/watch?v=PP1xn5wHtxE';
 
-        $this->embed->shouldReceive('get')->once()->with($url, '')->andReturn(array('url' => $url));
+//        $this->embed->shouldReceive('get')->once()->with($url, '')->andReturn(array('url' => $url));
         $this->cache->shouldReceive('remember')->once()->andReturn(array('url' => $url));
 
         $info = $this->oembed->cache($url);
