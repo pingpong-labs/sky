@@ -24,7 +24,7 @@ class WidgetTest extends PHPUnit_Framework_TestCase {
 		$this->container = new Container;
 		$this->widget = new Widget($this->blade, $this->container);	
 	}
-	
+
 	public function testInitialize()
 	{
 		$this->assertInstanceOf('Pingpong\Widget\Widget', $this->widget);
