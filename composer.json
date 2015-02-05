@@ -11,7 +11,7 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=5.4.0",
-    "laravel/framework": "~4",
+    "laravel/framework": "5.0.*",
     "embed/embed": "~1"
   },
   "require-dev": {
