@@ -11,11 +11,24 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', function ()
+{
+	return 'Hello World!';
+});
 
-Route::get('home', 'HomeController@index');
+Route::post('/post/data', function ()
+{
+	$rules = [
+		'username' => 'required',
+		'password' => 'required',
+	];
 
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
+	$validation = Validator::make($data = Input::all(), $rules);
+
+	if($validation->fails())
+	{
+		throw new RuntimeException("Validation failed");
+	}
+
+	return $data;
+});
