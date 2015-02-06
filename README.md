@@ -1,4 +1,4 @@
-# Sky - The Missing Laravel Packages 
+# Sky - The Extra Laravel Packages 
 
 [![Build Status](https://travis-ci.org/pingpong-labs/sky.svg)](https://travis-ci.org/pingpong-labs/sky)
 
