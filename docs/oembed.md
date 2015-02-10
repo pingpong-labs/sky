@@ -1,7 +1,4 @@
-Oembed
-======
-
-Laravel 4 - Retrieve page info using oembed, opengraph, etc.
+# Laravel Oembed
 
 [![Build Status](https://travis-ci.org/pingpong-labs/oembed.svg?branch=master)](https://travis-ci.org/pingpong-labs/oembed)
 

@@ -1,5 +1,4 @@
-Laravel Generators by Pingpong Labs
-==========
+# Laravel Generators
 
 [![Build Status](https://travis-ci.org/pingpong-labs/generators.svg)](https://travis-ci.org/pingpong-labs/generators)
 [![Latest Stable Version](https://poser.pugx.org/pingpong/generators/v/stable.svg)](https://packagist.org/packages/pingpong/generators)

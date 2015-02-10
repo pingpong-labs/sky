@@ -1,7 +1,4 @@
-Unit Testing Helper for Laravel's Package
-=========
-
-[![Build Status](https://travis-ci.org/pingpong-labs/testing.svg)](https://travis-ci.org/pingpong-labs/testing)
+# Unit Testing Laravel's Package
 
 - [Installation](#quick-installation-via-composer)
 - [Example Usage](#example-usage)
