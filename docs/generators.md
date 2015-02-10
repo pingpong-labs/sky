@@ -7,6 +7,10 @@ Laravel Generators by Pingpong Labs
 [![Latest Unstable Version](https://poser.pugx.org/pingpong/generators/v/unstable.svg)](https://packagist.org/packages/pingpong/generators)
 [![License](https://poser.pugx.org/pingpong/generators/license.svg)](https://packagist.org/packages/pingpong/generators)
 
+- [Installation](#quick-installation-via-composer)
+- [Documentation](#documentation)
+- [License](#license)
+
 ### Quick Installation Via Composer
 
 ```
