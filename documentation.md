@@ -1,0 +1,17 @@
+- Prologue
+    - [Release Notes](/docs/master/releases)
+    - [Contribution Guide](/docs/master/contributions)
+- Setup
+    - [Installation](/docs/master/installation)
+    - [Configuration](/docs/master/configuration)
+- Packages
+    - [Generators](/docs/master/generators)
+    - [Menus](/docs/master/menus)
+    - [Testing](/docs/master/testing)
+    - [Oembed](/docs/master/oembed)
+    - [Presenters](/docs/master/presenters)
+    - [Shortcode](/docs/master/shortcode)
+    - [Themes](/docs/master/themes)
+    - [Trusty](/docs/master/trusty)
+    - [Widget](/docs/master/widget)
+    - [Validator](/docs/master/validator)
