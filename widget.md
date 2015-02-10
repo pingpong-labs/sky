@@ -1,4 +1,4 @@
-Simple Widget System for Laravel Framework
+Laravel Widget System
 ==================================
 
 [![Build Status](https://travis-ci.org/pingpong-labs/widget.svg?branch=master)](https://travis-ci.org/pingpong-labs/widget)
