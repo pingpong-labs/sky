@@ -1,4 +1,4 @@
-Simple Validator Class for Laravel
+Laravel Validator
 =========
 
 ### Quick Installation Via Composer
