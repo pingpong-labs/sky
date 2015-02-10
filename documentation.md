@@ -1,9 +1,5 @@
-- Prologue
-    - [Release Notes](/docs/master/releases)
-    - [Contribution Guide](/docs/master/contributions)
 - Setup
     - [Installation](/docs/master/installation)
-    - [Configuration](/docs/master/configuration)
 - Packages
     - [Generators](/docs/master/generators)
     - [Menus](/docs/master/menus)
