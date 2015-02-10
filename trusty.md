@@ -1,7 +1,5 @@
 ## Trusty - Roles and Permissions for Laravel 4
 
-[![Build Status](https://travis-ci.org/pingpong-labs/trusty.svg?branch=master)](https://travis-ci.org/pingpong-labs/trusty)
-
 ### Server Requirements
 
 - PHP 5.4 or higher
