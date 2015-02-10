@@ -1,4 +1,4 @@
-Laravel Generators by Pingpong Labs
+Laravel Generators
 ==========
 
 [![Build Status](https://travis-ci.org/pingpong-labs/generators.svg)](https://travis-ci.org/pingpong-labs/generators)
