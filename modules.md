@@ -38,7 +38,7 @@ To install through composer, simply put the following in your composer.json file
 ```json
 {
     "require": {
-        "pingpong/modules": "~1"
+        "pingpong/modules": "~2.0"
     }
 }
 ```
