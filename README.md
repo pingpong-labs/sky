@@ -1,6 +1,6 @@
 # Welcome
 
-Sky 2.0 is an extra Laravel package which created laravel 5.
+Sky 2.0 is an extra Laravel package which created for laravel 5.
 
 ## License
 
