@@ -1,6 +1,7 @@
 - Setup
     - [Installation](/docs/master/installation)
 - Packages
+    - [Modules](/docs/master/modules)
     - [Generators](/docs/master/generators)
     - [Menus](/docs/master/menus)
     - [Testing](/docs/master/testing)
