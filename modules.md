@@ -1,7 +1,7 @@
 # Laravel Modules
 
 [![Build Status](https://travis-ci.org/pingpong-labs/sky.svg?branch=2.0)](https://travis-ci.org/pingpong-labs/modules)
-[![Latest Stable Version](https://poser.pugx.org/pingpong/shortcode/v/stable.png)](https://packagist.org/packages/pingpong/shortcode) [![Total Downloads](https://poser.pugx.org/pingpong/shortcode/downloads.png)](https://packagist.org/packages/pingpong/shortcode) [![Latest Unstable Version](https://poser.pugx.org/pingpong/shortcode/v/unstable.png)](https://packagist.org/packages/pingpong/shortcode) [![License](https://poser.pugx.org/pingpong/shortcode/license.png)](https://packagist.org/packages/pingpong/shortcode)
+[![Latest Stable Version](https://poser.pugx.org/pingpong/modules/v/stable.png)](https://packagist.org/packages/pingpong/modules) [![Total Downloads](https://poser.pugx.org/pingpong/modules/downloads.png)](https://packagist.org/packages/pingpong/modules) [![Latest Unstable Version](https://poser.pugx.org/pingpong/modules/v/unstable.png)](https://packagist.org/packages/pingpong/modules) [![License](https://poser.pugx.org/pingpong/modules/license.png)](https://packagist.org/packages/pingpong/modules)
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/pingpong-labs/modules/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 `pingpong/modules` is a laravel package which created to manage your large laravel app using modules. Module is like a laravel package, it have some views, controllers or models. This package is supported and tested in both Laravel 4 and Laravel 5.
