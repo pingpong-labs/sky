@@ -1,7 +1,6 @@
 # Welcome
 
-Sky is an extra PHP component which created for laravel 4 and 5.
-
+Sky 2.0 is an extra Laravel package which created laravel 5.
 
 ## License
 
