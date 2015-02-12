@@ -7,14 +7,14 @@ Laravel Generators
 [![Latest Unstable Version](https://poser.pugx.org/pingpong/generators/v/unstable.svg)](https://packagist.org/packages/pingpong/generators)
 [![License](https://poser.pugx.org/pingpong/generators/license.svg)](https://packagist.org/packages/pingpong/generators)
 
-- [Installation](#quick-installation-via-composer)
+- [Installation](#installation)
 - [Documentation](#documentation)
-- [License](#license)
 
-### Quick Installation Via Composer
+<a name="installation"></a>
+## Installation
 
 ```
-composer require "pingpong/generators:1.*"
+composer require "pingpong/generators:~2.0"
 ```
 
 Next, register new service provider to `providers` array in `app/config/app.php`.
@@ -25,6 +25,7 @@ Next, register new service provider to `providers` array in `app/config/app.php`
 
 Done.
 
+<a name="documentation"></a>
 ### Documentation
 
 **Generate a new controller**
@@ -110,7 +111,3 @@ $generator = new MigrationGenerator($path, 'remove_username_from_users_table', '
 
 $generator = new MigrationGenerator($path, 'drop_users_table', 'name:string, username:string');
 ```
-
-### License
-
-This package is open-sourced software licensed under [The BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause)
