@@ -1,19 +1,15 @@
 Laravel Oembed
 ======
 
-Laravel 4 - Retrieve page info using oembed, opengraph, etc.
+Retrieve page info using oembed, opengraph, etc.
 
 [![Build Status](https://travis-ci.org/pingpong-labs/oembed.svg?branch=master)](https://travis-ci.org/pingpong-labs/oembed)
-
-### Server Requirements
-
-    Require PHP 5.4+ or higher.
 
 ### Installation
 
 Open your composer.json file, and add the new required package.
 
-    "pingpong/oembed": "1.0.*"
+    "pingpong/oembed": "~2.0"
 
 Next, open a terminal and run.
 
