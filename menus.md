@@ -134,7 +134,7 @@ On view, for example `hello.blade.php`.
 </html>
 ```
 
-<a name="example-usage"></a>
+<a name="usage"></a>
 ## Usage 
 
 First, create a file called `menus.php` in your `app/` folder, alongside with `routes.php` and `filters.php`. The file will be automatically include if the file exists. And you can define your menus in that file.
