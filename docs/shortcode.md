@@ -5,20 +5,18 @@ Laravel Shortcode
 [![Latest Stable Version](https://poser.pugx.org/pingpong/shortcode/v/stable.png)](https://packagist.org/packages/pingpong/shortcode) [![Total Downloads](https://poser.pugx.org/pingpong/shortcode/downloads.png)](https://packagist.org/packages/pingpong/shortcode) [![Latest Unstable Version](https://poser.pugx.org/pingpong/shortcode/v/unstable.png)](https://packagist.org/packages/pingpong/shortcode) [![License](https://poser.pugx.org/pingpong/shortcode/license.png)](https://packagist.org/packages/pingpong/shortcode)
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/pingpong-labs/shortcode/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
-- [Server Requirements](#server-requirements)
 - [Installation](#installation)
-- [Registering Shorcode](#registering-shorcode)
-- [License](#license)
+- [Registering Shorcode](#registering-shortcode)
+- [Compiling Shorcode](#compiling-shortcode)
+- [Unregistering Shorcode](#unregistering-shortcode)
+- [Destroying All Shorcodes](#destroying-all-shortcode)
 
-### Server Requirements
-
-- PHP 5.4.0 or higher.
-
-### Installation
+<a name="installation"></a>
+## Installation
 Open your composer.json file, and add the new required package.
 
 ```
-  "pingpong/shortcode": "1.0.*" 
+  "pingpong/shortcode": "~2.0" 
 ```
 
 Next, open a terminal and run.
@@ -40,7 +38,8 @@ Add new Facade alias.
 
 Done.
 
-### Registering Shorcode
+<a name="registering-shortcode"></a>
+## Registering Shorcode
 
 Using closure:
 ```php
@@ -110,7 +109,8 @@ function smallTag($attr, $content = null, $name = null)
 Shortcode::register('small', 'smallTag');
 ```
 
-### Compile
+<a name="compiling-shortcode"></a>
+## Compiling Shortcode
 
 ```php
 $text = '[a href="#"]Click here[/a]';
@@ -125,20 +125,16 @@ $text = '
 echo Shortcode::compile($text);
 ```
 
-### Unregister The Specified Shortcode
+<a name="unregistering-shortcode"></a>
+## Unregistering Shortcode
 
 ```php
 Shortcode::unregister('img');
 ```
 
-### Destroy All Shortcodes
+<a name="destroying-all-shortcode"></a>
+## Destroying All Shortcodes
 
 ```php
 Shortcode::destroy();
 ```
-
-### License
-
-This package is open-sourced software licensed under [The BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause)
-
-This package also adopted a system of wordpress shortcodes. Please see or read [the license](http://wordpress.org/about/license/) of wordpress also [here](http://codex.wordpress.org/License).

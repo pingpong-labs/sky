@@ -4,19 +4,18 @@ Laravel Menus
 [![Build Status](https://travis-ci.org/pingpong-labs/menus.svg)](https://travis-ci.org/pingpong-labs/menus)
 [![Latest Stable Version](https://poser.pugx.org/pingpong/menus/v/stable.svg)](https://packagist.org/packages/pingpong/menus) [![Total Downloads](https://poser.pugx.org/pingpong/menus/downloads.svg)](https://packagist.org/packages/pingpong/menus) [![Latest Unstable Version](https://poser.pugx.org/pingpong/menus/v/unstable.svg)](https://packagist.org/packages/pingpong/menus) [![License](https://poser.pugx.org/pingpong/menus/license.svg)](https://packagist.org/packages/pingpong/menus)
 
-### Version Compability
+- [Installation](#installation)
+- [Screenshot](#screenshot)
+- [What's New](#whats-new)
+- [Usage](#usage)
 
- Laravel  | Pingpong Menus | PHP 
-:---------|:---------------|:----
- 4.x      | 1.x            |>= 5.3
- 5.0.x    | 2.*@dev        |>= 5.4
-
-### Installation
+<a name="installation"></a>
+## Installation
 
 First, open your `composer.json` file and add new package.
 ```
     "require": {
-        "pingpong/menus": "1.0.*" 
+        "pingpong/menus": "~2.0" 
     },
 ```
 Then open a terminal and run:
@@ -60,13 +59,13 @@ php artisan config:publish pingpong/menus
 ```
 Done.
 
-### Screenshot
+<a name="screenshot"></a>
+## Screenshot
 
 ![View Screenshot](https://raw.githubusercontent.com/pingpong-labs/menus/master/shots/multilevel-menu-pingpong.png)
 
-### Example Usage
-
-**NEW!**
+<a name="whats-new"></a>
+## What's New
 
 On `app/menus.php` :
 ```php
@@ -134,6 +133,9 @@ On view, for example `hello.blade.php`.
 </body>
 </html>
 ```
+
+<a name="usage"></a>
+## Usage 
 
 First, create a file called `menus.php` in your `app/` folder, alongside with `routes.php` and `filters.php`. The file will be automatically include if the file exists. And you can define your menus in that file.
 
@@ -384,7 +386,3 @@ $menu->url('profile', 'Profile');
 
 $menu->route('settings', 'Settings');
 ```
-
-### License
-
-This package is open-sourced software licensed under [The BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause)

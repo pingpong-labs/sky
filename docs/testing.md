@@ -7,7 +7,7 @@
 ### Quick Installation Via Composer
 
 ```
-composer require "pingpong/testing:1.*"
+composer require "pingpong/testing:~2.0"
 ```
 
 ### Example Usage

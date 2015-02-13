@@ -7,7 +7,7 @@
 
 Open your composer.json file, and add the new required package.
 ```
-   "pingpong/themes": "1.0.*"
+   "pingpong/themes": "~2.0"
 ```
 Next, open a terminal and run.
 ```

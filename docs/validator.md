@@ -4,7 +4,7 @@ Laravel Validator
 ### Quick Installation Via Composer
 
 ```
-composer require "pingpong/validator:1.*"
+composer require "pingpong/validator:~2.0"
 ```
 
 ### Example
@@ -116,7 +116,3 @@ App::error(function(Pingpong\Validator\Exceptions\ValidationException $e)
     return Redirect::back()->withInput()->withErrors($e->getErrors());
 });
 ```
-
-### License
-
-This package is open-sourced software licensed under [The BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause)
