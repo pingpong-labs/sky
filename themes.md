@@ -1,4 +1,8 @@
-## Laravel Themes
+Laravel Themes
+===============
+
+- [Installation](#installation)
+- [Usage](#usage)
 
 ### Installation
 
@@ -11,7 +15,7 @@ Next, open a terminal and run.
 composer update
 ```
 
-Next, Add new service provider in `app/config/app.php`.
+Next, Add new service provider in `config/app.php`.
 
 ```php
   'Pingpong\Themes\ThemesServiceProvider',
@@ -20,12 +24,12 @@ Next, Add new service provider in `app/config/app.php`.
 Next, Add new aliases in `app/config/app.php`.
 
 ```php
-   'Theme' => 'Pingpong\Themes\Facades\Theme',
+   'Theme' => 'Pingpong\Themes\ThemeFacade',
 ```
 
 Next, publish the asset. The asset is an example theme.
 ```
-php artisan asset:publish pingpong/themes
+php artisan vendor:publish
 ```
 
 Done.
@@ -89,7 +93,3 @@ Get lang from current active theme.
 ```php
 Theme::lang('group.name');
 ```
-
-### License
-
-This package is open-sourced software licensed under [The BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause)
