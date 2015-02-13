@@ -1,4 +1,4 @@
-Laravel View Presenters
+Laravel View Presenter
 =============================
 
 ### Installation
