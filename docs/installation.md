@@ -13,5 +13,5 @@
 ### Quick Installation Via Composer
 
 ```
-composer require pingpong/sky
+composer require "pingpong/sky:~2.0"
 ```

@@ -6,7 +6,7 @@
 
 Open your composer.json file, and add the new required package.
 	
- 	"pingpong/presenters": "1.0.*" 
+ 	"pingpong/presenters": "~2.0" 
 
 Next, open a terminal and run.
 
@@ -58,7 +58,3 @@ Or, call the presenter as method.
 ```php
 <h1>Your email is {{ $user->present()->email(['width' => 140]) }}</h1>
 ```
-
-### License
-
-This package is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)

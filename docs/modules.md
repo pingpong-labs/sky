@@ -38,7 +38,7 @@ To install through composer, simply put the following in your composer.json file
 ```json
 {
     "require": {
-        "pingpong/modules": "~1"
+        "pingpong/modules": "~2.0"
     }
 }
 ```
@@ -50,12 +50,12 @@ And then run `composer install` to fetch the package.
 You could also simplify the above code by using the following command:
 
 ```
-composer require "pingpong/modules:~1"
+composer require "pingpong/modules:~2.0"
 ```
 
 #### Add Service Provider
 
-Next add the following service provider in `app/config/app.php`.
+Next add the following service provider in `config/app.php`.
 
 ```php
 'providers' => array(
@@ -69,12 +69,6 @@ Next add the following service provider in `app/config/app.php`.
 
 Next publish the package's configuration file by run :
 
-Laravel 4.*
-```
-php artisan config:publish pingpong/modules
-```
-
-Laravel 5.
 ```
 php artisan vendor:publish
 ```
