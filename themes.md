@@ -4,7 +4,8 @@ Laravel Themes
 - [Installation](#installation)
 - [Usage](#usage)
 
-### Installation
+<a name="installation"></a>
+## Installation
 
 Open your composer.json file, and add the new required package.
 ```
@@ -34,7 +35,8 @@ php artisan vendor:publish
 
 Done.
 
-### Usage
+<a name="usage"></a>
+## Usage
 
 Get all themes.
 ```php
