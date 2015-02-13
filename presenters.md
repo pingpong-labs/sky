@@ -1,8 +1,6 @@
 Laravel View Presenters
 =============================
 
-[![Build Status](https://travis-ci.org/pingpong-labs/presenters.svg?branch=1.0.4)](https://travis-ci.org/pingpong-labs/presenters)
-
 ### Installation
 
 Open your composer.json file, and add the new required package.

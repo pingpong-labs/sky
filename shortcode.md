@@ -1,10 +1,6 @@
 Laravel Shortcode
 =========
 
-[![Build Status](https://travis-ci.org/pingpong-labs/shortcode.svg?branch=master)](https://travis-ci.org/pingpong-labs/shortcode)
-[![Latest Stable Version](https://poser.pugx.org/pingpong/shortcode/v/stable.png)](https://packagist.org/packages/pingpong/shortcode) [![Total Downloads](https://poser.pugx.org/pingpong/shortcode/downloads.png)](https://packagist.org/packages/pingpong/shortcode) [![Latest Unstable Version](https://poser.pugx.org/pingpong/shortcode/v/unstable.png)](https://packagist.org/packages/pingpong/shortcode) [![License](https://poser.pugx.org/pingpong/shortcode/license.png)](https://packagist.org/packages/pingpong/shortcode)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/pingpong-labs/shortcode/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
 - [Installation](#installation)
 - [Registering Shorcode](#registering-shortcode)
 - [Compiling Shorcode](#compiling-shortcode)
