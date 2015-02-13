@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/pingpong-labs/presenters.svg?branch=1.0.4)](https://travis-ci.org/pingpong-labs/presenters)
 
-### Installation
+## Installation
 
 Open your composer.json file, and add the new required package.
 	
@@ -14,7 +14,7 @@ Next, open a terminal and run.
 
 Done.
 
-### Example Usage
+## Example Usage
 
 First, create your own presenter and make sure that class is extends to `Pingpong\Presenters\Presenter` class. Like this.
 
