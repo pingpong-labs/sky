@@ -1,11 +1,10 @@
 # Laravel Oembed
 
 Retrieve page info using oembed, opengraph, etc.
->>>>>>> 01c197cd4fba96d40ce84fc6ff630cf97662ca3b
 
 [![Build Status](https://travis-ci.org/pingpong-labs/oembed.svg?branch=master)](https://travis-ci.org/pingpong-labs/oembed)
 
-### Installation
+## Installation
 
 Open your composer.json file, and add the new required package.
 
@@ -29,7 +28,7 @@ Next, Add new alias.
 
 Done.
 
-### Usage
+## Usage
 
 Basic Usage
 
@@ -68,10 +67,10 @@ Caching the results.
 $info = Oembed::cache($url, $options);
 ```
 
-### Documentation
+## Documentation
 
 Because this package using the library [oscarotero/Embed](https://github.com/oscarotero/Embed), please refer to its documentation for more info.
 
-### License
+## License
 
 This package is open-sourced software licensed under [The BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause)
