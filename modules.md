@@ -10,6 +10,7 @@
 - [Upgrade Guide](#upgrade-guide)
 - [Installation](#installation)
 - [Configuration](#configuration)
+- [Creating Module](#creating-a-module)
 - [Artisan Commands](#artisan-commands)
 - [Facades](#facades)
 - [Entity](#entity)
@@ -105,6 +106,66 @@ By default controllers, entities or repositories not loaded automatically. You c
   - `enabled` - If `true`, the scanned modules (all modules) will cached automatically. By default the value is `false`
   - `key` - The name of cache.
   - `lifetime` - Lifetime of cache.
+
+<a name="creating-a-module"></a>
+## Creating A Module
+
+To create a new module you can simply run :
+
+```
+php artisan module:make <module-name>
+```
+
+- `<module-name>` - Required. The name of module will be created.
+
+**Create a new module**
+
+```
+php artisan module:make Blog
+```
+
+**Create multiple modules**
+
+```
+php artisan module:make Blog User Auth
+```
+
+**Naming Convension**
+
+Because we are autoloading the modules using `psr-4`, we strongly recommend using `StudlyCase` convension.
+
+**Folder Structure**
+
+```
+laravel-app/
+  app/
+  bootstrap/
+  vendor/
+  Modules/
+    ├── Blog/
+      ├── Assets/
+      ├── Config/
+      ├── Console/
+      ├── Database/
+          ├── Migrations/
+          ├── Seeders/
+      ├── Entities/
+      ├── Http/
+          ├── Controllers/
+          ├── Filters/
+          ├── Requests/
+          ├── routes.php
+      ├── Providers/
+          ├── BlogServiceProvider.php
+      ├── Resources/
+          ├── lang/
+          ├── views/
+      ├── Repositories/
+      ├── Tests/
+      ├── composer.json
+      ├── module.json
+      ├── start.php
+```
 
 <a name="artisan-commands"></a>
 ## Artisan Commands
