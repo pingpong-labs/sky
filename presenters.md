@@ -1,6 +1,10 @@
 Laravel View Presenter
 =============================
 
+- [Installation](#installation)
+- [Usage](#usage)
+
+<a name="installation"></a>
 ### Installation
 
 Open your composer.json file, and add the new required package.
@@ -13,7 +17,8 @@ Next, open a terminal and run.
 
 Done.
 
-### Example Usage
+<a name="usage"></a>
+### Usage
 
 First, create your own presenter and make sure that class is extends to `Pingpong\Presenters\Presenter` class. Like this.
 
