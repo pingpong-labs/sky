@@ -2,14 +2,15 @@
 
 - [Installation](#quick-installation-via-composer)
 - [Example Usage](#example-usage)
-- [License](#license)
 
+<a name="quick-installation-via-composer"></a>
 ### Quick Installation Via Composer
 
 ```
 composer require "pingpong/testing:~2.0"
 ```
 
+<a name="example-usage"></a>
 ### Example Usage
 
 Your First Test.
@@ -78,7 +79,3 @@ class MasterTestCase extends TestCase {
     }
 }
 ```
-
-### License
-
-This package is open-sourced software licensed under [The BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause)
