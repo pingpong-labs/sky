@@ -23,7 +23,7 @@ After the composer updated. Add new service provider in app/config/app.php.
 Next, Add new alias.
 
 ```php
-    'Oembed'           => 'Pingpong\Oembed\Facades\Oembed',
+    'Oembed'           => 'Pingpong\Oembed\OembedFacade',
 ```
 
 Done.
