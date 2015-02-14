@@ -1,5 +1,5 @@
 Laravel Widget System
-=========
+=====================
 
 - [Installation](#installation)
 - [What's New](#whats-new)

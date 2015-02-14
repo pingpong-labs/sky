@@ -1,4 +1,5 @@
-# Laravel Generators
+Laravel Generators
+==========
 
 - [Installation](#installation)
 - [Documentation](#documentation)
