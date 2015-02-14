@@ -1,13 +1,19 @@
 Laravel Validator
 =========
 
-### Quick Installation Via Composer
+- [Installation](#installation)
+- [Usage](#usage)
+- [Handling Failed Validation](#handling-failed-validation)
+
+<a name="installation"></a>
+### Installation
 
 ```
-composer require "pingpong/validator:~2.0"
+composer require "pingpong/validator:2.0.*@dev"
 ```
 
-### Example
+<a name="usage"></a>
+### Usage
 
 Your validator class must extends to `Pingpong\Validator\Validator` class.
 
@@ -81,6 +87,7 @@ class RegisterValidator extends Validator {
 }
 ```
 
+<a name="handling-failed-validation"></a>
 ### Handling Failed Validation
 
 Handle one-by-one via validator class.

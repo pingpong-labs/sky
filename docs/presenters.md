@@ -1,12 +1,15 @@
-# Laravel View Presenters
+Laravel View Presenter
+=============================
 
-[![Build Status](https://travis-ci.org/pingpong-labs/presenters.svg?branch=1.0.4)](https://travis-ci.org/pingpong-labs/presenters)
+- [Installation](#installation)
+- [Usage](#usage)
 
-## Installation
+<a name="installation"></a>
+### Installation
 
 Open your composer.json file, and add the new required package.
 	
- 	"pingpong/presenters": "~2.0" 
+ 	"pingpong/presenters": "2.0.*@dev" 
 
 Next, open a terminal and run.
 
@@ -14,7 +17,8 @@ Next, open a terminal and run.
 
 Done.
 
-## Example Usage
+<a name="usage"></a>
+### Usage
 
 First, create your own presenter and make sure that class is extends to `Pingpong\Presenters\Presenter` class. Like this.
 

@@ -8,7 +8,7 @@ Retrieve page info using oembed, opengraph, etc.
 
 Open your composer.json file, and add the new required package.
 
-    "pingpong/oembed": "~2.0"
+    "pingpong/oembed": "2.0.*@dev"
 
 Next, open a terminal and run.
 
