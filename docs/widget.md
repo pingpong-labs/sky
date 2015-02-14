@@ -1,9 +1,6 @@
 Laravel Widget System
 =========
 
-[![Build Status](https://travis-ci.org/pingpong-labs/widget.svg?branch=master)](https://travis-ci.org/pingpong-labs/widget)
-[![Latest Stable Version](https://poser.pugx.org/pingpong/widget/v/stable.svg)](https://packagist.org/packages/pingpong/widget) [![Total Downloads](https://poser.pugx.org/pingpong/widget/downloads.svg)](https://packagist.org/packages/pingpong/widget) [![Latest Unstable Version](https://poser.pugx.org/pingpong/widget/v/unstable.svg)](https://packagist.org/packages/pingpong/widget) [![License](https://poser.pugx.org/pingpong/widget/license.svg)](https://packagist.org/packages/pingpong/widget)
-
 - [Installation](#installation)
 - [What's New](#whats-new)
 - [Registering Widget](#registering-widget)
@@ -16,7 +13,7 @@ Laravel Widget System
 Open your composer.json file and add the new required package.
 
 ```
-    "pingpong/widget" : "~2.0"
+    "pingpong/widget" : "2.0.*@dev"
 ```
 
 Next, open your terminal and run `composer update`.

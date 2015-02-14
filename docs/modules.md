@@ -1,19 +1,16 @@
-# Laravel Modules
-
-[![Build Status](https://travis-ci.org/pingpong-labs/sky.svg?branch=2.0)](https://travis-ci.org/pingpong-labs/modules)
-[![Latest Stable Version](https://poser.pugx.org/pingpong/modules/v/stable.png)](https://packagist.org/packages/pingpong/modules) [![Total Downloads](https://poser.pugx.org/pingpong/modules/downloads.png)](https://packagist.org/packages/pingpong/modules) [![Latest Unstable Version](https://poser.pugx.org/pingpong/modules/v/unstable.png)](https://packagist.org/packages/pingpong/modules) [![License](https://poser.pugx.org/pingpong/modules/license.png)](https://packagist.org/packages/pingpong/modules)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/pingpong-labs/modules/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
-`pingpong/modules` is a laravel package which created to manage your large laravel app using modules. Module is like a laravel package, it have some views, controllers or models. This package is supported and tested in both Laravel 4 and Laravel 5.
-
+Laravel Modules
+===============
 
 - [Upgrade Guide](#upgrade-guide)
 - [Installation](#installation)
 - [Configuration](#configuration)
+- [Creating Module](#creating-a-module)
 - [Artisan Commands](#artisan-commands)
 - [Facades](#facades)
 - [Entity](#entity)
 - [Publishing Modules](#publishing-modules)
+
+`pingpong/modules` is a laravel package which created to manage your large laravel app using modules. Module is like a laravel package, it have some views, controllers or models. This package is supported and tested in both Laravel 4 and Laravel 5.
 
 <a name="upgrade-guide"></a>
 ## Upgrade Guide
@@ -38,7 +35,7 @@ To install through composer, simply put the following in your composer.json file
 ```json
 {
     "require": {
-        "pingpong/modules": "~2.0"
+        "pingpong/modules": "2.0.*@dev"
     }
 }
 ```
@@ -50,7 +47,7 @@ And then run `composer install` to fetch the package.
 You could also simplify the above code by using the following command:
 
 ```
-composer require "pingpong/modules:~2.0"
+composer require "pingpong/modules:2.0.*@dev"
 ```
 
 #### Add Service Provider
@@ -105,6 +102,66 @@ By default controllers, entities or repositories not loaded automatically. You c
   - `enabled` - If `true`, the scanned modules (all modules) will cached automatically. By default the value is `false`
   - `key` - The name of cache.
   - `lifetime` - Lifetime of cache.
+
+<a name="creating-a-module"></a>
+## Creating A Module
+
+To create a new module you can simply run :
+
+```
+php artisan module:make <module-name>
+```
+
+- `<module-name>` - Required. The name of module will be created.
+
+**Create a new module**
+
+```
+php artisan module:make Blog
+```
+
+**Create multiple modules**
+
+```
+php artisan module:make Blog User Auth
+```
+
+**Naming Convension**
+
+Because we are autoloading the modules using `psr-4`, we strongly recommend using `StudlyCase` convension.
+
+**Folder Structure**
+
+```
+laravel-app/
+  app/
+  bootstrap/
+  vendor/
+  Modules/
+    ├── Blog/
+      ├── Assets/
+      ├── Config/
+      ├── Console/
+      ├── Database/
+          ├── Migrations/
+          ├── Seeders/
+      ├── Entities/
+      ├── Http/
+          ├── Controllers/
+          ├── Filters/
+          ├── Requests/
+          ├── routes.php
+      ├── Providers/
+          ├── BlogServiceProvider.php
+      ├── Resources/
+          ├── lang/
+          ├── views/
+      ├── Repositories/
+      ├── Tests/
+      ├── composer.json
+      ├── module.json
+      ├── start.php
+```
 
 <a name="artisan-commands"></a>
 ## Artisan Commands
