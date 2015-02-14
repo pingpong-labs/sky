@@ -9,7 +9,7 @@ Laravel Validator
 ### Installation
 
 ```
-composer require "pingpong/validator:~2.0"
+composer require "pingpong/validator:2.0.*@dev"
 ```
 
 <a name="usage"></a>

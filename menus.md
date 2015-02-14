@@ -12,7 +12,7 @@ Laravel Menus
 First, open your `composer.json` file and add new package.
 ```
     "require": {
-        "pingpong/menus": "~2.0" 
+        "pingpong/menus": "2.0.*@dev" 
     },
 ```
 Then open a terminal and run:
