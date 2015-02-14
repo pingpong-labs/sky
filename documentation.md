@@ -1,0 +1,14 @@
+- Setup
+    - [Installation](/docs/2.0/installation)
+- Packages
+    - [Modules](/docs/2.0/modules)
+    - [Generators](/docs/2.0/generators)
+    - [Menus](/docs/2.0/menus)
+    - [Testing](/docs/2.0/testing)
+    - [Oembed](/docs/2.0/oembed)
+    - [Presenters](/docs/2.0/presenters)
+    - [Shortcode](/docs/2.0/shortcode)
+    - [Themes](/docs/2.0/themes)
+    - [Trusty](/docs/2.0/trusty)
+    - [Widget](/docs/2.0/widget)
+    - [Validator](/docs/2.0/validator)
