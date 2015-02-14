@@ -47,7 +47,7 @@ Then add the class alias in `aliases`.
 		'View'            => 'Illuminate\Support\Facades\View',
 		
 		// here
-		'Menu'          =>  'Pingpong\Menus\Facades\Menu',
+		'Menu'          =>  'Pingpong\Menus\MenuFacade',
 	)
 ```
 Then, publish configuration for package `pingpong/menus`:
