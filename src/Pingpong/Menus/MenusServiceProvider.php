@@ -1,5 +1,6 @@
 <?php namespace Pingpong\Menus;
 
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
 class MenusServiceProvider extends ServiceProvider {
@@ -38,10 +39,29 @@ class MenusServiceProvider extends ServiceProvider {
      */
     public function register()
     {
+        $this->registerIlluminateHtml();
+
         $this->app['menus'] = $this->app->share(function ($app)
         {
             return new Menu($app['view'], $app['config']);
         });
+    }
+
+    /**
+     * Register "iluminate/html" package.
+     * 
+     * @return void
+     */
+    protected function registerIlluminateHtml()
+    {
+        $this->app->register('Illuminate\Html\HtmlServiceProvider');
+
+        $aliases = [
+            'HTML' => 'Illuminate\Html\HtmlFacade',
+            'Form' => 'Illuminate\Html\FormFacade',
+        ];
+
+        AliasLoader::getInstance($aliases)->register();
     }
 
     /**
