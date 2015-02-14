@@ -18,7 +18,6 @@ class MenusServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('pingpong/menus');
 		$this->requireMenusFile();
 	}
 
@@ -42,11 +41,37 @@ class MenusServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-        $this->app['menus'] = $this->app->share(function($app)
+		$this->registerServices();
+		$this->registerNamespaces();
+	}
+
+	/**
+	 * Register package service.
+	 *
+	 * @return void
+	 */
+	protected function registerServices()
+	{
+		$this->app['menus'] = $this->app->share(function($app)
         {
         	return new Menu($app['view'], $app['config']);
         });
 	}
+
+    /**
+     * Register package's namespaces.
+     *
+     * @return void
+     */
+    protected function registerNamespaces()
+    {
+    	// config
+        $configPath = __DIR__.'/../../../src/config/menus.styles.php';
+        $this->mergeConfigFrom($configPath, 'menus.styles');
+        $this->publishes([$configPath => config_path('menus.styles.php')]);
+        // views
+	    $this->loadViewsFrom(__DIR__.'/../../../src/views', 'menus');
+    }
 
 	/**
 	 * Get the services provided by the provider.
