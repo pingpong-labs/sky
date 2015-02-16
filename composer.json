@@ -1,28 +1,33 @@
 {
-    "name": "pingpong/oembed",
-    "description": "Laravel 4 - Retrieve page info using oembed, opengraph, etc.",
-    "keywords": ["laravel", "pingpong", "oembed", "laravel-oembed"],
-    "license": "BSD-3-Clause",
-    "authors": [
-        {
-            "name": "Pingpong Labs",
-            "email": "pingpong.labs@gmail.com"
-        }
-    ],
-    "require": {
-        "php": ">=5.4.0",
-        "illuminate/support": "4.2.*",
-        "illuminate/cache": "4.2.*",
-        "embed/embed": "1.7.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "4.1.*",
-        "mockery/mockery": "0.9.*"
-    },
-    "autoload": {
-        "psr-0": {
-            "Pingpong\\Oembed": "src/"
-        }
-    },
-    "minimum-stability": "stable"
+  "name": "pingpong/oembed",
+  "description": "Laravel 4 - Retrieve page info using oembed, opengraph, etc.",
+  "keywords": [
+    "laravel",
+    "pingpong",
+    "oembed",
+    "laravel-oembed"
+  ],
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Pingpong Labs",
+      "email": "pingpong.labs@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "illuminate/support": "4.2.*",
+    "illuminate/cache": "4.2.*",
+    "embed/embed": "~1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.1.*",
+    "mockery/mockery": "0.9.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Pingpong\\Oembed\\": ""
+    }
+  },
+  "minimum-stability": "stable"
 }
