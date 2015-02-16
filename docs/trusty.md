@@ -1,5 +1,9 @@
 ## Trusty - Roles and Permissions for Laravel 4
 
+- [Installation](#installation)
+- [Creating A Role](#creating-a-role)
+- [Creating A Permission](#creating-a-permission)
+
 ### Server Requirements
 
 - PHP 5.4 or higher
@@ -29,9 +33,9 @@ Next, Add new aliases in `app/config/app.php`.
 'Permission'  => 'Pingpong\Trusty\Entities\Permission',
 ```
 
-Next, migrate the database.
+Next, publish the package's migrations.
 ```
-php artisan migrate --package=pingpong/trusty
+php artisan vendor:publish
 ```
 
 **NOTE:** If you want to modify the `roles` and `permissions` table, you can publish the migration.
@@ -40,7 +44,7 @@ Done.
 
 ### Usage
 
-Open your `app/models/User.php` file and use the `Pingpong\Trusty\Traits\TrustyTrait` trait. Look like this.
+Add `Pingpong\Trusty\Traits\TrustyTrait` trait to your `User` model. For example.
 
 ```php
 <?php
@@ -63,25 +67,12 @@ class User extends \Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $table = 'users';
 
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = array('password', 'remember_token');
-
-	/**
-	 * The fillable property.
-	 * 	
-	 * @var array
-	 */
-	protected $fillable = array('name', 'username', 'email', 'password', 'status', 'remember_token');
-
 }
 ?>
 ```
 
-Creating new Role.
+<a name="creating-a-role"></a>
+## Creating A Role.
 ```php
 Role::create([
 	'name'			=>	'Administrator',
@@ -96,7 +87,8 @@ Role::create([
 ]);
 ```
 
-Creating new Permission.
+<a name="creating-a-role"></a>
+## Creating A Permission
 
 ```php
 Permission::create([
@@ -112,6 +104,7 @@ Permission::create([
 ]);
 ```
 
+<a name="set-permission-for-role"></a>
 Set permission for the specified role.
 
 ```php
@@ -127,15 +120,13 @@ $user = Auth::user();
 $user->roles()->attach($role_id);
 ```
 
-Adding role to the user.
+<a name="adding-role-to-user"></a>
+## Adding role to the user.
 ```php
+// by id
 Auth::user()->addRole(1);
-```
-
-Updating role user.
-```php
-$role_id = 1;
-Auth::user()->updateRole($role_id);
+// by name
+Auth::user()->addRole('admin');
 ```
 
 Check role for current user.
@@ -192,18 +183,8 @@ if($role->canManageUsers())
 
 Get all permission from current users.
 ```php
-$myPermissions = Auth::user()->getPermissions();
+$myPermissions = Auth::user()->permissions;
 dd($myPermissions);
-
-// or 
-
-$permissions = Auth::user()->permissions();
-dd($permissions);
-```
-
-Get role for current user.
-```php
-$myRole = Auth::user()->getRole();
 ```
 
 Simple filtering route based on permission.
@@ -240,11 +221,3 @@ App::error(function(Pingpong\Trusty\Exceptions\ForbiddenException $e)
 	return Response::make($e->getMessage(), 403);
 });
 ```
-
-### License
-
-This package is open-sourced software licensed under [The BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause)
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/pingpong-labs/trusty/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
