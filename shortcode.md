@@ -29,7 +29,7 @@ After the composer updated. Add new service provider in app/config/app.php.
 
 Add new Facade alias.
 ```php
-'Shortcode'       => 'Pingpong\Shortcode\Facades\Shortcode',
+'Shortcode'       => 'Pingpong\Shortcode\ShortcodeFacade',
 ```
 
 Done.

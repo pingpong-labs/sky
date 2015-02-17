@@ -1,4 +1,4 @@
-Unit Testing Laravel's Package
+Unit Testing For Laravel's Package
 =========
 
 - [Installation](#quick-installation-via-composer)

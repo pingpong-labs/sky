@@ -27,7 +27,7 @@ After composer updated, add new service provider in `config/app.php` :
 And add facade in the same file
 
 ```php
-    'Widget' => 'Pingpong\Widget\Facades\Widget'
+    'Widget' => 'Pingpong\Widget\WidgetFacade'
 ```
 
 Done.

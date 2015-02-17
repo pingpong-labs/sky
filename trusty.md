@@ -1,9 +1,15 @@
-## Trusty - Roles and Permissions for Laravel 4
+Trusty - Roles Based On Permission
+======
 
-### Server Requirements
+- [Installation](#installation)
+- [Creating A Role](#creating-a-role)
+- [Creating A Permission](#creating-a-permission)
+- [Adding Permission to Role](#adding-permission-to-role)
+- [Adding Role to User](#adding-role-to-user)
+- [Checking Role User](#checking-role-user)
+- [Checking User Permission](#checking-user-permission)
 
-- PHP 5.4 or higher
-
+<a name="installation"></a>
 ### Installation
 
 Open your composer.json file, and add the new required package.
@@ -29,9 +35,9 @@ Next, Add new aliases in `app/config/app.php`.
 'Permission'  => 'Pingpong\Trusty\Entities\Permission',
 ```
 
-Next, migrate the database.
+Next, publish the package's migrations.
 ```
-php artisan migrate --package=pingpong/trusty
+php artisan vendor:publish
 ```
 
 **NOTE:** If you want to modify the `roles` and `permissions` table, you can publish the migration.
@@ -40,7 +46,7 @@ Done.
 
 ### Usage
 
-Open your `app/models/User.php` file and use the `Pingpong\Trusty\Traits\TrustyTrait` trait. Look like this.
+Add `Pingpong\Trusty\Traits\TrustyTrait` trait to your `User` model. For example.
 
 ```php
 <?php
@@ -63,56 +69,52 @@ class User extends \Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $table = 'users';
 
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = array('password', 'remember_token');
-
-	/**
-	 * The fillable property.
-	 * 	
-	 * @var array
-	 */
-	protected $fillable = array('name', 'username', 'email', 'password', 'status', 'remember_token');
-
 }
 ?>
 ```
 
-Creating new Role.
+<a name="creating-a-role"></a>
+## Creating A Role.
+
+With description.
 ```php
 Role::create([
 	'name'			=>	'Administrator',
 	'slug'			=>	Str::slug('Administrator', '_'),
 	'description'	=>	'The Super Administrator'
 ]);
+```
 
-// without description
+Without description.
+```php
 Role::create([
 	'name'	=>	'Editor',
 	'slug'	=>	Str::slug('Editor', '_'),
 ]);
 ```
 
-Creating new Permission.
+<a name="creating-a-role"></a>
+## Creating A Permission
 
+With description.
 ```php
 Permission::create([
 	'name'			=>	'Manage Users',
  	'slug'			=>	Str::slug('Manage Users', '_'), // manage_users
  	'description'	=>	'Create, Read, Update and Delete Users'
 ]);
+```
 
-// without description
+Without description.
+```php
 Permission::create([
 	'name'			=>	'Manage Posts',
  	'slug'			=>	Str::slug('Manage Posts', '_'), // manage_posts
 ]);
 ```
 
-Set permission for the specified role.
+<a name="adding-permission-to-role"></a>
+## Adding Permission to Role.
 
 ```php
 $permission_id = 1;
@@ -120,27 +122,35 @@ $role = Role::findOrFail(1);
 $role->permissions()->attach($permission_id);
 ```
 
-Set role for current user.
-```php
-$role_id = 1;
-$user = Auth::user();
-$user->roles()->attach($role_id);
-```
+<a name="adding-role-to-user"></a>
+## Adding Role to User.
 
-Adding role to the user.
+By Role ID.
 ```php
 Auth::user()->addRole(1);
 ```
 
-Updating role user.
+By Slug Or Name.
 ```php
-$role_id = 1;
-Auth::user()->updateRole($role_id);
+Auth::user()->addRole('admin');
+
+Auth::user()->addRole('Administrator');
 ```
 
-Check role for current user.
+<a name="checking-role-user"></a>
+## Checking Role User
+
+Checking single role.
 ```php
 if(Auth::user()->is('administrator'))
+{
+	// your code here
+}
+```
+
+Multiple roles.
+```php
+if(Auth::user()->is('administrator', 'subscriber'))
 {
 	// your code here
 }
@@ -154,9 +164,20 @@ if(Auth::user()->isAdministrator())
 }
 ```
 
-Check permission for current user.
+<a name="checking-user-permission"></a>
+## Checking User Permission
+
+Single check.
 ```php
 if(Auth::user()->can('manage_users'))
+{
+	// your code here
+}
+```
+
+Checking multiple permissions.
+```php
+if(Auth::user()->can('manage_users', 'manage_pages'))
 {
 	// your code here
 }
@@ -189,62 +210,3 @@ if($role->canManageUsers())
 	// your code here
 }
 ```
-
-Get all permission from current users.
-```php
-$myPermissions = Auth::user()->getPermissions();
-dd($myPermissions);
-
-// or 
-
-$permissions = Auth::user()->permissions();
-dd($permissions);
-```
-
-Get role for current user.
-```php
-$myRole = Auth::user()->getRole();
-```
-
-Simple filtering route based on permission.
-```php
-
-// register all permission as filter
-Trusty::registerPermissions();
-
-// filter request 
-Trusty::when('admin/*', 'filter_name');
- 
-// mutiple request 
-Trusty::when(['admin/users', 'admin/users/*'], 'manage_users');
-```
-
-Abort the user if that user have not a specify permission.
-```php
-Trusty::forbidden();
-```
-
-Maybe you can do something like this.
-```php
-if( ! Auth::user()->canManageUsers())
-{
-	Trusty::forbidden();
-}
-```
-
-When you run `forbidden` method, that's will throw an exception. You can handle this exception using Laravel error handler feature. You can do something like this.
-
-```php
-App::error(function(Pingpong\Trusty\Exceptions\ForbiddenException $e)
-{
-	return Response::make($e->getMessage(), 403);
-});
-```
-
-### License
-
-This package is open-sourced software licensed under [The BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause)
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/pingpong-labs/trusty/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
