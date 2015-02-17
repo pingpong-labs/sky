@@ -1,6 +1,6 @@
 <?php
 
-use Config;
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -19,7 +19,7 @@ class CreateRoleUserTable extends Migration {
             $table->integer('role_id')->unsigned()->index();
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on(Config::get('auth.table'))->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on(config('trusty.model.user'))->onDelete('cascade');
             $table->timestamps();
         });
     }
