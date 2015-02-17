@@ -1,13 +1,15 @@
-## Trusty - Roles and Permissions for Laravel 4
+Trusty - Roles Based On Permission
+======
 
 - [Installation](#installation)
 - [Creating A Role](#creating-a-role)
 - [Creating A Permission](#creating-a-permission)
+- [Adding Permission to Role](#adding-permission-to-role)
+- [Adding Role to User](#adding-role-to-user)
+- [Checking Role User](#checking-role-user)
+- [Checking User Permission](#checking-user-permission)
 
-### Server Requirements
-
-- PHP 5.4 or higher
-
+<a name="installation"></a>
 ### Installation
 
 Open your composer.json file, and add the new required package.
@@ -73,14 +75,18 @@ class User extends \Eloquent implements UserInterface, RemindableInterface {
 
 <a name="creating-a-role"></a>
 ## Creating A Role.
+
+With description.
 ```php
 Role::create([
 	'name'			=>	'Administrator',
 	'slug'			=>	Str::slug('Administrator', '_'),
 	'description'	=>	'The Super Administrator'
 ]);
+```
 
-// without description
+Without description.
+```php
 Role::create([
 	'name'	=>	'Editor',
 	'slug'	=>	Str::slug('Editor', '_'),
@@ -90,22 +96,25 @@ Role::create([
 <a name="creating-a-role"></a>
 ## Creating A Permission
 
+With description.
 ```php
 Permission::create([
 	'name'			=>	'Manage Users',
  	'slug'			=>	Str::slug('Manage Users', '_'), // manage_users
  	'description'	=>	'Create, Read, Update and Delete Users'
 ]);
+```
 
-// without description
+Without description.
+```php
 Permission::create([
 	'name'			=>	'Manage Posts',
  	'slug'			=>	Str::slug('Manage Posts', '_'), // manage_posts
 ]);
 ```
 
-<a name="set-permission-for-role"></a>
-Set permission for the specified role.
+<a name="adding-permission-to-role"></a>
+## Adding Permission to Role.
 
 ```php
 $permission_id = 1;
@@ -113,25 +122,35 @@ $role = Role::findOrFail(1);
 $role->permissions()->attach($permission_id);
 ```
 
-Set role for current user.
-```php
-$role_id = 1;
-$user = Auth::user();
-$user->roles()->attach($role_id);
-```
-
 <a name="adding-role-to-user"></a>
-## Adding role to the user.
+## Adding Role to User.
+
+By Role ID.
 ```php
-// by id
 Auth::user()->addRole(1);
-// by name
-Auth::user()->addRole('admin');
 ```
 
-Check role for current user.
+By Slug Or Name.
+```php
+Auth::user()->addRole('admin');
+
+Auth::user()->addRole('Administrator');
+```
+
+<a name="checking-role-user"></a>
+## Checking Role User
+
+Checking single role.
 ```php
 if(Auth::user()->is('administrator'))
+{
+	// your code here
+}
+```
+
+Multiple roles.
+```php
+if(Auth::user()->is('administrator', 'subscriber'))
 {
 	// your code here
 }
@@ -145,9 +164,20 @@ if(Auth::user()->isAdministrator())
 }
 ```
 
-Check permission for current user.
+<a name="checking-user-permission"></a>
+## Checking User Permission
+
+Single check.
 ```php
 if(Auth::user()->can('manage_users'))
+{
+	// your code here
+}
+```
+
+Checking multiple permissions.
+```php
+if(Auth::user()->can('manage_users', 'manage_pages'))
 {
 	// your code here
 }
@@ -179,45 +209,4 @@ if($role->canManageUsers())
 {
 	// your code here
 }
-```
-
-Get all permission from current users.
-```php
-$myPermissions = Auth::user()->permissions;
-dd($myPermissions);
-```
-
-Simple filtering route based on permission.
-```php
-
-// register all permission as filter
-Trusty::registerPermissions();
-
-// filter request 
-Trusty::when('admin/*', 'filter_name');
- 
-// mutiple request 
-Trusty::when(['admin/users', 'admin/users/*'], 'manage_users');
-```
-
-Abort the user if that user have not a specify permission.
-```php
-Trusty::forbidden();
-```
-
-Maybe you can do something like this.
-```php
-if( ! Auth::user()->canManageUsers())
-{
-	Trusty::forbidden();
-}
-```
-
-When you run `forbidden` method, that's will throw an exception. You can handle this exception using Laravel error handler feature. You can do something like this.
-
-```php
-App::error(function(Pingpong\Trusty\Exceptions\ForbiddenException $e)
-{
-	return Response::make($e->getMessage(), 403);
-});
 ```
