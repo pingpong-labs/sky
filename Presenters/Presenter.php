@@ -2,7 +2,7 @@
 
 use Pingpong\Menus\MenuItem;
 
-class Presenter implements PresenterInterface {
+abstract class Presenter implements PresenterInterface {
 	
 	/**
 	 * Get open tag wrapper.
@@ -70,7 +70,7 @@ class Presenter implements PresenterInterface {
 		{
             if($child->hasSubMenu())
             {
-                $results.= $this->getMultiLevelDropdownWrapper(($child));
+                $results.= $this->getMultiLevelDropdownWrapper($child);
             }
             elseif($child->isHeader())
             {
