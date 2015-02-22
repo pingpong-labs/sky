@@ -42,6 +42,10 @@ class Theme {
      */
     protected $current;
 
+    protected $path;
+
+    protected $filename = 'theme.json';
+
     /**
      * The constructor.
      *
@@ -66,7 +70,7 @@ class Theme {
     {
         foreach($this->all() as $theme)
         {
-            foreach(array('config', 'views', 'lang') as $hint)
+            foreach(array('views', 'lang') as $hint)
             {
                 $this->{$hint}->addNamespace($theme, $this->getNamespacePath($theme, $hint));
             }
@@ -93,7 +97,7 @@ class Theme {
      */
     public function getThemePath($theme)
     {
-        return $this->finder->getThemePath($theme);
+        return $this->path ."/{$theme}";
     }
 
     /**
@@ -103,7 +107,7 @@ class Theme {
      */
     public function getCurrent()
     {
-        return $this->current ?: $this->config->get('themes::default');
+        return $this->current ?: $this->config->get('themes.default');
     }
 
     /**
@@ -115,6 +119,7 @@ class Theme {
     public function setCurrent($current)
     {
         $this->current = $current;
+
         return $this;
     }
 
@@ -136,7 +141,7 @@ class Theme {
      */
     public function all()
 	{
-		return $this->finder->all();
+		return $this->finder->find($this->path, $this->filename);
 	}
 
     /**
@@ -147,7 +152,7 @@ class Theme {
      */
     public function has($theme)
     {
-        return $this->finder->has($theme);
+        return in_array($theme, $this->all());
     }
 
     /**
@@ -169,7 +174,7 @@ class Theme {
      */
     public function setPath($path)
     {
-        return $this->finder->setPath($path);
+        return $this->path = $path;
     }
 
     /**
@@ -179,7 +184,7 @@ class Theme {
      */
     public function getPath()
     {
-        return $this->finder->getPath();
+        return $this->path;
     }
 
     /**
