@@ -15,132 +15,72 @@ class ThemeTest extends PHPUnit_Framework_TestCase {
         return __DIR__ . '/../../fixture/themes/';
     }
 
-    function testInitialize()
+    public function setUp()
     {
-        $finder = m::mock('Pingpong\Themes\Finder');
-        $config = m::mock('Illuminate\Config\Repository');
-        $view = m::mock('Illuminate\View\Factory');
-        $lang = m::mock('Illuminate\Translation\Translator');
-
-        $theme = new Theme($finder, $config, $view, $lang);
-
-        $this->assertInstanceOf('Pingpong\Themes\Theme', $theme);
+        $this->finder = m::mock('Pingpong\Themes\Finder');
+        $this->config = m::mock('Illuminate\Config\Repository');
+        $this->view = m::mock('Illuminate\View\Factory');
+        $this->lang = m::mock('Illuminate\Translation\Translator');
+        $this->theme = new Theme($this->finder, $this->config, $this->view, $this->lang);
+        $this->theme->setPath($this->getPath());
     }
 
-    function testGetAllThemes()
+    public function testGetAllThemes()
     {
-        $finder = m::mock('Pingpong\Themes\Finder');
-        $config = m::mock('Illuminate\Config\Repository');
-        $view = m::mock('Illuminate\View\Factory');
-        $lang = m::mock('Illuminate\Translation\Translator');
-
-        $theme = new Theme($finder, $config, $view, $lang);
-
-        $finder->shouldReceive('all')->once()->andReturn(['default']);
-
-        $themes = $theme->all();
-
+        $this->finder->shouldReceive('find')->with($this->getPath(), 'theme.json')->once()->andReturn(['default']);
+        $themes = $this->theme->all();
         $this->assertTrue(is_array($themes));
-        $this->assertArrayHasKey(0, $themes);
-        $this->assertArrayNotHasKey(1, $themes);
     }
 
-    function testHasTheme()
+    public function testSetAndGetThemePath()
     {
-        $finder = m::mock('Pingpong\Themes\Finder');
-        $config = m::mock('Illuminate\Config\Repository');
-        $view = m::mock('Illuminate\View\Factory');
-        $lang = m::mock('Illuminate\Translation\Translator');
-
-        $theme = new Theme($finder, $config, $view, $lang);
-
-        $finder->shouldReceive('has')->once()->with('default')->andReturn(true);
-
-        $hasTheme = $theme->has('default');
-
-        $this->assertTrue($hasTheme);
+        $this->theme->setPath('path/to');
+        $this->assertEquals('path/to', $this->theme->getPath());
     }
 
-    function testGetCurrentThemeAndWillReturnFromConfig()
+    public function testRegisterNamespaces()
+    {        
+        $this->finder->shouldReceive('find')->with($this->getPath(), 'theme.json')->once()->andReturn(['default']);
+        $this->view->shouldReceive('addNamespace')->once();
+        $this->lang->shouldReceive('addNamespace')->once();
+        $themes = $this->theme->registerNamespaces();
+    }
+
+    public function testGetThemePathForSpecifiedTheme()
     {
-        $finder = m::mock('Pingpong\Themes\Finder');
-        $config = m::mock('Illuminate\Config\Repository');
-        $view = m::mock('Illuminate\View\Factory');
-        $lang = m::mock('Illuminate\Translation\Translator');
-
-        $theme = new Theme($finder, $config, $view, $lang);
-
-        $config->shouldReceive('get')->once()->with('themes::default')->andReturn('default');
-
-        $currentTheme = $theme->getCurrent();
-
-        $this->assertEquals($currentTheme, 'default');
+        $this->theme->setPath('path/to');
+        $themePath = $this->theme->getThemePath('default');
+        $this->assertEquals('path/to/default', $themePath);
     }
 
-    function testSetAndGetCurrentTheme()
+    public function testSetAndGetCurrentTheme()
     {
-        $finder = m::mock('Pingpong\Themes\Finder');
-        $config = m::mock('Illuminate\Config\Repository');
-        $view = m::mock('Illuminate\View\Factory');
-        $lang = m::mock('Illuminate\Translation\Translator');
-
-        $theme = new Theme($finder, $config, $view, $lang);
-
-        $theme->setCurrent('white');
-
-        $currentTheme = $theme->getCurrent();
-
-        $this->assertEquals($currentTheme, 'white');
+        $this->theme->setCurrent('foo');
+        $this->assertEquals('foo', $this->theme->getCurrent());
     }
 
-    function testGetThemesPath()
+    public function testHasTheme()
     {
-        $finder = m::mock('Pingpong\Themes\Finder');
-        $config = m::mock('Illuminate\Config\Repository');
-        $view = m::mock('Illuminate\View\Factory');
-        $lang = m::mock('Illuminate\Translation\Translator');
-
-        $theme = new Theme($finder, $config, $view, $lang);
-
-        $finder->shouldReceive('getPath')->once()->andReturn($this->getPath());
-
-        $path = $theme->getPath();
-
-        $this->assertEquals($path, $this->getPath());
+        $this->finder->shouldReceive('find')->with($this->getPath(), 'theme.json')->times(3)->andReturn(['foo', 'bar']);
+        $this->assertTrue($this->theme->has('foo'));
+        $this->assertTrue($this->theme->exists('bar'));
+        $this->assertFalse($this->theme->has('baz'));
     }
 
-    function testThemePathForTheSpecifiedTheme()
+    public function testLoadViewFromCurrentTheme()
     {
-        $finder = m::mock('Pingpong\Themes\Finder');
-        $config = m::mock('Illuminate\Config\Repository');
-        $view = m::mock('Illuminate\View\Factory');
-        $lang = m::mock('Illuminate\Translation\Translator');
-
-        $theme = new Theme($finder, $config, $view, $lang);
-
-        $themePath = $this->getPath() . "/default";
-
-        $finder->shouldReceive('getThemePath')->once()->with('default')->andReturn($themePath);
-
-        $path = $theme->getThemePath('default');
-
-        $this->assertEquals($path, $themePath);
+        $this->config->shouldReceive('get')->once()->andreturn('foo');
+        $this->view->shouldReceive('make')->once()->andreturn('bar');
+        $response = $this->theme->view('index');
+        $this->assertEquals('bar', $response);
     }
 
-    function testSetAndGetThemesPath()
+    public function testLoadLangFromCurrentTheme()
     {
-        $finder = m::mock('Pingpong\Themes\Finder');
-        $config = m::mock('Illuminate\Config\Repository');
-        $view = m::mock('Illuminate\View\Factory');
-        $lang = m::mock('Illuminate\Translation\Translator');
-
-        $theme = new Theme($finder, $config, $view, $lang);
-
-        $finder->shouldReceive('setPath')->once()->with($this->getPath())->andReturn($this->getPath());
-        $finder->shouldReceive('getPath')->once()->andReturn($this->getPath());
-
-        $theme->setPath($this->getPath());
-
-        $this->assertEquals($theme->getPath(), $this->getPath());
+        $this->config->shouldReceive('get')->once()->andreturn('foo');
+        $this->lang->shouldReceive('get')->once()->andreturn('bar');
+        $result = $this->theme->lang('index');
+        $this->assertEquals('bar', $result);
     }
+
 }
