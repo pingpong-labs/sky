@@ -30,6 +30,13 @@ abstract class PingpongTestCase extends \Pingpong\Testing\TestCase {
     {
         return [
             'Pingpong\Modules\ModulesServiceProvider',
+            'Pingpong\Modules\ModulesServiceProvider',
+            'Pingpong\Trusty\TrustyServiceProvider',
+            'Pingpong\Menus\MenusServiceProvider',
+            'Pingpong\Widget\WidgetServiceProvider',
+            'Pingpong\Themes\ThemesServiceProvider',
+            'Pingpong\Shortcode\ShortcodeServiceProvider',
+            'Pingpong\Oembed\OembedServiceProvider',
         ];
     }
 
