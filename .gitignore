@@ -1,6 +1,7 @@
 /.idea
 /vendor/
 /fixture/storage
+/fixture/.env
 .env
 composer.phar
 composer.lock
