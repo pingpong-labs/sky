@@ -11,7 +11,7 @@
  
 ### Documentation
 
-Coming soon
+Documentation is located [here](http://sky.pingpong-labs.com).
 
 ### License
 
