@@ -25,3 +25,21 @@ if( ! function_exists('upload_image'))
 		return null;
 	}
 }
+
+if ( ! function_exists('set_active'))
+{
+    /**
+	* Set active to specified selector.
+	* 
+	* @param array|string $paths
+	* @param string $class
+	* @return string
+	 */
+    function set_active($paths, $class = 'active')
+    {
+    	foreach ((array) $paths as $path)
+    	{
+    		if(Request::is($path)) return $class;
+    	}
+    }
+}
