@@ -2,14 +2,6 @@
 
 use Embed\Embed as BaseEmbed;
 
-/**
- * Class Embed
- * 
- * @package Pingpong\Oembed
- * @author  Pingpong Labs <pingpong.labs@gmail.com>
- * @author  Gravitano <gravitano16@gmail.com>
- * @license https://github.com/pingpong-labs/oembed/blob/master/LICENSE MIT
- */
 class Embed extends BaseEmbed {
 
     /**

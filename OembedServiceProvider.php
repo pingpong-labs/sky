@@ -26,7 +26,7 @@ class OembedServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('pingpong/oembed');
+		//
 	}
 
 	/**
