@@ -1,6 +1,8 @@
 <?php
 
 return [
+    
+    'namespace' => 'App\Modules',
 
     'stubs' => [
         'enabled'   => false,
@@ -16,12 +18,15 @@ return [
         ],
         'replacements' => [
             'start'         => ['LOWER_NAME'],
-            'routes'        => ['LOWER_NAME', 'STUDLY_NAME'],
-            'json'          => ['LOWER_NAME', 'STUDLY_NAME'],
+            'routes'        => ['LOWER_NAME', 'STUDLY_NAME', 'MODULE_NAMESPACE'],
+            'json'          => ['LOWER_NAME', 'STUDLY_NAME', 'MODULE_NAMESPACE'],
             'views/index'   => ['LOWER_NAME'],
             'views/master'  => ['STUDLY_NAME'],
             'scaffold/config' => ['STUDLY_NAME'],
-            'composer'      => ['LOWER_NAME', 'STUDLY_NAME', 'VENDOR', 'AUTHOR_NAME', 'AUTHOR_EMAIL'],
+            'composer'      => [
+                'LOWER_NAME', 'STUDLY_NAME', 'VENDOR', 'AUTHOR_NAME', 'AUTHOR_EMAIL',
+                'MODULE_NAMESPACE'
+            ],
         ],
     ],
 
@@ -36,7 +41,7 @@ return [
         |
         */
 
-        'modules' => base_path('Modules'),
+        'modules' => app_path('Modules'),
         /*
         |--------------------------------------------------------------------------
         | Modules assets path
