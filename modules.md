@@ -189,23 +189,23 @@ Create new command for the specified module.
   ```
   php artisan module:command CustomCommand blog
 
-  php artisan module:command CustomCommand blog --command=custom:command
+  php artisan module:command CustomCommand --command=custom:command blog
 
-  php artisan module:command CustomCommand blog --namespace=Modules\Blog\Commands
+  php artisan module:command CustomCommand --namespace=Modules\Blog\Commands blog
   ```
   
 Create new migration for the specified module.
 
   ```
-  php artisan module:migration blog create_users_table
+  php artisan module:migration create_users_table blog
 
-  php artisan module:migration blog create_users_table --fields="username:string, password:string"
+  php artisan module:migration create_users_table --fields="username:string, password:string" blog
 
-  php artisan module:migration blog add_email_to_users_table --fields="email:string:unique"
+  php artisan module:migration add_email_to_users_table --fields="email:string:unique" blog
 
-  php artisan module:migration blog remove_email_from_users_table --fields="email:string:unique"
+  php artisan module:migration remove_email_from_users_table --fields="email:string:unique" blog
 
-  php artisan module:migration blog drop_users_table
+  php artisan module:migration drop_users_table blog
   ```
 
 Rollback, Reset and Refresh The Modules Migrations.
