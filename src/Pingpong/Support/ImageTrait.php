@@ -4,7 +4,7 @@ trait ImageTrait {
 
     public function deleteImage()
     {
-        if(file_exists($path = $this->getImagePath())) 
+        if (file_exists($path = $this->getImagePath()))
         {
             @unlink($path);
 
