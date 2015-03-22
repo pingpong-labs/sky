@@ -51,8 +51,8 @@ class RepositoryTest extends PingpongTestCase {
     {
         $url = $this->repository->asset("user:img/image.png");
         $url2 = $this->repository->asset("blog:articles/foo.png");
-        $this->assertEquals("http://localhost/modules/user/img/image.png", $url);
-        $this->assertEquals("http://localhost/modules/blog/articles/foo.png", $url2);
+        $this->assertEquals("http://localhost/user/img/image.png", $url);
+        $this->assertEquals("http://localhost/blog/articles/foo.png", $url2);
     }
 
     public function testGetAndSetModuleStatus()
