@@ -1,6 +1,7 @@
 <?php
 
 use Mockery as m;
+use Pingpong\Themes\Repository;
 use Pingpong\Themes\Theme;
 
 class ThemeTest extends PHPUnit_Framework_TestCase {
@@ -21,13 +22,25 @@ class ThemeTest extends PHPUnit_Framework_TestCase {
         $this->config = m::mock('Illuminate\Config\Repository');
         $this->view = m::mock('Illuminate\View\Factory');
         $this->lang = m::mock('Illuminate\Translation\Translator');
-        $this->theme = new Theme($this->finder, $this->config, $this->view, $this->lang);
+        $this->theme = new Repository($this->finder, $this->config, $this->view, $this->lang);
         $this->theme->setPath($this->getPath());
     }
 
-    public function testGetAllThemes()
+    public function getTheme($name = 'foo')
     {
-        $this->finder->shouldReceive('find')->with($this->getPath(), 'theme.json')->once()->andReturn(['default']);
+        return new Theme([
+            'name' => $name
+        ]);
+    }
+
+    public function testGetAllThemes()
+    { 
+        $this->finder->shouldReceive('find')
+                     ->with($this->getPath(), 'theme.json')
+                     ->once()
+                     ->andReturn([
+                        $this->getTheme()
+                    ]);
         $themes = $this->theme->all();
         $this->assertTrue(is_array($themes));
     }
@@ -40,7 +53,12 @@ class ThemeTest extends PHPUnit_Framework_TestCase {
 
     public function testRegisterNamespaces()
     {        
-        $this->finder->shouldReceive('find')->with($this->getPath(), 'theme.json')->once()->andReturn(['default']);
+        $this->finder->shouldReceive('find')
+                     ->with($this->getPath(), 'theme.json')
+                     ->once()
+                     ->andReturn([
+                        $this->getTheme()
+                    ]);
         $this->view->shouldReceive('addNamespace')->once();
         $this->lang->shouldReceive('addNamespace')->once();
         $themes = $this->theme->registerNamespaces();
@@ -60,8 +78,14 @@ class ThemeTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testHasTheme()
-    {
-        $this->finder->shouldReceive('find')->with($this->getPath(), 'theme.json')->times(3)->andReturn(['foo', 'bar']);
+    {        
+        $this->finder->shouldReceive('find')
+                     ->with($this->getPath(), 'theme.json')
+                     ->once()
+                     ->andReturn([
+                        $this->getTheme(),
+                        $this->getTheme('bar')
+                    ]);
         $this->assertTrue($this->theme->has('foo'));
         $this->assertTrue($this->theme->exists('bar'));
         $this->assertFalse($this->theme->has('baz'));
