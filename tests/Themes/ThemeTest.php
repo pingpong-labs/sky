@@ -81,7 +81,7 @@ class ThemeTest extends PHPUnit_Framework_TestCase {
     {        
         $this->finder->shouldReceive('find')
                      ->with($this->getPath(), 'theme.json')
-                     ->once()
+                     ->times(3)
                      ->andReturn([
                         $this->getTheme(),
                         $this->getTheme('bar')
