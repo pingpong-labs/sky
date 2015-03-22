@@ -21,6 +21,8 @@ class ModulesServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
+        $this->registerNamespaces();
+        
         $this->app['modules']->boot();
 
         $this->app['modules']->register();
@@ -33,13 +35,26 @@ class ModulesServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $this->registerNamespaces();
         $this->registerServices();
+        $this->setupStubPath();
         $this->registerProviders();
+    }
 
+    /**
+     * Setup stub path.
+     * 
+     * @return void
+     */
+    public function setupStubPath()
+    {
         $this->app->booted(function ($app)
         {
             Stub::setPath(__DIR__ . '/Commands/stubs');
+        
+            if ($app['modules']->config('stubs.enabled') === true)
+            {
+                Stub::setPath($app['modules']->config('stubs.path'));
+            }
         });
     }
     
@@ -62,11 +77,11 @@ class ModulesServiceProvider extends ServiceProvider {
      */
     protected function registerHtml()
     {
-        $this->app->register('Illuminate\Html\HtmlServiceProvider');
+        $this->app->register('Collective\Html\HtmlServiceProvider');
 
         $aliases = [
-            'HTML' => 'Illuminate\Html\HtmlFacade',
-            'Form' => 'Illuminate\Html\FormFacade',
+            'HTML' => 'Collective\Html\HtmlFacade',
+            'Form' => 'Collective\Html\FormFacade',
             'Module' => 'Pingpong\Modules\Facades\Module',
         ];
 
