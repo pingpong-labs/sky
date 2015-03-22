@@ -1,12 +1,7 @@
 <?php namespace Pingpong\Testing;
 
 use Illuminate\Config\EnvironmentVariables;
-use Illuminate\Config\Repository;
-use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Testing\ApplicationTrait;
-use Illuminate\Foundation\Testing\AssertionsTrait;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Facade;
 
 abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase {
