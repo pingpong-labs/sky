@@ -4,7 +4,7 @@ use Illuminate\Support\ServiceProvider;
 
 /**
  * Class OembedServiceProvider
- * 
+ *
  * @package Pingpong\Oembed
  * @author  Pingpong Labs <pingpong.labs@gmail.com>
  * @author  Gravitano <gravitano16@gmail.com>
@@ -12,44 +12,44 @@ use Illuminate\Support\ServiceProvider;
  */
 class OembedServiceProvider extends ServiceProvider {
 
-	/**
-	 * Indicates if loading of the provider is deferred.
-	 *
-	 * @var bool
-	 */
-	protected $defer = false;
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = false;
 
-	/**
-	 * Boot the package.
-	 * 
-	 * @return void
-	 */
-	public function boot()
-	{
-		//
-	}
+    /**
+     * Boot the package.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //
+    }
 
-	/**
-	 * Register the service provider.
-	 *
-	 * @return void
-	 */
-	public function register()
-	{
-		$this->app->bindShared('oembed', function ($app)
-		{
-			return new Oembed(new Embed, $app['cache.store']);
-		});
-	}
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->app->bindShared('oembed', function ($app)
+        {
+            return new Oembed(new Embed, $app['cache.store']);
+        });
+    }
 
-	/**
-	 * Get the services provided by the provider.
-	 *
-	 * @return array
-	 */
-	public function provides()
-	{
-		return array('oembed');
-	}
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return array('oembed');
+    }
 
 }
