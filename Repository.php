@@ -1,9 +1,8 @@
 <?php namespace Pingpong\Themes;
 
-use Illuminate\View\Factory;
 use Illuminate\Config\Repository as Config;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Translation\Translator;
+use Illuminate\View\Factory;
 
 class Repository {
 
@@ -78,29 +77,32 @@ class Repository {
      */
     public function registerNamespaces()
     {
-        foreach($this->all() as $theme)
+        foreach ($this->all() as $theme)
         {
-            foreach(array('views', 'lang') as $hint)
+            foreach (array('views', 'lang') as $hint)
             {
-                $name = $theme->getLowerName();
-
-                $path = $this->getNamespacePath($name, $hint);
-                
-                $this->{$hint}->addNamespace($name, $path);
+                $this->{$hint}->addNamespace($theme->getLowerName(), $theme->getPath($hint));
             }
         }
     }
 
     /**
-     * Get path for namespace.
+     * Find the specified theme.
      *
-     * @param $theme
-     * @param $type
-     * @return string
+     * @param  string $search
+     * @return \Pingpong\Themes\Theme|null
      */
-    protected function getNamespacePath($theme, $type)
+    public function find($search)
     {
-        return $this->getThemePath($theme) . "/{$type}";
+        foreach ($this->all() as $theme)
+        {
+            if ($theme->getLowerName() == strtolower($earch))
+            {
+                return $theme;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -111,7 +113,7 @@ class Repository {
      */
     public function getThemePath($theme)
     {
-        return $this->path ."/{$theme}";
+        return $this->path . "/{$theme}";
     }
 
     /**
