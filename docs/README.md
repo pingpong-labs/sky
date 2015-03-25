@@ -1,6 +1,6 @@
-# Welcome
+# Introduction
 
-Sky 2.0 is an extra Laravel package which created for laravel 5.
+Pingpong Sky is a PHP component made specifically for Laravel. Pingpong Sky includes some ready-made components such as Modules, Menus and Widgets.
 
 ## License
 
