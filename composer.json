@@ -2,6 +2,7 @@
   "name": "pingpong/sky",
   "description": "An Extra Laravel Component",
   "license": "BSD-3-Clause",
+  "homepage": "http://sky.pingpong-labs.com",
   "authors": [
     {
       "name": "Pingpong Labs",
