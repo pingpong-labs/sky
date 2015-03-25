@@ -1,4 +1,4 @@
-# Sky - The Extra Laravel Packages 
+# Pingpong Sky - An Extra Laravel Component
 
 [![Build Status](https://travis-ci.org/pingpong-labs/sky.svg)](https://travis-ci.org/pingpong-labs/sky)
 
