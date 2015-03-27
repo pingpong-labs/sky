@@ -36,7 +36,7 @@ class MigrationParser implements Arrayable {
 	/**
 	 * Parse a string to array of formatted schema.
 	 * 
-	 * @param  string $migration]
+	 * @param  string $migration
 	 * @return array
 	 */
 	public function parse($migration)
@@ -57,6 +57,11 @@ class MigrationParser implements Arrayable {
 		return $parsed;
 	}
 
+	/**
+	 * Get array of schema.
+	 * 
+	 * @return array
+	 */
 	public function getSchemas()
 	{
 		return explode(',', str_replace(' ', '', $this->migration));
@@ -118,7 +123,9 @@ class MigrationParser implements Arrayable {
 	 */
 	protected function formatField($key, $field, $column)
 	{
-		if($key == 0)
+		if ($this->hasCustomAttribute($column)) return '->' . $field;
+
+		if ($key == 0)
 		{
 			return '->' . $field . "('". $column."')";	
 		}
@@ -169,7 +176,7 @@ class MigrationParser implements Arrayable {
 	 * Get custom attributes value.
 	 * 
 	 * @param  string $column
-	 * @return string|array
+	 * @return array
 	 */
 	public function getCustomAttribute($column)
 	{
