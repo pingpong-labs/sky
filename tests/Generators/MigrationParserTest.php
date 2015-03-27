@@ -13,7 +13,7 @@ class MigrationParserTest extends PHPUnit_Framework_TestCase {
 
 	public function testParseSimpleMigration()
 	{
-		$excepted = [
+		$expected = [
 			'username' => [
 				'string'
 			],
@@ -24,12 +24,12 @@ class MigrationParserTest extends PHPUnit_Framework_TestCase {
 
 		$equal = $this->parser->parse('username:string,password:string');
 
-		$this->assertEquals($excepted, $equal);	
+		$this->assertEquals($expected, $equal);	
 	}
 
 	public function testParseMigrationThatContainSpace()
 	{		
-		$excepted = [
+		$expected = [
 			'username' => [
 				'string'
 			],
@@ -43,12 +43,12 @@ class MigrationParserTest extends PHPUnit_Framework_TestCase {
 
 		$equal = $this->parser->parse('username:string, password:string , email:string');
 
-		$this->assertEquals($excepted, $equal);	
+		$this->assertEquals($expected, $equal);	
 	}
 
 	public function testParseMigrationWithMultipleAttributes()
 	{		
-		$excepted = [
+		$expected = [
 			'title' => [
 				'string'
 			],
@@ -63,12 +63,12 @@ class MigrationParserTest extends PHPUnit_Framework_TestCase {
 
 		$equal = $this->parser->parse('title:string, slug:string:unqiue, body:text');
 
-		$this->assertEquals($excepted, $equal);	
+		$this->assertEquals($expected, $equal);	
 	}
 
 	public function testParseAdvancedMigration()
 	{		
-		$excepted = [
+		$expected = [
 			'email' => [
 				'string(100)',
 				'primary'
@@ -87,6 +87,26 @@ class MigrationParserTest extends PHPUnit_Framework_TestCase {
 
 		$equal = $this->parser->parse('email:string(100):primary, username:string(20):unique, remember_token, soft_delete');
 
-		$this->assertEquals($excepted, $equal);	
+		$this->assertEquals($expected, $equal);	
+	}
+
+	public function testRenderSimpleMigration()
+	{		
+		$expected = '$table->string(\'title\');'.PHP_EOL;
+
+		$equal = (new MigrationParser('title:string'))->render();
+
+		$this->assertEquals($expected, $equal);	
+	}
+
+	public function testRenderAdvanceMigration()
+	{		
+		$expected = '$table->string(\'title\');'.PHP_EOL;
+		$expected.= '$table->string(\'slug\')->unique();'.PHP_EOL;
+		$expected.= '$table->text(\'body\');'.PHP_EOL;
+
+		$equal = (new MigrationParser('title:string, slug:string:unique, body:text'))->render();
+
+		$this->assertEquals($expected, $equal);	
 	}
 }
