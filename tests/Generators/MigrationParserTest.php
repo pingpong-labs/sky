@@ -104,8 +104,10 @@ class MigrationParserTest extends PHPUnit_Framework_TestCase {
 		$expected = '$table->string(\'title\');'.PHP_EOL;
 		$expected.= '$table->string(\'slug\')->unique();'.PHP_EOL;
 		$expected.= '$table->text(\'body\');'.PHP_EOL;
+		$expected.= '$table->rememberToken();'.PHP_EOL;
+		$expected.= '$table->softDeletes();'.PHP_EOL;
 
-		$equal = (new MigrationParser('title:string, slug:string:unique, body:text'))->render();
+		$equal = (new MigrationParser('title:string, slug:string:unique, body:text, remember_token, soft_delete'))->render();
 
 		$this->assertEquals($expected, $equal);	
 	}
