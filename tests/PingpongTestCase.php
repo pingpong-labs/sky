@@ -37,7 +37,7 @@ abstract class PingpongTestCase extends \Pingpong\Testing\TestCase {
             'Pingpong\Themes\ThemesServiceProvider',
             'Pingpong\Shortcode\ShortcodeServiceProvider',
             'Pingpong\Oembed\OembedServiceProvider',
-            'Pingpong\Generators\Providers\ConsoleServiceProvider',
+            'Pingpong\Generators\GeneratorsServiceProvider',
         ];
     }
 
