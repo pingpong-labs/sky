@@ -3,6 +3,7 @@ Laravel Generators
 
 - [Installation](#installation)
 - [Artisan Commands](#artisan-commands)
+- [Scaffolding](#scaffold)
 
 <a name="installation"></a>
 ## Installation
