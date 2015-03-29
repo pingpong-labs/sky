@@ -2,14 +2,7 @@ Laravel Generators
 ==========
 
 - [Installation](#installation)
-- [Generate a controller](#controller)
-- [Generate a model](#model)
-- [Generate a console command](#console)
-- [Generate a form request](#request)
-- [Generate a migration](#migration)
-- [Generate a pivot migration](#pivot)
-- [Generate a seed](#seed)
-- [Generate a view](#view)
+- [Artisan Commands](#artisan-commands)
 
 <a name="installation"></a>
 ## Installation
@@ -25,6 +18,18 @@ Next, register new service provider to `providers` array in `app/config/app.php`
 ```
 
 Done.
+
+<a name="artisan-commands"></a>
+## Artisan Commands
+
+- [Generate a controller](#controller)
+- [Generate a model](#model)
+- [Generate a console command](#console)
+- [Generate a form request](#request)
+- [Generate a migration](#migration)
+- [Generate a pivot migration](#pivot)
+- [Generate a seed](#seed)
+- [Generate a view](#view)
 
 <a name="controller"></a>
 ### Generate a new controller
