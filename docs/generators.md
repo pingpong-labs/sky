@@ -161,10 +161,10 @@ Generate a plain/blank view.
 php artisan generate:view users/index --plain
 ```
 
-Generate a view with also generate a layout for it.
+Generate a master view.
 
 ```terminal
-php artisan generate:view users/index --with-layout
+php artisan generate:view layouts/master --master
 ```
 
 <a name="scaffold"></a>
