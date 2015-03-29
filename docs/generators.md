@@ -8,6 +8,7 @@ Laravel Generators
 - [Generate a form request](#request)
 - [Generate a migration](#migration)
 - [Generate a pivot migration](#pivot)
+- [Generate a seed](#seed)
 - [Generate a view](#view)
 
 <a name="installation"></a>
@@ -119,6 +120,15 @@ php artisan generate:migration drop_users_table
 
 ```terminal
 php artisan generate:pivot users roles
+```
+
+<a name="seed"></a>
+### Generate a seed class
+
+Create a basic database seeder class.
+
+```terminal
+php artisan generate:seed users
 ```
 
 <a name="view"></a>
