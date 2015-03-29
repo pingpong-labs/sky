@@ -2,7 +2,10 @@ Laravel Generators
 ==========
 
 - [Installation](#installation)
-- [Documentation](#documentation)
+- [Generate a controller](#controller)
+- [Generate a model](#model)
+- [Generate a console command](#console)
+- [Generate a migration](#migration)
 
 <a name="installation"></a>
 ## Installation
@@ -19,89 +22,92 @@ Next, register new service provider to `providers` array in `app/config/app.php`
 
 Done.
 
-<a name="documentation"></a>
-### Documentation
+<a name="controller"></a>
+### Generate a new controller
 
-**Generate a new controller**
+Generate a basic controller.
 
-```php
-$path = app_path('controllers');
-
-$generator = new Pingpong\Generators\ControllerGenerator($path, 'HomeController');
-
-$generator->generate();
+```terminal
+php artisan generate:controller UsersController
 ```
 
-You may also set the namespace for the class by specify the `namespace` key in the `options` array. The `options` array is the third argument in the generator class. For example :
+Generate a resource controller.
 
-```php
-$options = ['namespace' => 'App\\Controllers'];
-
-$generator = new Pingpong\Generators\ControllerGenerator($path, 'HomeController', $options);
-
-$generator->generate();
+```terminal
+php artisan generate:controller UsersController --resource
+# OR
+php artisan generate:controller UsersController -r
 ```
 
-**Generate a new model**
+Generate a scaffolded controller.
 
-```php
-$generator = new Pingpong\Generators\ModelGenerator($path, 'User');
-
-$generator->generate();
+```
+php artisan generate:controller UsersController --scaffold
+# OR
+php artisan generate:controller UsersController -s
 ```
 
-**Generate a new seed**
+<a name="model"></a>
+### Generate a new model
 
 ```php
-$generator = new Pingpong\Generators\SeedGenerator($path, 'UsersTableSeeder');
+php artisan generate:model User
 
-$generator->generate();
+php artisan generate:model Users/User
 ```
 
-**Generate a new filter**
+<a name="console"></a>
+### Generate a new console
 
-```php
-$generator = new Pingpong\Generators\FilterGenerator($path, 'AdminFilter');
+```
+php artisan generate:console FooCommand
 
-$generator->generate();
+php artisan generate:console FooCommand --command="foo" --description="a console"
 ```
 
-**Generate a new form request**
+<a name="request"></a>
+### Generate a new form request
 
-```php
-$generator = new Pingpong\Generators\FormRequestGenerator($path, 'LoginRequest');
-
-$generator->generate();
+```
+php artisan generate:request CreateUserRequest
 ```
 
-**Generate a new command**
+You can also specify `rules`.
 
-```php
-$generator = new Pingpong\Generators\CommandGenerator($path, 'FooCommand');
+```
+php artisan generate:request CreateUserRequest --rules="username:required, email:required,email"
 
-$generator->generate();
+php artisan generate:request CreateUserRequest --rules="username:unique(users;username)"
 ```
 
-**Generate a new service provider**
+<a name="migration"></a>
+### Generate a new migration
 
-```php
-$generator = new Pingpong\Generators\ProviderGenerator($path, 'BarServiceProvider');
+Generate a basic migration.
 
-$generator->generate();
+```
+php artisan generate:migration create_users_table
 ```
 
-**Generate a new migration**
+Generate a migration with specify the fields.
 
-```php
-use Pingpong\Generate\MigrationGenerator;
-
-$generator = new MigrationGenerator($path, 'create_users_table');
-
-$generator = new MigrationGenerator($path, 'create_users_table', 'name:string, username:string');
-
-$generator = new MigrationGenerator($path, 'add_remember_token_to_users_table', 'remember_token:string:nullable');
-
-$generator = new MigrationGenerator($path, 'remove_username_from_users_table', 'username:string');
-
-$generator = new MigrationGenerator($path, 'drop_users_table', 'name:string, username:string');
 ```
+php artisan generate:migration create_users_table --fields="username:string, email:string:unique, remember_token, soft_delete"
+```
+
+Add new field to an existing table.
+```
+php artisan generate:migration add_password_to_users_table --fields="password:string"
+```
+
+Remove column from a specify table.
+
+```
+php artisan generate:migration remove_password_from_users_table --fields="password:string"
+```
+
+Drop a specify table.
+```
+php artisan generate:migration drop_users_table
+```
+
