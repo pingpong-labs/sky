@@ -32,6 +32,7 @@ In this package there are many CLI commands that are useful to speed up you in c
 - [Generate a pivot migration](#pivot)
 - [Generate a seed](#seed)
 - [Generate a view](#view)
+- [Generate a scaffold](#scaffold)
 
 <a name="controller"></a>
 ### Generate a new controller
@@ -163,4 +164,25 @@ Generate a view with also generate a layout for it.
 
 ```terminal
 php artisan generate:view users/index --with-layout
+```
+
+<a name="scaffold"></a>
+### Generate a scaffolded resource
+
+For some cases we may need to be faster in making resource. Let's say we're making a CRUD. First we have to create a migration, then the controller, and then the model and the others stuffs. If we use the commands to make it one by one, it is inefficient and will take a long time. That is where the "Generate: Scaffold" useful. With this command we can create a CRUD with just one command.
+
+```
+php artisan generate:scaffold task --fields="name:string, description=text"
+```
+
+From the example above we can see how easy it is to create a crud just one command. The first parameter is the name of entity being in singular convention. For example, if you want to create a `users` CRUD, you just need to use `user`. You have to follow singular convention.
+
+```
+php artisan generate:scaffold user
+```
+
+You can also specify the option "prefix" for this command. It is used as a "prefix" controller path , views, and also the route.
+
+```
+php artisan generate:scaffold task --fields="name:string, description=text" --prefix=admin
 ```
