@@ -113,13 +113,13 @@ Add new field to an existing table.
 php artisan generate:migration add_password_to_users_table --fields="password:string"
 ```
 
-Remove column from a specify table.
+Remove column from the specified table.
 
 ```
 php artisan generate:migration remove_password_from_users_table --fields="password:string"
 ```
 
-Drop a specify table.
+Drop the specified table.
 ```
 php artisan generate:migration drop_users_table
 ```
@@ -168,9 +168,9 @@ php artisan generate:view layouts/master --master
 ```
 
 <a name="scaffold"></a>
-### Generate a scaffolded resource
+### Generate a scaffold resource
 
-For some cases we may need to be faster in making resource. Let's say we're making a CRUD. First we have to create a migration, then the controller, and then the model and the others stuffs. If we use the commands to make it one by one, it is inefficient and will take a long time. That is where the "Generate: Scaffold" useful. With this command we can create a CRUD with just one command.
+For some cases we may need to be faster in making resource. Let's say we're making a CRUD. First we have to create a migration, then the controller, and then the model and the others stuffs. If we use the commands to make it one by one, it is inefficient and will take a long time. That is where the "generate:scaffold" useful. With this command we can create a CRUD with just one command.
 
 ```
 php artisan generate:scaffold task --fields="name:string, description=text"
@@ -182,7 +182,7 @@ From the example above we can see how easy it is to create a crud just one comma
 php artisan generate:scaffold user
 ```
 
-You can also specify the option "prefix" for this command. It is used as a "prefix" controller path , views, and also the route.
+You can also specify the option `prefix` for this command. It is used as a `prefix` controller path , views, and also the route.
 
 ```
 php artisan generate:scaffold task --fields="name:string, description=text" --prefix=admin
