@@ -5,6 +5,7 @@ Laravel Generators
 - [Generate a controller](#controller)
 - [Generate a model](#model)
 - [Generate a console command](#console)
+- [Generate a form request](#request)
 - [Generate a migration](#migration)
 - [Generate a pivot migration](#pivot)
 - [Generate a view](#view)
