@@ -6,6 +6,8 @@ Laravel Generators
 - [Generate a model](#model)
 - [Generate a console command](#console)
 - [Generate a migration](#migration)
+- [Generate a pivot migration](#pivot)
+- [Generate a view](#view)
 
 <a name="installation"></a>
 ## Installation
@@ -111,3 +113,36 @@ Drop a specify table.
 php artisan generate:migration drop_users_table
 ```
 
+<a name="pivot"></a>
+### Generate a pivot
+
+```terminal
+php artisan generate:pivot users roles
+```
+
+<a name="view"></a>
+### Generate a view
+
+Basic usage.
+
+```terminal
+php artisan generate:view index
+```
+
+Auto generate folder.
+
+```terminal
+php artisan generate:view users/index
+```
+
+Generate a plain/blank view.
+
+```terminal
+php artisan generate:view users/index --plain
+```
+
+Generate a view with also generate a layout for it.
+
+```terminal
+php artisan generate:view users/index --with-layout
+```
