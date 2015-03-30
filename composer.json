@@ -26,8 +26,7 @@
       "Pingpong\\": "src/Pingpong"
     },
     "classmap": [
-      "tests/PingpongTestCase.php",
-      "tests/Generators/GeneratorTestCase.php"
+      "tests/PingpongTestCase.php"
     ],
     "files": [
       "src/Pingpong/Support/helpers.php"
