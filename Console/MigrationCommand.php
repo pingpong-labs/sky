@@ -3,43 +3,45 @@
 namespace Pingpong\Generators\Console;
 
 use Illuminate\Console\Command;
-use Pingpong\Generators\ConsoleGenerator;
+use Illuminate\Foundation\Composer;
+use Pingpong\Generators\MigrationGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class ConsoleCommand extends Command {
+class MigrationCommand extends Command {
 
     /**
      * The name of command.
      *
      * @var string
      */
-    protected $name = 'generate:console';
+    protected $name = 'generate:migration';
 
     /**
      * The description of command.
      *
      * @var string
      */
-    protected $description = 'Generate a new console command.';
+    protected $description = 'Generate a new migration.';
 
     /**
      * Execute the command.
      *
      * @return void
      */
-    public function fire()
+    public function fire(Composer $composer)
     {
-        $generator = new ConsoleGenerator([
+        $generator = new MigrationGenerator([
             'name' => $this->argument('name'),
+            'fields' => $this->option('fields'),
             'force' => $this->option('force'),
-            'command' => $this->option('command'),
-            'description' => $this->option('description'),
         ]);
 
         $generator->run();
 
-        $this->info("Console created successfully.");
+        $this->info("Migration created successfully.");
+
+        $composer->dumpAutoloads();
     }
 
     /**
@@ -62,8 +64,7 @@ class ConsoleCommand extends Command {
     public function getOptions()
     {
         return [
-            ['command', 'c', InputOption::VALUE_OPTIONAL, 'The name of command being used.', null],
-            ['description', 'd', InputOption::VALUE_OPTIONAL, 'The description of command being used.', null],
+            ['fields', 'c', InputOption::VALUE_OPTIONAL, 'The fields of migration. Separated with comma (,).', null],
             ['force', 'f', InputOption::VALUE_NONE, 'Force the creation if file already exists.', null],
         ];
     }

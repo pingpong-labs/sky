@@ -3,25 +3,25 @@
 namespace Pingpong\Generators\Console;
 
 use Illuminate\Console\Command;
-use Pingpong\Generators\ModelGenerator;
+use Pingpong\Generators\FormGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class ModelCommand extends Command {
+class FormCommand extends Command {
 
     /**
      * The name of command.
      *
      * @var string
      */
-    protected $name = 'generate:model';
+    protected $name = 'generate:form';
 
     /**
      * The description of command.
      *
      * @var string
      */
-    protected $description = 'Generate a new model.';
+    protected $description = 'Generate a new form.';
 
     /**
      * Execute the command.
@@ -30,15 +30,12 @@ class ModelCommand extends Command {
      */
     public function fire()
     {
-        $generator = new ModelGenerator([
-            'name' => $this->argument('name'),
-            'fillable' => $this->option('fillable'),
-            'force' => $this->option('force'),
-        ]);
+        $generator = new FormGenerator(
+            $this->argument('table'),
+            $this->option('fields')
+        );
 
-        $generator->run();
-
-        $this->info("Model created successfully.");
+        $this->line($generator->render());
     }
 
     /**
@@ -49,7 +46,7 @@ class ModelCommand extends Command {
     public function getArguments()
     {
         return [
-            ['name', InputArgument::REQUIRED, 'The name of class being generated.', null],
+            ['table', InputArgument::OPTIONAL, 'The name of table being used.', null],
         ];
     }
 
@@ -61,8 +58,7 @@ class ModelCommand extends Command {
     public function getOptions()
     {
         return [
-            ['fillable', null, InputOption::VALUE_OPTIONAL, 'The fillable attributes.', null],
-            ['force', 'f', InputOption::VALUE_NONE, 'Force the creation if file already exists.', null],
+            ['fields', 'f', InputOption::VALUE_OPTIONAL, 'The form fields.', null],
         ];
     }
 }

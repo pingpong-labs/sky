@@ -3,25 +3,25 @@
 namespace Pingpong\Generators\Console;
 
 use Illuminate\Console\Command;
-use Pingpong\Generators\ConsoleGenerator;
+use Pingpong\Generators\ScaffoldGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class ConsoleCommand extends Command {
+class ScaffoldCommand extends Command {
 
     /**
      * The name of command.
      *
      * @var string
      */
-    protected $name = 'generate:console';
+    protected $name = 'generate:scaffold';
 
     /**
      * The description of command.
      *
      * @var string
      */
-    protected $description = 'Generate a new console command.';
+    protected $description = 'Generate a new scaffold resource.';
 
     /**
      * Execute the command.
@@ -30,16 +30,7 @@ class ConsoleCommand extends Command {
      */
     public function fire()
     {
-        $generator = new ConsoleGenerator([
-            'name' => $this->argument('name'),
-            'force' => $this->option('force'),
-            'command' => $this->option('command'),
-            'description' => $this->option('description'),
-        ]);
-
-        $generator->run();
-
-        $this->info("Console created successfully.");
+        (new ScaffoldGenerator($this))->run();
     }
 
     /**
@@ -50,7 +41,7 @@ class ConsoleCommand extends Command {
     public function getArguments()
     {
         return [
-            ['name', InputArgument::REQUIRED, 'The name of class being generated.', null],
+            ['entity', InputArgument::REQUIRED, 'The entity name.', null],
         ];
     }
 
@@ -62,8 +53,9 @@ class ConsoleCommand extends Command {
     public function getOptions()
     {
         return [
-            ['command', 'c', InputOption::VALUE_OPTIONAL, 'The name of command being used.', null],
-            ['description', 'd', InputOption::VALUE_OPTIONAL, 'The description of command being used.', null],
+            ['fields', null, InputOption::VALUE_OPTIONAL, 'The fields of migration. Separated with comma (,).', null],
+            ['prefix', null, InputOption::VALUE_OPTIONAL, 'The prefix path & routes.', null],
+            ['no-question', null, InputOption::VALUE_NONE, 'Don\'t ask any question.', null],
             ['force', 'f', InputOption::VALUE_NONE, 'Force the creation if file already exists.', null],
         ];
     }

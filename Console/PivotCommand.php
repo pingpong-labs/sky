@@ -3,25 +3,25 @@
 namespace Pingpong\Generators\Console;
 
 use Illuminate\Console\Command;
-use Pingpong\Generators\ConsoleGenerator;
+use Pingpong\Generators\PivotGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class ConsoleCommand extends Command {
+class PivotCommand extends Command {
 
     /**
      * The name of command.
      *
      * @var string
      */
-    protected $name = 'generate:console';
+    protected $name = 'generate:pivot';
 
     /**
      * The description of command.
      *
      * @var string
      */
-    protected $description = 'Generate a new console command.';
+    protected $description = 'Generate a new pivot migration.';
 
     /**
      * Execute the command.
@@ -30,16 +30,15 @@ class ConsoleCommand extends Command {
      */
     public function fire()
     {
-        $generator = new ConsoleGenerator([
-            'name' => $this->argument('name'),
-            'force' => $this->option('force'),
-            'command' => $this->option('command'),
-            'description' => $this->option('description'),
+        $generator = new PivotGenerator([
+            'table_one' => $this->argument('table_one'),
+            'table_two' => $this->argument('table_two'),
+            'force' => $this->option('force')
         ]);
 
         $generator->run();
 
-        $this->info("Console created successfully.");
+        $this->info("Migration created successfully.");
     }
 
     /**
@@ -50,7 +49,8 @@ class ConsoleCommand extends Command {
     public function getArguments()
     {
         return [
-            ['name', InputArgument::REQUIRED, 'The name of class being generated.', null],
+            ['table_one', InputArgument::REQUIRED, 'The name of table one.', null],
+            ['table_two', InputArgument::REQUIRED, 'The name of table two.', null],
         ];
     }
 
@@ -62,8 +62,6 @@ class ConsoleCommand extends Command {
     public function getOptions()
     {
         return [
-            ['command', 'c', InputOption::VALUE_OPTIONAL, 'The name of command being used.', null],
-            ['description', 'd', InputOption::VALUE_OPTIONAL, 'The description of command being used.', null],
             ['force', 'f', InputOption::VALUE_NONE, 'Force the creation if file already exists.', null],
         ];
     }

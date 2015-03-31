@@ -3,25 +3,25 @@
 namespace Pingpong\Generators\Console;
 
 use Illuminate\Console\Command;
-use Pingpong\Generators\ConsoleGenerator;
+use Pingpong\Generators\RequestGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class ConsoleCommand extends Command {
+class RequestCommand extends Command {
 
     /**
      * The name of command.
      *
      * @var string
      */
-    protected $name = 'generate:console';
+    protected $name = 'generate:request';
 
     /**
      * The description of command.
      *
      * @var string
      */
-    protected $description = 'Generate a new console command.';
+    protected $description = 'Generate a new form request class.';
 
     /**
      * Execute the command.
@@ -30,16 +30,17 @@ class ConsoleCommand extends Command {
      */
     public function fire()
     {
-        $generator = new ConsoleGenerator([
+        $generator = new RequestGenerator([
             'name' => $this->argument('name'),
+            'rules' => $this->option('rules'),
+            'auth' => $this->option('auth'),
+            'scaffold' => $this->option('scaffold'),
             'force' => $this->option('force'),
-            'command' => $this->option('command'),
-            'description' => $this->option('description'),
         ]);
 
         $generator->run();
 
-        $this->info("Console created successfully.");
+        $this->info("Form request created successfully.");
     }
 
     /**
@@ -62,9 +63,11 @@ class ConsoleCommand extends Command {
     public function getOptions()
     {
         return [
-            ['command', 'c', InputOption::VALUE_OPTIONAL, 'The name of command being used.', null],
-            ['description', 'd', InputOption::VALUE_OPTIONAL, 'The description of command being used.', null],
+            ['rules', 'r', InputOption::VALUE_OPTIONAL, 'The rules.', null],
+            ['scaffold', 's', InputOption::VALUE_NONE, 'Determine whether the request class generated with scaffold.', null],
+            ['auth', 'a', InputOption::VALUE_NONE, 'Determine whether the request class needs authorized.', null],
             ['force', 'f', InputOption::VALUE_NONE, 'Force the creation if file already exists.', null],
         ];
     }
+    
 }
