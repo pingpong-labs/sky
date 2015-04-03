@@ -1,6 +1,6 @@
 <?php
 
-use Pingpong\Generators\Parsers\MigrationParser;
+use Pingpong\Generators\Migrations\SchemaParser;
 
 class MigrationParserTest extends PHPUnit_Framework_TestCase {
 
@@ -8,7 +8,7 @@ class MigrationParserTest extends PHPUnit_Framework_TestCase {
 
 	public function setUp()
 	{
-		$this->parser = new MigrationParser;	
+		$this->parser = new SchemaParser;	
 	}
 
 	public function testParseSimpleMigration()
@@ -92,22 +92,22 @@ class MigrationParserTest extends PHPUnit_Framework_TestCase {
 
 	public function testRenderSimpleMigration()
 	{		
-		$expected = '$table->string(\'title\');'.PHP_EOL;
+		$expected = "\t\t\t".'$table->string(\'title\');'.PHP_EOL;
 
-		$equal = (new MigrationParser('title:string'))->render();
+		$equal = (new SchemaParser('title:string'))->render();
 
 		$this->assertEquals($expected, $equal);	
 	}
 
 	public function testRenderAdvanceMigration()
 	{		
-		$expected = '$table->string(\'title\');'.PHP_EOL;
-		$expected.= '$table->string(\'slug\')->unique();'.PHP_EOL;
-		$expected.= '$table->text(\'body\');'.PHP_EOL;
-		$expected.= '$table->rememberToken();'.PHP_EOL;
-		$expected.= '$table->softDeletes();'.PHP_EOL;
+		$expected = "\t\t\t".'$table->string(\'title\');'.PHP_EOL;
+		$expected.= "\t\t\t".'$table->string(\'slug\')->unique();'.PHP_EOL;
+		$expected.= "\t\t\t".'$table->text(\'body\');'.PHP_EOL;
+		$expected.= "\t\t\t".'$table->rememberToken();'.PHP_EOL;
+		$expected.= "\t\t\t".'$table->softDeletes();'.PHP_EOL;
 
-		$equal = (new MigrationParser('title:string, slug:string:unique, body:text, remember_token, soft_delete'))->render();
+		$equal = (new SchemaParser('title:string, slug:string:unique, body:text, remember_token, soft_delete'))->render();
 
 		$this->assertEquals($expected, $equal);	
 	}
