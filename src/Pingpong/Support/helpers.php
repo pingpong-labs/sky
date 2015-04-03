@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 if ( ! function_exists('upload_image'))
