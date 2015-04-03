@@ -25,7 +25,7 @@ class MenuItem implements ArrayableContract {
      *
      * @var array
      */
-    protected $fillable = array('url', 'route', 'title', 'name', 'icon', 'parent', 'attributes');
+    protected $fillable = array('url', 'route', 'title', 'name', 'icon', 'parent', 'attributes', 'active');
 
     /**
      * Constructor.
@@ -281,7 +281,9 @@ class MenuItem implements ArrayableContract {
      */
     public function getAttributes()
     {
-        return HTML::attributes($this->attributes);
+        $attributes = array_forget($this->attributes, 'active');
+
+        return HTML::attributes($attributes);
     }
 
     /**
@@ -342,13 +344,23 @@ class MenuItem implements ArrayableContract {
      */
     public function hasActiveOnChild()
     {
+        if ($this->inactive()) return false;
+
         $isActive = false;
 
         if ($this->hasChilds())
         {
             foreach ($this->getChilds() as $child)
             {
-                if ($child->hasRoute() && $child->getActiveStateFromRoute())
+                if ($child->inactive())
+                {
+                    $isActive = false;
+                }
+                elseif ($child->isActive())
+                {
+                    $isActive = true;
+                }
+                elseif ($child->hasRoute() && $child->getActiveStateFromRoute())
                 {
                     $isActive = true;
                 }
@@ -363,12 +375,62 @@ class MenuItem implements ArrayableContract {
     }
 
     /**
+     * Get inactive state.
+     * 
+     * @return boolean
+     */
+    public function inactive()
+    {
+        $inactive = $this->getInactiveAttribute();
+
+        if (is_bool($inactive)) return $inactive;
+
+        if ($inactive instanceof \Closure)
+        {
+            return call_user_func($inactive);
+        }
+
+        return false;
+    }
+
+    /**
+     * Get active attribute.
+     * 
+     * @return string
+     */
+    public function getActiveAttribute()
+    {
+        return array_get($this->attributes, 'active');
+    }
+
+    /**
+     * Get inactive attribute.
+     * 
+     * @return string
+     */
+    public function getInactiveAttribute()
+    {
+        return array_get($this->attributes, 'inactive');
+    }
+
+    /**
      * Get active state for current item.
      *
      * @return mixed
      */
     public function isActive()
     {
+        if ($this->inactive()) return false;
+
+        $active = $this->getActiveAttribute();
+
+        if (is_bool($active)) return $active;
+
+        if ($active instanceof \Closure)
+        {
+            return call_user_func($active);
+        }
+
         if ($this->hasRoute())
         {
             return $this->getActiveStateFromRoute();
