@@ -16,7 +16,7 @@ if ( ! function_exists('upload_image'))
     {
         if ( ! is_null($file))
         {
-            $filename = sha1($file->getClientOriginalName()) . '.' . strtolower($file->getClientOriginalExtension());
+            $filename = sha1(time() . $file->getClientOriginalName()) . '.' . strtolower($file->getClientOriginalExtension());
 
             $file->move(public_path($path), $filename);
 
