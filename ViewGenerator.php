@@ -13,6 +13,11 @@ class ViewGenerator extends Generator {
      */
     protected $stub = 'view';
 
+    /**
+     * The array of custom replacements.
+     * 
+     * @var array
+     */
     protected $customReplacements = [];
 
     /**
@@ -29,13 +34,23 @@ class ViewGenerator extends Generator {
     }
 
     /**
+     * Get base path of destination file.
+     *
+     * @return string
+     */
+    public function getBasePath()
+    {
+        return base_path() . '/resources/views/';
+    }
+
+    /**
      * Get destination path for generated file.
      *
      * @return string
      */
     public function getPath()
     {
-        return base_path() . '/resources/views/' . strtolower($this->getName()) . '.blade.php';
+        return $this->getBasePath() . strtolower($this->getName()) . '.blade.php';
     }
 
     /**
