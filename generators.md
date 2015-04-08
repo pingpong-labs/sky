@@ -23,7 +23,7 @@ Done.
 <a name="artisan-commands"></a>
 ## Artisan Commands
 
-In this package there are many CLI commands that are useful to speed up you in creating web applications with Laravel. Some commands may already be familiar, such as the command to create a controller or model. However we are aware, sometimes we want everything instantly. Although not all of them can be so.
+In this package, there are many CLI commands that are useful to speed up you in creating web applications with Laravel. Some commands may already be familiar, such as the command to create a controller or model. However we are aware, sometimes we want everything instantly. Although not all of them can be so.
 
 - [Generate a controller](#controller)
 - [Generate a model](#model)
@@ -170,13 +170,13 @@ php artisan generate:view layouts/master --master
 <a name="scaffold"></a>
 ### Generate a scaffold resource
 
-For some cases we may need to be faster in making resource. Let's say we're making a CRUD. First we have to create a migration, then the controller, and then the model and the others stuffs. If we use the commands to make it one by one, it is inefficient and will take a long time. That is where the "generate:scaffold" useful. With this command we can create a CRUD with just one command.
+For some cases, we may need to be faster in making resource. Let's say we're making a CRUD. First we have to create a migration, then the controller, and then the model and the others stuffs. If we use the commands to make it one by one, it is inefficient and will take a long time. That is where the "generate:scaffold" useful. With this command, we can create a CRUD with just one command.
 
 ```
 php artisan generate:scaffold task --fields="name:string, description=text"
 ```
 
-From the example above we can see how easy it is to create a crud just one command. The first parameter is the name of entity being in singular convention. For example, if you want to create a `users` CRUD, you just need to use `user`. You have to follow singular convention.
+From the example above we can see how easy it is to create a crud just one command. The first parameter is the name of the entity being in the singular convention. For example, if you want to create users CRUD, you just need to use user. You have to follow singular convention.
 
 ```
 php artisan generate:scaffold user
