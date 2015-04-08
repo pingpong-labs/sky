@@ -31,8 +31,8 @@ Next, Add new aliases in `app/config/app.php`.
 
 ```php
 'Trusty'      => 'Pingpong\Trusty\Facades\Trusty',
-'Role'		  => 'Pingpong\Trusty\Entities\Role',
-'Permission'  => 'Pingpong\Trusty\Entities\Permission',
+'Role'		  => 'Pingpong\Trusty\Role',
+'Permission'  => 'Pingpong\Trusty\Permission',
 ```
 
 Next, publish the package's migrations.
