@@ -17,7 +17,7 @@ Laravel Modules
 
 #### From Laravel 4 to Laravel 5
 
-If upgrade your Laravel app from Laravel 4 to Laravel 5, there is a few things to do if you are using this package. You will receive some kind errors about config not loaded. To fix this issue, please follow this intruction.
+If upgrade your Laravel app from Laravel 4 to Laravel 5, there is a few things to do if you are using this package. You will receive some kind errors about config not loaded. To fix this issue, please follow this instruction.
 
 - If you publish the package's configuration file, you need to move the config file from `app/config/packages/pingpong/modules/config.php` to `app/config/modules.php`.
 - If you are not publish the package's configuration file and you want to publish the config file, just run `php artisan vendor:publish` command and you are done. 
