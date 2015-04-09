@@ -3,11 +3,15 @@
 abstract class Presenter {
 
     /**
+     * The entity instance.
+     * 
      * @var PresentableInterface
      */
     protected $entity;
 
     /**
+     * The constructor.
+     * 
      * @param PresentableInterface $entity
      */
     public function __construct(PresentableInterface $entity)
@@ -26,6 +30,8 @@ abstract class Presenter {
     }
 
     /**
+     * Handle call to __get method.
+     * 
      * @param $key
      * @return mixed
      */
