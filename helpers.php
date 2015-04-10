@@ -47,3 +47,38 @@ if ( ! function_exists('set_active'))
         }
     }
 }
+
+if (! function_exists('flash'))
+{
+    /**
+     * Flash message.
+     *
+     * @require "laracasts/flash:~1.3" 
+     * 
+     * @param  string|null $message
+     * @return string|object
+     */
+    function flash($message = null)
+    {
+        $flash = app('flash');
+
+        if (is_null($message)) return $flash;
+
+        return $flash->success($message);
+    }
+}
+
+if (! function_exists('error_for'))
+{
+    /**
+     * Show validation for the specified field.
+     * 
+     * @param  string $field
+     * @param  object $errors
+     * @return string
+     */
+    function error_for($field, $errors, $template = '<div class="text-danger">:message</div>')
+    {
+        return $errors->first($field, $template);
+    }
+}
