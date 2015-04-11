@@ -1,6 +1,4 @@
-<?php
-
-namespace Pingpong\Support;
+<?php namespace Pingpong\Support;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
