@@ -20,6 +20,8 @@ if ( ! function_exists('upload_image'))
 
             $file->move(public_path($path), $filename);
 
+            event('image.uploaded', [$path . $filename]);
+            
             return $filename;
         }
 
