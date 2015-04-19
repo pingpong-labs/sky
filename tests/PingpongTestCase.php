@@ -29,7 +29,6 @@ abstract class PingpongTestCase extends \Pingpong\Testing\TestCase {
     protected function getPackageProviders()
     {
         return [
-            'Pingpong\Modules\ModulesServiceProvider',
             'Pingpong\Trusty\TrustyServiceProvider',
             'Pingpong\Menus\MenusServiceProvider',
             'Pingpong\Widget\WidgetServiceProvider',
@@ -41,9 +40,7 @@ abstract class PingpongTestCase extends \Pingpong\Testing\TestCase {
 
     protected function getPackageAliases()
     {
-        return [
-            'Module' => 'Pingpong\Modules\Facades\Module',
-        ];
+        return [];
     }
 
 
