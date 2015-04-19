@@ -22,7 +22,15 @@ class ThemeTest extends PHPUnit_Framework_TestCase {
         $this->config = m::mock('Illuminate\Config\Repository');
         $this->view = m::mock('Illuminate\View\Factory');
         $this->lang = m::mock('Illuminate\Translation\Translator');
-        $this->theme = new Repository($this->finder, $this->config, $this->view, $this->lang);
+        $this->cache = m::mock('Illuminate\Cache\Repository');
+        $this->theme = new Repository(
+            $this->finder,
+            $this->config,
+            $this->view,
+            $this->lang,
+            $this->cache
+        );
+
         $this->theme->setPath($this->getPath());
     }
 
@@ -33,14 +41,38 @@ class ThemeTest extends PHPUnit_Framework_TestCase {
         ]);
     }
 
-    public function testGetAllThemes()
+    public function testGetAllThemesAndWillReturnFromFinder()
     { 
+        $this->config->shouldReceive('get')
+            ->once()
+            ->andReturn(false);
+
         $this->finder->shouldReceive('find')
                      ->with($this->getPath(), 'theme.json')
                      ->once()
                      ->andReturn([
                         $this->getTheme()
                     ]);
+                     
+
+        $themes = $this->theme->all();
+        $this->assertTrue(is_array($themes));
+    }
+
+    public function testGetAllThemesAndWillReturnFromCache()
+    { 
+        $this->config->shouldReceive('get')
+            ->times(2)
+            ->andReturn(true);
+
+        $this->cache->shouldReceive('get')
+            ->once()
+            ->andReturn([
+                [
+                    'name' => 'foo'
+                ],
+            ]);                     
+
         $themes = $this->theme->all();
         $this->assertTrue(is_array($themes));
     }
@@ -53,6 +85,10 @@ class ThemeTest extends PHPUnit_Framework_TestCase {
 
     public function testRegisterNamespaces()
     {        
+        $this->config->shouldReceive('get')
+            ->once()
+            ->andReturn(false);
+
         $this->finder->shouldReceive('find')
                      ->with($this->getPath(), 'theme.json')
                      ->once()
@@ -79,6 +115,10 @@ class ThemeTest extends PHPUnit_Framework_TestCase {
 
     public function testHasTheme()
     {        
+        $this->config->shouldReceive('get')
+            ->times(3)
+            ->andReturn(false);
+
         $this->finder->shouldReceive('find')
                      ->with($this->getPath(), 'theme.json')
                      ->times(3)
