@@ -3,6 +3,7 @@ Laravel Themes
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Artisan Commands](#artisan-commands)
 
 <a name="installation"></a>
 ## Installation
@@ -94,4 +95,31 @@ Theme::config('group.name');
 Get lang from current active theme.
 ```php
 Theme::lang('group.name');
+```
+
+<a name="artisan-commands"></a>
+## Artisan Commands
+
+Show all available themes.
+
+```
+php artisan theme:list
+``
+
+Cache all themes.
+
+```
+php artisan theme:cache
+```
+
+Publish all theme's assets.
+
+```
+php artisan theme:publish
+```
+
+Publish all theme's assets from the specified theme.
+
+```
+php artisan theme:publish theme-name
 ```
