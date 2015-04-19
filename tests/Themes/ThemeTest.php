@@ -107,4 +107,40 @@ class ThemeTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('bar', $result);
     }
 
+    public function testArrayableOfTheme()
+    {
+        $theme = new Theme([
+            'name' => 'foo',
+            'description' => 'foo theme',
+            'author' => [
+                'name' => 'Pingpong Labs',
+                'email' => 'pingpong.labs@gmail.com'
+            ],
+            'enabled' => true,
+        ]);
+
+        $array = $theme->toArray();
+
+        $this->assertArrayHasKey('name', $array);
+        $this->assertArrayHasKey('description', $array);
+        $this->assertArrayHasKey('author', $array);
+        $this->assertArrayHasKey('enabled', $array);
+    }
+
+    public function testGetAllThemesAsArray()
+    {
+        $this->finder->shouldReceive('find')
+                     ->with($this->getPath(), 'theme.json')
+                     ->once()
+                     ->andReturn([
+                        $this->getTheme(),
+                        $this->getTheme('bar')
+                    ]);
+
+        $themes = $this->theme->toArray();
+
+        $this->assertTrue(is_array($themes));
+        $this->assertArrayHasKey(0, $themes);
+        $this->assertArrayHasKey(1, $themes);
+    }
 }
