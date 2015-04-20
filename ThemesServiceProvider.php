@@ -66,8 +66,28 @@ class ThemesServiceProvider extends ServiceProvider {
     {
         $this->app['themes'] = $this->app->share(function ($app)
         {
-            return new Repository(new Finder, $app['config'], $app['view'], $app['translator']);
+            return new Repository(
+                new Finder,
+                $app['config'],
+                $app['view'],
+                $app['translator'],
+                $app['cache.store']
+            );
         });
+
+        $this->registerCommands();
+    }
+
+    /**
+     * Register commands.
+     * 
+     * @return void
+     */
+    protected function registerCommands()
+    {
+        $this->commands('Pingpong\Themes\Console\CacheCommand');
+        $this->commands('Pingpong\Themes\Console\ListCommand');
+        $this->commands('Pingpong\Themes\Console\PublishCommand');
     }
 
     /**

@@ -1,10 +1,12 @@
 <?php namespace Pingpong\Themes;
 
+use Illuminate\Cache\Repository as Cache;
 use Illuminate\Config\Repository as Config;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Translation\Translator;
 use Illuminate\View\Factory;
 
-class Repository {
+class Repository implements Arrayable {
 
     /**
      * The Pingpong Themes Finder Object.
@@ -64,12 +66,19 @@ class Repository {
      * @param Translator $lang
      * @internal param Factory $view
      */
-    public function __construct(Finder $finder, Config $config, Factory $views, Translator $lang)
+    public function __construct(
+        Finder $finder,
+        Config $config,
+        Factory $views,
+        Translator $lang,
+        Cache $cache
+    )
     {
         $this->finder = $finder;
         $this->config = $config;
         $this->lang = $lang;
         $this->views = $views;
+        $this->cache = $cache;
     }
 
     /**
@@ -157,7 +166,124 @@ class Repository {
      */
     public function all()
     {
+        if ($this->cached()) return $this->getCached();
+
+        return $this->scan();
+    }
+
+    /**
+     * Get all themes.
+     * 
+     * @return array
+     */
+    public function scan()
+    {
         return $this->finder->find($this->getPath(), $this->filename);
+    }
+
+    /**
+     * Get cached themes.
+     * 
+     * @return array
+     */
+    public function getCached()
+    {
+        return $this->formatCache($this->cache->get($this->getCacheKey(), []));
+    }
+
+    /**
+     * Determine whether the cache is enabled.
+     * 
+     * @return boolean
+     */
+    public function cached()
+    {
+        return $this->getCacheStatus() == true;
+    }
+
+    /**
+     * Get cache key.
+     * 
+     * @return string
+     */
+    public function getCacheKey()
+    {
+        return $this->config->get('themes.cache.key');
+    }
+
+    /**
+     * Get cache lifetime.
+     * 
+     * @return int
+     */
+    public function getCacheLifetime()
+    {
+        return $this->config->get('themes.cache.lifetime');
+    }
+
+    /**
+     * Get cache status.
+     * 
+     * @return boolean
+     */
+    public function getCacheStatus()
+    {
+        return $this->config->get('themes.cache.key');
+    }
+
+    /**
+     * Format for each cached theme to a Theme instance.
+     * 
+     * @param  array $cached
+     * @return array
+     */
+    protected function formatCache($cached)
+    {
+        $themes = [];
+
+        foreach ($cached as $theme)
+        {
+            $themes[] = new Theme($theme);
+        }
+
+        return $themes;
+    }
+
+    /**
+     * Cache the themes.
+     * 
+     * @return void
+     */
+    public function cache()
+    {
+        $this->cache->put(
+            $this->getCacheKey(),
+            $this->toArray(),
+            $this->getCacheLifetime()
+        );
+    }
+
+    /**
+     * Forget cached themes.
+     * 
+     * @return void
+     */
+    public function forgetCache()
+    {
+        $this->cache->forget($this->getCacheKey());
+    }
+
+    /**
+     * Convert all themes to an array.
+     * 
+     * @return array
+     */
+    public function toArray()
+    {
+        return array_map(function ($theme)
+        {
+            return (array) $theme;
+        }, $this->scan());
     }
 
     /**
