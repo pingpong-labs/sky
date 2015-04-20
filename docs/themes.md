@@ -104,7 +104,7 @@ Show all available themes.
 
 ```
 php artisan theme:list
-``
+```
 
 Cache all themes.
 
