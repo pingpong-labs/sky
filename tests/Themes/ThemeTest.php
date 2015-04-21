@@ -48,7 +48,7 @@ class ThemeTest extends PHPUnit_Framework_TestCase {
             ->andReturn(false);
 
         $this->finder->shouldReceive('find')
-                     ->with($this->getPath(), 'theme.json')
+                     ->with($this->getPath())
                      ->once()
                      ->andReturn([
                         $this->getTheme()
@@ -90,7 +90,7 @@ class ThemeTest extends PHPUnit_Framework_TestCase {
             ->andReturn(false);
 
         $this->finder->shouldReceive('find')
-                     ->with($this->getPath(), 'theme.json')
+                     ->with($this->getPath())
                      ->once()
                      ->andReturn([
                         $this->getTheme()
@@ -120,7 +120,7 @@ class ThemeTest extends PHPUnit_Framework_TestCase {
             ->andReturn(false);
 
         $this->finder->shouldReceive('find')
-                     ->with($this->getPath(), 'theme.json')
+                     ->with($this->getPath())
                      ->times(3)
                      ->andReturn([
                         $this->getTheme(),
@@ -170,7 +170,7 @@ class ThemeTest extends PHPUnit_Framework_TestCase {
     public function testGetAllThemesAsArray()
     {
         $this->finder->shouldReceive('find')
-                     ->with($this->getPath(), 'theme.json')
+                     ->with($this->getPath())
                      ->once()
                      ->andReturn([
                         $this->getTheme(),
