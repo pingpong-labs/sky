@@ -3,13 +3,6 @@
 namespace Pingpong\Support\Traits;
 
 trait Publishable {
-	
-	/**
-	 * The "published_at" column.
-	 *
-	 * @var string
-	 */
-	const PUBLISHED_AT = 'published_at';
 
 	/**
 	 * Query scope for only published data.
