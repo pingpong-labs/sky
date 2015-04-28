@@ -127,6 +127,14 @@ php artisan module:make Blog
 php artisan module:make Blog User Auth
 ```
 
+By default if you create a new module, that will add some resources like controller, seed class or provider automatically. If you don't want these, you can add `--plain` flag, to generate a plain module.
+
+```shell
+php artisan module:make Blog --plain
+#OR
+php artisan module:make Blog -p
+```
+
 **Naming Convension**
 
 Because we are autoloading the modules using `psr-4`, we strongly recommend using `StudlyCase` convension.
