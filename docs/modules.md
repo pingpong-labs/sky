@@ -59,7 +59,8 @@ Next add the following service provider in `config/app.php`.
 
     // ...
 
-    'Pingpong\Modules\ModulesServiceProvider'
+    'Pingpong\Modules\ModulesServiceProvider',
+    'Pingpong\Modules\Providers\BootstrapServiceProvider',
 
 ),
 ```
