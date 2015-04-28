@@ -2,7 +2,26 @@
 
 return [
 
-    'namespace' => 'App\Modules',
+    /*
+    |--------------------------------------------------------------------------
+    | Module Namespace
+    |--------------------------------------------------------------------------
+    |
+    | Default module namespace.
+    |
+    */
+   
+    'namespace' => 'Modules',
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Module Stubs
+    |--------------------------------------------------------------------------
+    |
+    | Default module stubs.
+    |
+    */
+    
     'stubs' => [
         'enabled' => false,
         'path' => base_path() . '/vendor/pingpong/modules/src/Pingpong/Modules/Commands/stubs',
@@ -43,7 +62,7 @@ return [
         |
         */
 
-        'modules' => app_path('Modules'),
+        'modules' => base_path('modules'),
         /*
         |--------------------------------------------------------------------------
         | Modules assets path
