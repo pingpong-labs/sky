@@ -187,25 +187,25 @@ php artisan module:list
 Create new command for the specified module.
   
   ```
-  php artisan module:command CustomCommand blog
+  php artisan module:make-command CustomCommand blog
 
-  php artisan module:command CustomCommand --command=custom:command blog
+  php artisan module:make-command CustomCommand --command=custom:command blog
 
-  php artisan module:command CustomCommand --namespace=Modules\Blog\Commands blog
+  php artisan module:make-command CustomCommand --namespace=Modules\Blog\Commands blog
   ```
   
 Create new migration for the specified module.
 
   ```
-  php artisan module:migration create_users_table blog
+  php artisan module:make-migration create_users_table blog
 
-  php artisan module:migration create_users_table --fields="username:string, password:string" blog
+  php artisan module:make-migration create_users_table --fields="username:string, password:string" blog
 
-  php artisan module:migration add_email_to_users_table --fields="email:string:unique" blog
+  php artisan module:make-migration add_email_to_users_table --fields="email:string:unique" blog
 
-  php artisan module:migration remove_email_from_users_table --fields="email:string:unique" blog
+  php artisan module:make-migration remove_email_from_users_table --fields="email:string:unique" blog
 
-  php artisan module:migration drop_users_table blog
+  php artisan module:make-migration drop_users_table blog
   ```
 
 Rollback, Reset and Refresh The Modules Migrations.
@@ -229,7 +229,7 @@ Rollback, Reset and Refresh The Migrations for the specified module.
 Create new seed for the specified module.
 
   ```
-  php artisan module:seed-make users blog
+  php artisan module:make-seed users blog
   ```
   
 Migrate from the specified module.
@@ -259,7 +259,7 @@ Seed from all modules.
 Create new controller for the specified module.
 
   ```
-  php artisan module:controller SiteController blog
+  php artisan module:make-controller SiteController blog
   ```
 
 Publish assets from the specified module to public directory.
@@ -277,15 +277,15 @@ Publish assets from all modules to public directory.
 Create new model for the specified module.
 
   ```
-  php artisan module:model User blog
+  php artisan module:make-model User blog
 
-  php artisan module:model User blog --fillable="username,email,password"
+  php artisan module:make-model User blog --fillable="username,email,password"
   ```
 
 Create new service provider for the specified module.
 
   ```
-  php artisan module:provider MyServiceProvider blog
+  php artisan module:make-provider MyServiceProvider blog
   ```
 
 Publish migration for the specified module or for all modules.
@@ -313,9 +313,9 @@ Disable the specified module.
 php artisan module:disable blog
 ```
 
-Generate new filter class.
+Generate new middleware class.
 ```
-php artisan module:filter-make AuthFilter
+php artisan module:make-middleware AuthFilter
 ```
 
 Update dependencies for the specified module.
