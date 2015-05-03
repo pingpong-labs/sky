@@ -6,8 +6,6 @@
     <li><a href="/docs/2.0/widget">Widget</a></li>
     <li><a href="/docs/2.0/generators">Generators</a></li>
     <li><a href="/docs/2.0/testing">Testing</a></li>
-    <li><a href="/docs/2.0/oembed">Oembed</a></li>
-    <li><a href="/docs/2.0/validator">Validator</a></li>
     <li><a href="/docs/2.0/presenters">Presenters</a></li>
     <li><a href="/docs/2.0/trusty">Trusty</a></li>
     <li><a href="/docs/2.0/themes">Themes</a></li>
