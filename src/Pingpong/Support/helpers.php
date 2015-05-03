@@ -10,9 +10,10 @@ if ( ! function_exists('upload_image'))
      *
      * @param  UploadedFile $file
      * @param  string $path
+     * @param  string $event
      * @return string
      */
-    function upload_image($file, $path)
+    function upload_image($file, $path, $event = 'image.uploaded')
     {
         if ( ! is_null($file))
         {
@@ -20,7 +21,7 @@ if ( ! function_exists('upload_image'))
 
             $file->move(public_path($path), $filename);
 
-            event('image.uploaded', [$path . $filename]);
+            event($event, [$path . $filename]);
             
             return $filename;
         }
