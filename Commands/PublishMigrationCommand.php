@@ -32,6 +32,7 @@ class PublishMigrationCommand extends Command {
             $module = $this->laravel['modules']->findOrFail($name);
             
             $this->publish($module);
+
             return;
         }
 
