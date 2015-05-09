@@ -1,6 +1,8 @@
-<?php namespace Pingpong\Support;
+<?php
 
-trait ImageTrait {
+namespace Pingpong\Support\Traits;
+
+trait Imageable {
 
     /**
      * Delete image from current instance.
