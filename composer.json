@@ -9,13 +9,13 @@
       "email": "pingpong.labs@gmail.com"
     }
   ],
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "require": {
     "php": ">=5.4.0",
     "laravel/framework": "5.0.*",
     "laravelcollective/html": "~5.0",
     "embed/embed": "~1",
-    "doctrine/dbal": "~2.5"   
+    "doctrine/dbal": "~2.5"    
   },
   "require-dev": {
     "mockery/mockery": "~0.9",
