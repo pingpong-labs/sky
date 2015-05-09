@@ -3,27 +3,35 @@
 abstract class Presenter {
 
     /**
+     * The entity instance.
+     * 
      * @var PresentableInterface
      */
-    protected $resource;
+    protected $entity;
 
     /**
-     * @param PresentableInterface $resource
+     * The constructor.
+     * 
+     * @param PresentableInterface $entity
      */
-    public function __construct(PresentableInterface $resource)
+    public function __construct(PresentableInterface $entity)
     {
-        $this->resource = $resource;
+        $this->entity = $entity;
     }
 
     /**
-     * @return mixed
+     * Get entity class.
+     * 
+     * @return PresentableInterface
      */
-    public function getResource()
+    public function getEntity()
     {
-        return $this->resource;
+        return $this->entity;
     }
 
     /**
+     * Handle call to __get method.
+     * 
      * @param $key
      * @return mixed
      */
@@ -34,7 +42,7 @@ abstract class Presenter {
             return call_user_func(array($this, $key));
         }
 
-        return $this->resource->{$key};
+        return $this->entity->{$key};
     }
 
 }

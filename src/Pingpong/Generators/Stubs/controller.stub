@@ -1,7 +1,0 @@
-<?php $NAMESPACE$
-
-use Illuminate\Routing\Controller;
-
-class $CLASS_NAME$ extends Controller {
-
-}

@@ -29,15 +29,19 @@ abstract class PingpongTestCase extends \Pingpong\Testing\TestCase {
     protected function getPackageProviders()
     {
         return [
+            'Pingpong\Trusty\TrustyServiceProvider',
+            'Pingpong\Menus\MenusServiceProvider',
+            'Pingpong\Widget\WidgetServiceProvider',
+            'Pingpong\Themes\ThemesServiceProvider',
+            'Pingpong\Shortcode\ShortcodeServiceProvider',
+            'Pingpong\Generators\GeneratorsServiceProvider',
             'Pingpong\Modules\ModulesServiceProvider',
         ];
     }
 
     protected function getPackageAliases()
     {
-        return [
-            'Module' => 'Pingpong\Modules\Facades\Module',
-        ];
+        return [];
     }
 
 

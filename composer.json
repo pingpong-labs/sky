@@ -1,7 +1,8 @@
 {
   "name": "pingpong/sky",
-  "description": "Pingpong Sky - An Extra Laravel Component",
+  "description": "An Extra Laravel Component",
   "license": "BSD-3-Clause",
+  "homepage": "http://sky.pingpong-labs.com",
   "authors": [
     {
       "name": "Pingpong Labs",
@@ -11,8 +12,10 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=5.4.0",
-    "laravel/framework": "~4",
-    "embed/embed": "~1"
+    "laravel/framework": "5.0.*",
+    "laravelcollective/html": "~5.0",
+    "embed/embed": "~1",
+    "doctrine/dbal": "~2.5"   
   },
   "require-dev": {
     "mockery/mockery": "~0.9",
@@ -23,8 +26,10 @@
       "Pingpong\\": "src/Pingpong"
     },
     "classmap": [
-      "tests/PingpongTestCase.php",
-      "tests/Generators/GeneratorTestCase.php"
+      "tests/PingpongTestCase.php"
+    ],
+    "files": [
+      "src/Pingpong/Support/helpers.php"
     ]
   }
 }

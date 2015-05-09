@@ -42,7 +42,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase {
         $this->builder->setStyles(array());
         $this->config->shouldReceive('get')
                      ->times(2)
-                     ->with('menus::styles')
+                     ->with('menus.styles')
                      ->andReturn(array('navbar' => $this->styles['navbar']));
 
         $actual = $this->builder->hasStyle('navbar');

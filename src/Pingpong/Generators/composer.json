@@ -15,8 +15,9 @@
   ],
   "require": {
     "php": ">=5.4.0",
-    "illuminate/filesystem": "~4",
-    "illuminate/support": "~4"
+    "illuminate/filesystem": "5.0.*",
+    "illuminate/support": "5.0.*",
+    "doctrine/dbal": "~2.5"
   },
   "require-dev": {
     "mockery/mockery": "~0.9",
@@ -26,9 +27,6 @@
     "psr-4": {
       "Pingpong\\Generators\\": ""
     }
-  },
-  "autoload-dev": {
-    "files": ["tests/TestCase.php"]
   },
   "minimum-stability": "stable"
 }
