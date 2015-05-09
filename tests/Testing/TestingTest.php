@@ -12,11 +12,6 @@ class TestingTest extends PingpongTestCase {
         Mockery::close();
     }
 
-    public function tearDown()
-    {
-        Mockery::close();
-    }
-
     public function testOk()
     {
         $this->assertInstanceOf('Illuminate\Foundation\Application', $this->app);
