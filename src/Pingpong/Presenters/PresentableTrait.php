@@ -12,7 +12,9 @@ trait PresentableTrait {
     protected $container;
 
     /**
-     * @return mixed
+     * Present the presenter object.
+     * 
+     * @return object
      * @throws \InvalidArgumentException
      */
     public function present()
@@ -26,7 +28,9 @@ trait PresentableTrait {
     }
 
     /**
-     * @param mixed $presenter
+     * Set the presenter class.
+     * 
+     * @param string $presenter
      * @return $this
      */
     public function setPresenter($presenter)
@@ -37,7 +41,9 @@ trait PresentableTrait {
     }
 
     /**
-     * @return mixed
+     * Get presenter.
+     * 
+     * @return string
      */
     public function getPresenter()
     {

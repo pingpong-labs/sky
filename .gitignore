@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 /.idea
+=======
+.idea
+>>>>>>> 2.0
 /vendor/
 /fixture/storage
 /fixture/.env
 .env
 composer.phar
+<<<<<<< HEAD
 composer.lock
+=======
+composer.lock
+>>>>>>> 2.0

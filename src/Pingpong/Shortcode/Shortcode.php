@@ -199,7 +199,10 @@ class Shortcode implements Countable {
      */
     public function strip($content)
     {
-        if (empty($this->shortcodes)) return $content;
+        if (empty($this->shortcodes))
+        {
+            return $content;
+        }
 
         $pattern = $this->getRegex();
 
@@ -273,11 +276,25 @@ class Shortcode implements Countable {
      */
     public function compile($content)
     {
-        if ( ! $this->count()) return $content;
+        if ( ! $this->count())
+        {
+            return $content;
+        }
 
         $pattern = $this->getRegex();
 
         return preg_replace_callback("/{$pattern}/s", [&$this, 'render'], $content);
+    }
+
+    /**
+     * Parse the given content.
+     * 
+     * @param  string $content
+     * @return void
+     */
+    public function parse($content)
+    {
+        return $this->compile($content);
     }
 
     /**
