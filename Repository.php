@@ -51,13 +51,6 @@ class Repository implements Arrayable {
     protected $path;
 
     /**
-     * The theme identifier.
-     *
-     * @var string
-     */
-    protected $filename = 'theme.json';
-
-    /**
      * The constructor.
      *
      * @param Finder $finder
@@ -166,7 +159,7 @@ class Repository implements Arrayable {
      */
     public function all()
     {
-        if ($this->cached()) return $this->getCached();
+        if ($this->useCache()) return $this->getCached();
 
         return $this->scan();
     }
@@ -178,7 +171,7 @@ class Repository implements Arrayable {
      */
     public function scan()
     {
-        return $this->finder->find($this->getPath(), $this->filename);
+        return $this->finder->find($this->getPath());
     }
 
     /**
@@ -188,7 +181,12 @@ class Repository implements Arrayable {
      */
     public function getCached()
     {
-        return $this->formatCache($this->cache->get($this->getCacheKey(), []));
+        $cached = $this->cache->get(
+            $this->getCacheKey(),
+            []
+        );
+
+        return $this->formatCache($cached);
     }
 
     /**
@@ -196,7 +194,7 @@ class Repository implements Arrayable {
      * 
      * @return boolean
      */
-    public function cached()
+    public function useCache()
     {
         return $this->getCacheStatus() == true;
     }
@@ -228,25 +226,27 @@ class Repository implements Arrayable {
      */
     public function getCacheStatus()
     {
-        return $this->config->get('themes.cache.key');
+        return $this->config->get('themes.cache.enabled');
     }
 
     /**
      * Format for each cached theme to a Theme instance.
      * 
-     * @param  array $cached
+     * @param  array|string $cached
      * @return array
      */
     protected function formatCache($cached)
     {
-        $themes = [];
+        $themes = is_array($cached) ? $cached : json_decode($cached, true);
 
-        foreach ($cached as $theme)
+        $results = [];
+
+        foreach ($themes as $theme)
         {
-            $themes[] = new Theme($theme);
+            $results[] = new Theme($theme);
         }
 
-        return $themes;
+        return $results;
     }
 
     /**
@@ -258,7 +258,7 @@ class Repository implements Arrayable {
     {
         $this->cache->put(
             $this->getCacheKey(),
-            $this->toArray(),
+            $this->toJson(),
             $this->getCacheLifetime()
         );
     }
@@ -282,8 +282,18 @@ class Repository implements Arrayable {
     {
         return array_map(function ($theme)
         {
-            return (array) $theme;
+            return $theme->toArray();
         }, $this->scan());
+    }
+
+    /**
+     * Convert all themes to a json string.
+     * 
+     * @return string
+     */
+    public function toJson()
+    {
+        return json_encode($this->toArray());
     }
 
     /**
@@ -376,5 +386,36 @@ class Repository implements Arrayable {
     protected function getThemeNamespace($key)
     {
         return $this->getCurrent() . "::{$key}";
+    }
+
+    /**
+     * Get theme namespace.
+     * 
+     * @param  string $key
+     * @return string
+     */
+    public function getNamespace($key)
+    {
+        return $this->getThemeNamespace($key);
+    }
+
+    /**
+     * Register a view composer to current theme.
+     * 
+     * @param  string|array $views
+     * @param  string|callable $callback
+     * @param  int|null $priority
+     * @return void
+     */
+    public function composer($views, $callback, $priority = null)
+    {
+        $theViews = [];
+        
+        foreach ((array) $views as $view)
+        {
+            $theViews[] = $this->getThemeNamespace($view);
+        }
+
+        $this->views->composer($theViews, $callback, $priority);    
     }
 }
