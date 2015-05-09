@@ -29,5 +29,5 @@
             "Pingpong\\Validator\\": ""
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
