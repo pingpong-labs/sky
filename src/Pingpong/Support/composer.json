@@ -18,5 +18,5 @@
       "Pingpong\\Support\\": ""
     }
   },
-  "minimum-stability": "stable"
+  "minimum-stability": "dev"
 }
