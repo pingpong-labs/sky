@@ -1,196 +1,134 @@
-<?php namespace Pingpong\Generators;
+<?php
 
-use Pingpong\Generators\Exceptions\InvalidMigrationNameException;
-use Pingpong\Generators\Schema\Field;
-use Pingpong\Generators\Schema\Parser;
-use Pingpong\Generators\Stub;
-use Illuminate\Support\Str;
+namespace Pingpong\Generators;
 
-class MigrationGenerator extends FileGenerator {
+use Pingpong\Generators\Migrations\NameParser;
+use Pingpong\Generators\Migrations\SchemaParser;
 
-    /**
-     * The name of migration.
-     * 
-     * @var string
-     */
-    protected $name;
+class MigrationGenerator extends Generator {
 
     /**
-     * The specified migration fields.
-     * 
-     * @var null|string
-     */
-    protected $fields;
-
-    /**
-     * Create a plain migration.
-     * 
-     * @var bool
-     */
-    protected $plain;
-
-    /**
-     * The name of stub will be used.
-     * 
-     * @var string
-     */
-    protected $type = 'migration';
-
-    /**
-     * The constructor.
-     * 
-     * @param string $path
-     * @param string $name
-     * @param string|null $fields
-     * @param bool $plain
-     */
-    public function __construct($path, $name, $fields = null, $plain = false)
-    {
-        parent::__construct($path);
-
-        $this->name = $name;
-        $this->path = $path;
-        $this->fields = $fields;
-        $this->plain = $plain;
-    }
-
-    /**
-     * Get stub replacements.
+     * Get stub name.
      *
-     * @return array
+     * @var string
      */
-    public function getStubReplacements()
-    {
-        return [];
-    }
+    protected $stub = 'migration/plain';
 
     /**
-     * Get class name.
+     * Get base path of destination file.
      *
      * @return string
      */
-    protected function getClassName()
+    public function getBasePath()
     {
-        return Str::studly($this->name);
+        return base_path() . '/database/migrations/';
     }
 
     /**
-     * @return Stub
-     * @throws Invalidname
+     * Get destination path for generated file.
+     *
+     * @return string
      */
-    public function getTemplateContents()
+    public function getPath()
     {
-        $schema = $this->getSchemaParser();
-        
-        if ($this->plain) return $this->getPlainStubContents();
-        
-        elseif ($schema->isCreate()) return $this->getCreatingStubContents();
-
-        elseif ($schema->isAdd()) return $this->getAddingStubContents();
-
-        elseif ($schema->isDelete()) return $this->getDeletingStubContents();
-
-        elseif ($schema->isDrop()) return $this->getDroppingStubContents();
-
-        throw new InvalidMigrationNameException;
+        return $this->getBasePath() . $this->getFileName() . '.php';
     }
 
     /**
-     * Get fields.
-     * 
-     * @return Field
+     * Get root namespace.
+     *
+     * @return string
      */
-    public function getFields()
+    public function getRootNamespace()
     {
-        return new Field($this->fields);
+        return '';
+    }
+
+    /**
+     * Get migration name.
+     *
+     * @return string
+     */
+    public function getMigrationName()
+    {
+        return strtolower($this->name);
+    }
+
+    /**
+     * Get file name.
+     *
+     * @return string
+     */
+    public function getFileName()
+    {
+        return date('Y_m_d_His_') . $this->getMigrationName();
     }
 
     /**
      * Get schema parser.
-     * 
-     * @return Parser 
+     *
+     * @return SchemaParser
      */
     public function getSchemaParser()
     {
-        return new Parser($this->name);
+        return new SchemaParser($this->fields);
     }
 
     /**
-     * Get stub contents for dropping action.
-     * 
-     * @return Stub
+     * Get name parser.
+     *
+     * @return NameParser
      */
-    protected function getPlainStubContents()
+    public function getNameParser()
     {
-        return new Stub('migration/plain', ['CLASS' => $this->getClassName()]);
+        return new NameParser($this->name);
     }
 
     /**
-     * Get stub contents for creating action.
-     * 
-     * @return Stub
-     */
-    protected function getCreatingStubContents()
-    {
-        return new Stub('migration/create', [
-            'CLASS' => $this->getClassName(),
-            'FIELDS' => $this->getFields()->getSchemaCreate(),
-            'TABLE' => $this->getSchemaParser()->getTableName()
-        ]);
-    }
-
-    /**
-     * Get stub contents for adding action.
-     * 
-     * @return Stub
-     */
-    protected function getAddingStubContents()
-    {
-        return new Stub('migration/add', [
-            'CLASS' => $this->getClassName(),
-            'FIELDS_UP' => $this->getFields()->getSchemaCreate(),
-            'FIELDS_DOWN' => $this->getFields()->getSchemaDropColumn(),
-            'TABLE' => $this->getSchemaParser()->getTableName()
-        ]);
-    }
-
-    /**
-     * Get stub contents for deleting action.
-     * 
-     * @return Stub
-     */
-    protected function getDeletingStubContents()
-    {
-        return new Stub('migration/delete', [
-            'CLASS' => $this->getClassName(),
-            'FIELDS_DOWN' => $this->getFields()->getSchemaCreate(),
-            'FIELDS_UP' => $this->getFields()->getSchemaDropColumn(),
-            'TABLE' => $this->getSchemaParser()->getTableName()
-        ]);
-    }
-
-    /**
-     * Get stub contents for dropping action.
-     * 
-     * @return Stub
-     */
-    protected function getDroppingStubContents()
-    { 
-        return new Stub('migration/drop', [
-            'CLASS' => $this->getClassName(),
-            'FIELDS' => $this->getFields()->getSchemaCreate(),
-            'TABLE' => $this->getSchemaParser()->getTableName()
-        ]);
-    }
-
-    /**
-     * Get filename.
-     * 
+     * Get stub templates.
+     *
      * @return string
      */
-    public function getFilename()
+    public function getStub()
     {
-        return date('Y_m_d_His_') . $this->name . '.php';
+        $parser = $this->getNameParser();
+
+        if ($parser->isCreate())
+        {
+            return Stub::create(__DIR__ . '/Stubs/migration/create.stub', [
+                'class' => $this->getClass(),
+                'table' => $parser->getTable(),
+                'fields' => $this->getSchemaParser()->render()
+            ]);
+        }
+        elseif ($parser->isAdd())
+        {
+            return Stub::create(__DIR__ . '/Stubs/migration/add.stub', [
+                'class' => $this->getClass(),
+                'table' => $parser->getTable(),
+                'fields_up' => $this->getSchemaParser()->up(),
+                'fields_down' => $this->getSchemaParser()->down()
+            ]);
+        }
+        elseif ($parser->isDelete())
+        {
+            return Stub::create(__DIR__ . '/Stubs/migration/delete.stub', [
+                'class' => $this->getClass(),
+                'table' => $parser->getTable(),
+                'fields_down' => $this->getSchemaParser()->up(),
+                'fields_up' => $this->getSchemaParser()->down()
+            ]);
+        }
+        elseif ($parser->isDrop())
+        {
+            return Stub::create(__DIR__ . '/Stubs/migration/drop.stub', [
+                'class' => $this->getClass(),
+                'table' => $parser->getTable(),
+                'fields' => $this->getSchemaParser()->render()
+            ]);
+        }
+
+        return parent::getStub();
     }
 
 }

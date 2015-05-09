@@ -3,7 +3,7 @@
 use Mockery as m;
 use Pingpong\Widget\Widget;
 use Illuminate\Container\Container;
-use Illuminate\Html\HtmlBuilder as HTML;
+use Collective\Html\HtmlBuilder as HTML;
 
 class WidgetTest extends PHPUnit_Framework_TestCase {
 	
