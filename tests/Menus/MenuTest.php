@@ -75,4 +75,16 @@ class MenuTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEquals(1, $this->menu->count());
     }
+
+    public function testMultiLevelMenu()
+    {
+        $this->menu->create('foo', function ($menu)
+        {
+            $menu->url('/', 'Bar');
+            $menu->dropdown('Baz', function ($sub)
+            {
+                $sub->url('/', 'Lorem');
+            });
+        });
+    }
 }
