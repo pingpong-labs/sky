@@ -80,6 +80,7 @@ class MenuTest extends PHPUnit_Framework_TestCase {
     {
         $this->menu->create('foo', function ($menu)
         {
+            $menu->addHeader('Main');
             $menu->url('/', 'Bar');
             $menu->dropdown('Baz', function ($sub)
             {
