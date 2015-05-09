@@ -33,22 +33,6 @@ $app = (new DummyApp)->createApplication();
 
 /*
 |--------------------------------------------------------------------------
-| Load The Artisan Console Application
-|--------------------------------------------------------------------------
-|
-| We'll need to run the script to load and return the Artisan console
-| application. We keep this in its own script so that we will load
-| the console application independent of running commands which
-| will allow us to fire commands from Routes when we want to.
-|
-*/
-
-$app->setRequestForConsoleEnvironment();
-
-$artisan = Illuminate\Console\Application::start($app);
-
-/*
-|--------------------------------------------------------------------------
 | Run The Artisan Application
 |--------------------------------------------------------------------------
 |
@@ -58,7 +42,12 @@ $artisan = Illuminate\Console\Application::start($app);
 |
 */
 
-$status = $artisan->run();
+$kernel = $app->make('Illuminate\Contracts\Console\Kernel');
+
+$status = $kernel->handle(
+	$input = new Symfony\Component\Console\Input\ArgvInput,
+	new Symfony\Component\Console\Output\ConsoleOutput
+);
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +60,6 @@ $status = $artisan->run();
 |
 */
 
-$app->shutdown();
+$kernel->terminate($input, $status);
 
 exit($status);
