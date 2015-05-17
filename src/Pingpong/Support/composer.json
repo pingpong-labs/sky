@@ -11,7 +11,8 @@
   "require": {
     "php": ">=5.4.0",
     "illuminate/filesystem": "5.0.*",
-    "illuminate/support": "5.0.*"
+    "illuminate/support": "5.0.*",
+    "erusev/parsedown-extra": "0.7.*"
   },
   "autoload": {
     "psr-4": {
@@ -21,8 +22,5 @@
       "helpers.php"
     ]
   },
-  "minimum-stability": "stable",
-  "suggest": {
-    "erusev/parsedown-extra": "Required for markdown helper."
-  }
+  "minimum-stability": "stable"
 }
