@@ -102,3 +102,16 @@ if (! function_exists('gravatar')) {
         return 'http://www.gravatar.com/avatar/' . md5(strtolower(trim($email))) . "?s={$size}&d={$default}&r={$rating}";
     }
 }
+
+if ( ! function_exists('markdown')) {
+    /**
+     * Markdown.
+     * 
+     * @param  string $text
+     * @return string
+     */
+    function markdown($text)
+    {
+        return (new ParsedownExtra())->text($text);
+    }
+}

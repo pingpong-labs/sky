@@ -21,5 +21,8 @@
       "helpers.php"
     ]
   },
-  "minimum-stability": "stable"
+  "minimum-stability": "stable",
+  "suggest": {
+    "erusev/parsedown-extra": "Required for markdown helper."
+  }
 }

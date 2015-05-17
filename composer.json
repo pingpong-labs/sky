@@ -31,5 +31,8 @@
     "files": [
       "src/Pingpong/Support/helpers.php"
     ]
+  },
+  "suggest": {
+    "erusev/parsedown-extra": "Required for markdown helper."
   }
 }
