@@ -4,7 +4,8 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Pingpong\Support\Json;
 
-class Json {
+class Json
+{
 
     /**
      * The file path.
@@ -198,8 +199,7 @@ class Json {
      */
     public function __call($method, $arguments = [])
     {
-        if (method_exists($this, $method))
-        {
+        if (method_exists($this, $method)) {
             return call_user_func_array([$this, $method], $arguments);
         }
 
@@ -215,5 +215,4 @@ class Json {
     {
         return $this->getContents();
     }
-
 }

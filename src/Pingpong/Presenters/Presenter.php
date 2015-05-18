@@ -1,17 +1,18 @@
 <?php namespace Pingpong\Presenters;
 
-abstract class Presenter {
+abstract class Presenter
+{
 
     /**
      * The entity instance.
-     * 
+     *
      * @var PresentableInterface
      */
     protected $entity;
 
     /**
      * The constructor.
-     * 
+     *
      * @param PresentableInterface $entity
      */
     public function __construct(PresentableInterface $entity)
@@ -21,7 +22,7 @@ abstract class Presenter {
 
     /**
      * Get entity class.
-     * 
+     *
      * @return PresentableInterface
      */
     public function getEntity()
@@ -31,18 +32,16 @@ abstract class Presenter {
 
     /**
      * Handle call to __get method.
-     * 
+     *
      * @param $key
      * @return mixed
      */
     public function __get($key)
     {
-        if (method_exists($this, $key))
-        {
+        if (method_exists($this, $key)) {
             return call_user_func(array($this, $key));
         }
 
         return $this->entity->{$key};
     }
-
 }
