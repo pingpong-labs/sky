@@ -107,6 +107,6 @@ if (! function_exists('markdown')) {
      */
     function markdown($text)
     {
-        return (new ParsedownExtra())->text($text);
+        return (new ParsedownExtra)->text($text);
     }
 }
