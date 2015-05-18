@@ -3,8 +3,7 @@
 use Illuminate\Support\Facades\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-if ( ! function_exists('upload_image'))
-{
+if (! function_exists('upload_image')) {
     /**
      * Upload image and get image filename.
      *
@@ -15,8 +14,7 @@ if ( ! function_exists('upload_image'))
      */
     function upload_image($file, $path, $event = 'image.uploaded')
     {
-        if ( ! is_null($file))
-        {
+        if (! is_null($file)) {
             $filename = sha1(time() . $file->getClientOriginalName()) . '.' . strtolower($file->getClientOriginalExtension());
 
             $file->move(public_path($path), $filename);
@@ -30,8 +28,7 @@ if ( ! function_exists('upload_image'))
     }
 }
 
-if ( ! function_exists('set_active'))
-{
+if (! function_exists('set_active')) {
     /**
      * Set active to specified selector.
      *
@@ -41,23 +38,20 @@ if ( ! function_exists('set_active'))
      */
     function set_active($paths, $class = 'active')
     {
-        foreach ((array)$paths as $path)
-        {
-            if (Request::is($path))
-            {
+        foreach ((array)$paths as $path) {
+            if (Request::is($path)) {
                 return $class;
             }
         }
     }
 }
 
-if (! function_exists('flash'))
-{
+if (! function_exists('flash')) {
     /**
      * Flash message.
      *
-     * @require "laracasts/flash:~1.3" 
-     * 
+     * @require "laracasts/flash:~1.3"
+     *
      * @param  string|null $message
      * @return string|object
      */
@@ -65,17 +59,18 @@ if (! function_exists('flash'))
     {
         $flash = app('flash');
 
-        if (is_null($message)) return $flash;
+        if (is_null($message)) {
+            return $flash;
+        }
 
         return $flash->success($message);
     }
 }
 
-if (! function_exists('error_for'))
-{
+if (! function_exists('error_for')) {
     /**
      * Show validation for the specified field.
-     * 
+     *
      * @param  string $field
      * @param  object $errors
      * @return string
@@ -103,10 +98,10 @@ if (! function_exists('gravatar')) {
     }
 }
 
-if ( ! function_exists('markdown')) {
+if (! function_exists('markdown')) {
     /**
      * Markdown.
-     * 
+     *
      * @param  string $text
      * @return string
      */

@@ -4,7 +4,8 @@ use Illuminate\Config\EnvironmentVariables;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Facade;
 
-abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase {
+abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase
+{
 
     /**
      * Creates the application.
@@ -211,8 +212,7 @@ abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase {
      */
     protected function detectEnvironment(Application $app)
     {
-        $app->detectEnvironment(function ()
-        {
+        $app->detectEnvironment(function () {
             return 'testing';
         });
     }
@@ -228,5 +228,4 @@ abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase {
         $app->make('Illuminate\Foundation\Bootstrap\SetRequestForConsole')->bootstrap($app);
         $app->make('Illuminate\Foundation\Bootstrap\RegisterProviders')->bootstrap($app);
     }
-
 }

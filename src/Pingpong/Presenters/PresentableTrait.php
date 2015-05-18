@@ -2,7 +2,8 @@
 
 use Illuminate\Container\Container;
 
-trait PresentableTrait {
+trait PresentableTrait
+{
 
     /**
      * The container instance.
@@ -13,14 +14,13 @@ trait PresentableTrait {
 
     /**
      * Present the presenter object.
-     * 
+     *
      * @return object
      * @throws \InvalidArgumentException
      */
     public function present()
     {
-        if (is_null($this->presenter))
-        {
+        if (is_null($this->presenter)) {
             throw new \InvalidArgumentException("Presenter is not defined.");
         }
 
@@ -29,7 +29,7 @@ trait PresentableTrait {
 
     /**
      * Set the presenter class.
-     * 
+     *
      * @param string $presenter
      * @return $this
      */
@@ -42,7 +42,7 @@ trait PresentableTrait {
 
     /**
      * Get presenter.
-     * 
+     *
      * @return string
      */
     public function getPresenter()
@@ -69,5 +69,4 @@ trait PresentableTrait {
     {
         return $this->container ?: new Container;
     }
-
 }
