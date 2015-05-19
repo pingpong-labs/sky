@@ -86,7 +86,7 @@ class Stub
 
     /**
      * Get base path.
-     * 
+     *
      * @return string|null
      */
     public static function getBasePath()
