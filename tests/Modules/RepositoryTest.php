@@ -82,4 +82,9 @@ class RepositoryTest extends PingpongTestCase {
         $this->assertEquals(2, count($this->repository->getPaths()));
     }
 
+    public function testInstallAndUpdateModule()
+    {
+        $this->repository->install('pingpongcms/core');
+    }
+
 }
