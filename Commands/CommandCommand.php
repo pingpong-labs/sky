@@ -1,14 +1,21 @@
 <?php namespace Pingpong\Modules\Commands;
 
 use Illuminate\Support\Str;
-use Pingpong\Generators\Stub;
+use Pingpong\Support\Stub;
 use Pingpong\Modules\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class CommandCommand extends GeneratorCommand {
-
+class CommandCommand extends GeneratorCommand
+{
     use ModuleCommandTrait;
+
+    /**
+     * The name of argument name.
+     *
+     * @var string
+     */
+    protected $argumentName = 'name';
 
     /**
      * The console command name.
@@ -54,11 +61,12 @@ class CommandCommand extends GeneratorCommand {
      */
     protected function getTemplateContents()
     {
+        $module = $this->laravel['modules']->findOrFail($this->getModuleName());
+
         return (new Stub('/command.stub', [
-            'MODULE' => $this->getModuleName(),
-            'NAME' => $this->getFileName(),
             'COMMAND_NAME' => $this->getCommandName(),
-            'MODULE_NAMESPACE' => $this->laravel['modules']->config('namespace')
+            'NAMESPACE' => $this->getClassNamespace($module),
+            'CLASS' => $this->getClass()
         ]))->render();
     }
 
@@ -88,5 +96,15 @@ class CommandCommand extends GeneratorCommand {
     private function getCommandName()
     {
         return $this->option('command') ?: 'command:name';
+    }
+
+    /**
+     * Get default namespace.
+     *
+     * @return string
+     */
+    public function getDefaultNamespace()
+    {
+        return 'Console';
     }
 }

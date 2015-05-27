@@ -5,41 +5,54 @@ use Illuminate\Support\Str;
 use Pingpong\Modules\Repository;
 use Symfony\Component\Process\Process;
 
-class Installer {
+class Installer
+{
 
     /**
      * The module name.
-     * 
+     *
      * @var string
      */
     protected $name;
     
     /**
      * The version of module being installed.
-     * 
+     *
      * @var string
      */
     protected $version;
 
     /**
      * The module repository instance.
-     * 
+     *
      * @var \Pingpong\Modules\Repository
      */
     protected $repository;
 
     /**
      * The console command instance.
-     * 
+     *
      * @var \Illuminate\Console\Command
      */
     protected $console;
 
+    /**
+     * The destionation path.
+     *
+     * @var string
+     */
     protected $path;
 
     /**
+     * The process timeout.
+     *
+     * @var integer
+     */
+    protected $timeout = 3360;
+
+    /**
      * The constructor.
-     * 
+     *
      * @param string  $name
      * @param string  $version
      * @param string  $type
@@ -55,7 +68,7 @@ class Installer {
 
     /**
      * Set destination path.
-     * 
+     *
      * @param string $path
      * @return $this
      */
@@ -68,7 +81,7 @@ class Installer {
 
     /**
      * Set the module repository instance.
-     * 
+     *
      * @param \Pingpong\Modules\Repository $repository
      * @return $this
      */
@@ -81,7 +94,7 @@ class Installer {
 
     /**
      * Set console command instance.
-     * 
+     *
      * @param \Illuminate\Console\Command $console
      * @return $this
      */
@@ -93,31 +106,66 @@ class Installer {
     }
 
     /**
+     * Set process timeout.
+     *
+     * @param  int $timeout
+     * @return $this
+     */
+    public function setTimeout($timeout)
+    {
+        $this->timeout = $timeout;
+
+        return $this;
+    }
+
+    /**
      * Run the installation process.
-     * 
+     *
      * @return \Symfony\Component\Process\Process
      */
     public function run()
+    {
+        $process = $this->getProcess();
+
+        $process->setTimeout($this->timeout);
+
+        if ($this->console instanceof Command) {
+            $process->run(function ($type, $line) {
+                $this->console->line($line);
+            });
+        }
+
+        return $process;
+    }
+
+    /**
+     * Get process instance.
+     *
+     * @return \Symfony\Component\Process\Process
+     */
+    public function getProcess()
     {
         switch ($this->type) {
             case 'github':
             case 'bitbucket':
                 if ($this->tree) {
-                    return $this->installViaSubtree();
+                    $process = $this->installViaSubtree();
                 }
 
-                return $this->installViaGit();
+                $process = $this->installViaGit();
                 break;
             
             default:
-                return $this->installViaComposer();
+                $process = $this->installViaComposer();
                 break;
         }
+
+        return $process;
     }
 
     /**
      * Get destination path.
-     * 
+     *
      * @return string
      */
     public function getDestinationPath()
@@ -131,18 +179,18 @@ class Installer {
 
     /**
      * Get git repo url.
-     * 
+     *
      * @return string|null
      */
     public function getRepoUrl()
     {
         switch ($this->type) {
             case 'github':
-                return "git@github.com:$this->name.git";
+                return "git@github.com:{$this->name}.git";
                 break;
 
             case 'bitbucket':
-                return "git@bitbucket.org:$this->name.git";
+                return "git@bitbucket.org:{$this->name}.git";
                 break;
             
             default:
@@ -153,7 +201,7 @@ class Installer {
 
     /**
      * Get branch name.
-     * 
+     *
      * @return string
      */
     public function getBranch()
@@ -163,19 +211,19 @@ class Installer {
 
     /**
      * Get module name.
-     * 
+     *
      * @return string
      */
     public function getModuleName()
     {
         $parts = explode('/', $this->name);
 
-        return Str::studly(end($parts));   
+        return Str::studly(end($parts));
     }
 
     /**
      * Get composer package name.
-     * 
+     *
      * @return string
      */
     public function getPackageName()
@@ -189,35 +237,28 @@ class Installer {
 
     /**
      * Install the module via git.
-     * 
+     *
      * @return \Symfony\Component\Process\Process
      */
     public function installViaGit()
     {
-        $process = new Process(sprintf(
+        return new Process(sprintf(
             'cd %s && git clone %s %s && git checkout %s',
             base_path(),
             $this->getRepoUrl(),
             $this->getDestinationPath(),
             $this->getBranch()
         ));
-
-        $process->run(function($type, $line)
-        {
-            $this->console->line($line);
-        });
-
-        return $process;
     }
 
     /**
      * Install the module via git subtree.
-     * 
+     *
      * @return \Symfony\Component\Process\Process
      */
     public function installViaSubtree()
     {
-        $process = new Process(sprintf(
+        return new Process(sprintf(
             'cd %s && git remote add %s %s && git subtree add --prefix=%s --squash %s %s',
             base_path(),
             $this->getModuleName(),
@@ -226,34 +267,19 @@ class Installer {
             $this->getModuleName(),
             $this->getBranch()
         ));
-
-        $process->run(function($type, $line)
-        {
-            $this->console->line($line);
-        });
-
-        return $process;
     }
 
     /**
      * Install the module via composer.
-     * 
+     *
      * @return \Symfony\Component\Process\Process
      */
     public function installViaComposer()
     {
-        $process = new Process(sprintf(
+        return new Process(sprintf(
             'cd %s && composer require %s',
             base_path(),
             $this->getPackageName()
         ));
-
-        $process->run(function($type, $line)
-        {
-            $this->console->line($line);
-        });
-
-        return $process;
     }
-
 }

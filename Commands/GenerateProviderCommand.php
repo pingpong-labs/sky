@@ -1,14 +1,22 @@
 <?php namespace Pingpong\Modules\Commands;
 
 use Illuminate\Support\Str;
-use Pingpong\Generators\Stub;
+use Pingpong\Support\Stub;
 use Pingpong\Modules\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class GenerateProviderCommand extends GeneratorCommand {
+class GenerateProviderCommand extends GeneratorCommand
+{
 
     use ModuleCommandTrait;
+
+    /**
+     * The name of argument name.
+     *
+     * @var string
+     */
+    protected $argumentName = 'name';
 
     /**
      * The console command name.
@@ -56,11 +64,12 @@ class GenerateProviderCommand extends GeneratorCommand {
     {
         $stub = $this->option('master') ? 'scaffold/provider' : 'provider';
 
+        $module = $this->laravel['modules']->findOrFail($this->getModuleName());
+
         return (new Stub('/'.$stub.'.stub', [
-            'MODULE' => $this->getModuleName(),
-            'LOWER_NAME' => strtolower($this->getModuleName()),
-            'NAME' => $this->getFileName(),
-            'MODULE_NAMESPACE' => $this->laravel['modules']->config('namespace')
+            'NAMESPACE' => $this->getClassNamespace($module),
+            'CLASS' => $this->getClass(),
+            'LOWER_NAME' => $module->getLowerName()
         ]))->render();
     }
 
@@ -82,5 +91,15 @@ class GenerateProviderCommand extends GeneratorCommand {
     private function getFileName()
     {
         return Str::studly($this->argument('name'));
+    }
+
+    /**
+     * Get default namespace.
+     *
+     * @return string
+     */
+    public function getDefaultNamespace()
+    {
+        return 'Providers';
     }
 }

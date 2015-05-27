@@ -1,30 +1,31 @@
 <?php namespace Pingpong\Modules\Commands;
 
-use Pingpong\Generators\Stub;
+use Pingpong\Support\Stub;
 use Pingpong\Modules\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 
-class GenerateRouteProviderCommand extends GeneratorCommand {
+class GenerateRouteProviderCommand extends GeneratorCommand
+{
 
     use ModuleCommandTrait;
 
     /**
      * The command name.
-     * 
+     *
      * @var string
      */
     protected $name = 'module:route-provider';
 
     /**
      * The command description.
-     * 
+     *
      * @var string
      */
     protected $description = 'Generate a new route service provider for the specified module.';
 
     /**
      * The command arguments.
-     * 
+     *
      * @return array
      */
     protected function getArguments()

@@ -2,10 +2,12 @@
 
 use Illuminate\Console\Command;
 use Pingpong\Modules\Process\Installer;
+use Pingpong\Support\Json;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class InstallCommand extends Command {
+class InstallCommand extends Command
+{
 
     /**
      * The console command name.
@@ -38,22 +40,85 @@ class InstallCommand extends Command {
      */
     public function fire()
     {
-        $installer = new Installer(
+        if (is_null($this->argument('name'))) {
+            $this->installFromFile();
+
+            return;
+        }
+
+        $this->install(
             $this->argument('name'),
             $this->argument('version'),
             $this->option('type'),
             $this->option('tree')
+        );
+    }
+
+    /**
+     * Install modules from modules.json file.
+     *
+     * @return void
+     */
+    protected function installFromFile()
+    {
+        if (! file_exists($path = base_path('modules.json'))) {
+            $this->error("File 'modules.json' does not exist in your project root.");
+            
+            return;
+        }
+
+        $modules = Json::make($path);
+        
+        $dependencies = $modules->get('require', []);
+
+        foreach ($dependencies as $module) {
+            $module = collect($module);
+
+            $this->install(
+                $module->get('name'),
+                $module->get('version'),
+                $module->get('type')
+            );
+        }
+    }
+
+    /**
+     * Install the specified module.
+     *
+     * @param  string  $name
+     * @param  string  $version
+     * @param  string  $type
+     * @param  boolean $tree
+     * @return void
+     */
+    protected function install($name, $version = 'dev-master', $type = 'composer', $tree = false)
+    {
+        $installer = new Installer(
+            $name,
+            $version,
+            $type ?: $this->option('type'),
+            $tree ?: $this->option('tree')
         );
 
         $installer->setRepository($this->laravel['modules']);
         
         $installer->setConsole($this);
 
+        if ($timeout = $this->option('timeout')) {
+            $installer->setTimeout($timeout);
+        }
+
         if ($path = $this->option('path')) {
             $installer->setPath($path);
         }
 
         $installer->run();
+
+        if (! $this->option('no-update')) {
+            $this->call('module:update', [
+                'module' => $installer->getModuleName()
+            ]);
+        }
     }
 
     /**
@@ -64,7 +129,7 @@ class InstallCommand extends Command {
     protected function getArguments()
     {
         return array(
-            array('name', InputArgument::REQUIRED, 'The name of module will be installed.'),
+            array('name', InputArgument::OPTIONAL, 'The name of module will be installed.'),
             array('version', InputArgument::OPTIONAL, 'The version of module will be installed.'),
         );
     }
@@ -77,10 +142,11 @@ class InstallCommand extends Command {
     protected function getOptions()
     {
         return array(
+            array('timeout', null, InputOption::VALUE_OPTIONAL, 'The process timeout.', null),
             array('path', null, InputOption::VALUE_OPTIONAL, 'The installation path.', null),
             array('type', null, InputOption::VALUE_OPTIONAL, 'The type of installation.', null),
             array('tree', null, InputOption::VALUE_NONE, 'Install the module as a git subtree', null),
+            array('no-update', null, InputOption::VALUE_NONE, 'Disables the automatic update of the dependencies.', null),
         );
     }
-
 }

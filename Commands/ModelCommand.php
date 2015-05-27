@@ -1,14 +1,21 @@
 <?php namespace Pingpong\Modules\Commands;
 
 use Illuminate\Support\Str;
-use Pingpong\Generators\Stub;
+use Pingpong\Support\Stub;
 use Pingpong\Modules\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class ModelCommand extends GeneratorCommand {
-
+class ModelCommand extends GeneratorCommand
+{
     use ModuleCommandTrait;
+
+    /**
+     * The name of argument name.
+     *
+     * @var string
+     */
+    protected $argumentName = 'model';
 
     /**
      * The console command name.
@@ -54,11 +61,15 @@ class ModelCommand extends GeneratorCommand {
      */
     protected function getTemplateContents()
     {
+        $module = $this->laravel['modules']->findOrFail($this->getModuleName());
+
         return (new Stub('/model.stub', [
             'MODULE' => $this->getModuleName(),
             'NAME' => $this->getModelName(),
             'FILLABLE' => $this->getFillable(),
-            'MODULE_NAMESPACE' => $this->laravel['modules']->config('namespace')
+            'MODULE_NAMESPACE' => $this->laravel['modules']->config('namespace'),
+            'NAMESPACE' => $this->getClassNamespace($module),
+            'CLASS' => $this->getClass()
         ]))->render();
     }
 
@@ -89,13 +100,22 @@ class ModelCommand extends GeneratorCommand {
     {
         $fillable = $this->option('fillable');
 
-        if ( ! is_null($fillable))
-        {
+        if (! is_null($fillable)) {
             $arrays = explode(',', $fillable);
 
             return json_encode($arrays);
         }
 
         return '[]';
+    }
+
+    /**
+     * Get default namespace.
+     *
+     * @return string
+     */
+    public function getDefaultNamespace()
+    {
+        return 'Entities';
     }
 }

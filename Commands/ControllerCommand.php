@@ -1,12 +1,19 @@
 <?php namespace Pingpong\Modules\Commands;
 
-use Pingpong\Generators\Stub;
+use Pingpong\Support\Stub;
 use Pingpong\Modules\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 
-class ControllerCommand extends GeneratorCommand {
-
+class ControllerCommand extends GeneratorCommand
+{
     use ModuleCommandTrait;
+
+    /**
+     * The name of argument being used.
+     *
+     * @var string
+     */
+    protected $argumentName = 'controller';
 
     /**
      * The console command name.
@@ -46,8 +53,10 @@ class ControllerCommand extends GeneratorCommand {
         return (new Stub('/controller.stub', [
             'MODULENAME' => $module->getStudlyName(),
             'CONTROLLERNAME' => $this->getControllerName(),
+            'CLASS' => $this->getClass(),
             'NAMESPACE' => $module->getLowername(),
-            'MODULE_NAMESPACE' => $this->laravel['modules']->config('namespace')
+            'MODULE_NAMESPACE' => $this->laravel['modules']->config('namespace'),
+            'CLASS_NAMESPACE' => $this->getClassNamespace($module)
         ]))->render();
     }
 
@@ -71,11 +80,20 @@ class ControllerCommand extends GeneratorCommand {
     {
         $controller = studly_case($this->argument('controller'));
 
-        if ( ! str_contains(strtolower($controller), 'controller'))
-        {
+        if (! str_contains(strtolower($controller), 'controller')) {
             $controller = $controller . 'Controller';
         }
 
         return $controller;
+    }
+
+    /**
+     * Get default namespace.
+     *
+     * @return string
+     */
+    public function getDefaultNamespace()
+    {
+        return 'Http\Controllers';
     }
 }
