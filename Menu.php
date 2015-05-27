@@ -5,7 +5,8 @@ use Countable;
 use Illuminate\Config\Repository;
 use Illuminate\View\Factory;
 
-class Menu implements Countable {
+class Menu implements Countable
+{
 
     /**
      * The menus collections.
@@ -36,6 +37,8 @@ class Menu implements Countable {
     {
         $builder = new MenuBuilder($name, $this->config);
 
+        $builder->setViewFactory($this->views);
+        
         $this->menus[$name] = $builder;
 
         return $builder;
@@ -140,5 +143,4 @@ class Menu implements Countable {
     {
         $this->menus = array();
     }
-
 }
