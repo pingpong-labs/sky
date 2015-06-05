@@ -4,11 +4,11 @@ namespace Pingpong\Support\Traits;
 
 trait Publishable
 {
-
     /**
      * Query scope for only published data.
      *
-     * @param  \Illuminate\Database\Query\Builder $query
+     * @param \Illuminate\Database\Query\Builder $query
+     *
      * @return \Illuminate\Database\Query\Builder
      */
     public function scopeOnlyPublished($query)
@@ -19,7 +19,8 @@ trait Publishable
     /**
      * Query scope for only drafted data.
      *
-     * @param  \Illuminate\Database\Query\Builder $query
+     * @param \Illuminate\Database\Query\Builder $query
+     *
      * @return \Illuminate\Database\Query\Builder
      */
     public function scopeOnlyDrafted($query)
@@ -30,17 +31,17 @@ trait Publishable
     /**
      * Determine whether the current model/data is published.
      *
-     * @return boolean
+     * @return bool
      */
     public function published()
     {
-        return ! $this->drafted();
+        return !$this->drafted();
     }
 
     /**
      * Determine whether the current model/data is drafted.
      *
-     * @return boolean
+     * @return bool
      */
     public function drafted()
     {
