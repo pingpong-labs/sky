@@ -137,6 +137,18 @@ class Stub
     }
 
     /**
+     * Save stub to specific path.
+     * 
+     * @param  string $path
+     * @param  string $filename
+     * @return boolean
+     */
+    public function saveTo($path, $filename)
+    {
+        return file_put_contents($path . '/' . $filename, $this->getContents());
+    }
+
+    /**
      * Set replacements array.
      *
      * @param  array $replaces
