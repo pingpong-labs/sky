@@ -1,8 +1,9 @@
-<?php namespace Pingpong\Presenters;
+<?php
+
+namespace Pingpong\Presenters;
 
 interface PresentableInterface
 {
-
     /**
      * Present the presenter.
      *
