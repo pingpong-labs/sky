@@ -44,14 +44,14 @@ class MenuBuilder implements Countable
 
     /**
      * The name of view presenter.
-     * 
+     *
      * @var null
      */
     protected $view = null;
 
     /**
      * The laravel view factory instance.
-     * 
+     *
      * @var \Illumiate\View\Factory
      */
     protected $views;
@@ -69,7 +69,7 @@ class MenuBuilder implements Countable
 
     /**
      * Set view factory instance.
-     * 
+     *
      * @param ViewFactory $views
      * @return $this
      */
@@ -82,7 +82,7 @@ class MenuBuilder implements Countable
 
     /**
      * Set view.
-     * 
+     *
      * @param  string $view
      * @return $this
      */
@@ -219,9 +219,9 @@ class MenuBuilder implements Countable
      * @param array $attributes
      * @return $this
      */
-    public function dropdown($title, \Closure $callback, array $attributes = array())
+    public function dropdown($title, \Closure $callback, $order = 0, array $attributes = array())
     {
-        $item = MenuItem::make(compact('title') + $attributes);
+        $item = MenuItem::make(compact('title', 'order') + $attributes);
 
         call_user_func($callback, $item);
 
@@ -241,11 +241,9 @@ class MenuBuilder implements Countable
      */
     public function route($route, $title, $parameters = array(), $attributes = array())
     {
-        $item = MenuItem::make(array(
-            'route' => array($route, $parameters),
-            'title' => $title,
-            'attributes' => $attributes
-        ));
+        $route = array($route, $parameters);
+
+        $item = MenuItem::make(compact('route', 'title', 'parameters', 'attributes'));
 
         $this->items[] = $item;
 
@@ -273,13 +271,11 @@ class MenuBuilder implements Countable
      * @param array $attributes
      * @return static
      */
-    public function url($url, $title, $attributes = array())
+    public function url($url, $title, $order = 0, $attributes = array())
     {
-        $item = MenuItem::make(array(
-            'url' => $this->formatUrl($url),
-            'title' => $title,
-            'attributes' => $attributes
-        ));
+        $url = $this->formatUrl($url);
+
+        $item = MenuItem::make(compact('url', 'title', 'order', 'attributes'));
 
         $this->items[] = $item;
 
@@ -364,7 +360,7 @@ class MenuBuilder implements Countable
      */
     public function render($presenter = null)
     {
-        if ( ! is_null($this->view)) {
+        if (! is_null($this->view)) {
             return $this->renderView($presenter);
         }
 
@@ -381,12 +377,60 @@ class MenuBuilder implements Countable
 
     /**
      * Render menu via view presenter.
-     * 
+     *
      * @return \Illuminate\View\View
      */
     public function renderView($presenter = null)
     {
-        return $this->views->make($presenter ?: $this->view, ['items' => $this->items]);
+        return $this->views->make($presenter ?: $this->view, [
+            'items' => $this->getOrderedItems()
+        ]);
+    }
+
+    /**
+     * Get original items.
+     *
+     * @return array
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * Get menu items as laravel collection instance.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function toCollection()
+    {
+        return collect($this->items);
+    }
+
+    /**
+     * Get menu items as array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->toCollection()->toArray();
+    }
+
+    /**
+     * Get menu items and order it by 'order' key.
+     *
+     * @return array
+     */
+    public function getOrderedItems()
+    {
+        if (config('menus.ordering')) {
+            return $this->toCollection()->sortBy(function ($item) {
+                return $item->order;
+            })->all();
+        }
+
+        return $this->items;
     }
 
     /**
@@ -399,7 +443,7 @@ class MenuBuilder implements Countable
         $presenter = $this->getPresenter();
         $menu = $presenter->getOpenTagWrapper();
 
-        foreach ($this->items as $item) {
+        foreach ($this->getOrderedItems() as $item) {
             if ($item->hasSubMenu()) {
                 $menu .= $presenter->getMenuWithDropDownWrapper($item);
             } elseif ($item->isHeader()) {
