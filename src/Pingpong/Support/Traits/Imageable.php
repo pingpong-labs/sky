@@ -4,11 +4,10 @@ namespace Pingpong\Support\Traits;
 
 trait Imageable
 {
-
     /**
      * Delete image from current instance.
      *
-     * @return boolean
+     * @return bool
      */
     public function deleteImage()
     {
@@ -28,7 +27,7 @@ trait Imageable
      */
     public function getImagePath()
     {
-        return public_path(static::$path . $this->image);
+        return public_path(static::$path.$this->image);
     }
 
     /**
@@ -38,13 +37,14 @@ trait Imageable
      */
     public function getImageUrl()
     {
-        return asset(static::$path . $this->image);
+        return asset(static::$path.$this->image);
     }
 
     /**
      * Accessor for "image_url".
      *
-     * @param  string $value
+     * @param string $value
+     *
      * @return string
      */
     public function getImageUrlAttribute($value)
@@ -55,10 +55,10 @@ trait Imageable
     /**
      * Determine whether the current file has image.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasImage()
     {
-        return ! empty($this->image) && file_exists($this->getImagePath());
+        return !empty($this->image) && file_exists($this->getImagePath());
     }
 }

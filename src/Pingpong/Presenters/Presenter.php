@@ -1,8 +1,9 @@
-<?php namespace Pingpong\Presenters;
+<?php
+
+namespace Pingpong\Presenters;
 
 abstract class Presenter
 {
-
     /**
      * The entity instance.
      *
@@ -34,6 +35,7 @@ abstract class Presenter
      * Handle call to __get method.
      *
      * @param $key
+     *
      * @return mixed
      */
     public function __get($key)
