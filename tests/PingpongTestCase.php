@@ -7,23 +7,7 @@ abstract class PingpongTestCase extends \Pingpong\Testing\TestCase {
      */
     public function getBasePath()
     {
-        return realpath(__DIR__ . '/../fixture');
-    }
-
-    /**
-     * @return \Illuminate\Foundation\Application
-     */
-    public function getApplication()
-    {
-        return $this->app;
-    }
-
-    /**
-     * @return \Illuminate\Foundation\Application
-     */
-    public static function getLaravel()
-    {
-        return (new static)->getApplication();
+        return realpath(__DIR__ . '/../vendor/pingpong/testing/fixture');
     }
 
     protected function getPackageProviders()
