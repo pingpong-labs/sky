@@ -3,6 +3,13 @@
 abstract class PingpongTestCase extends \Pingpong\Testing\TestCase {
 
     /**
+     * The base URL to use while testing the application.
+     *
+     * @var string
+     */
+    protected $baseUrl = 'http://localhost';
+
+    /**
      * @return string
      */
     public function getBasePath()
