@@ -18,17 +18,18 @@
   },
   "require-dev": {
     "mockery/mockery": "~0.9",
-    "phpunit/phpunit": "~4"
+    "phpunit/phpunit": "~4",
+    "pingpong/testing": "2.1.*"
   },
   "autoload": {
     "psr-4": {
       "Pingpong\\": "src/Pingpong"
     },
-    "classmap": [
-      "tests/PingpongTestCase.php"
-    ],
     "files": [
       "src/Pingpong/Support/helpers.php"
+    ],
+    "classmap": [
+      "tests/PingpongTestCase.php"
     ]
   },
   "suggest": {
