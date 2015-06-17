@@ -1,13 +1,13 @@
-<?php namespace Pingpong\Modules;
+<?php
+
+namespace Pingpong\Modules;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Pingpong\Support\Stub;
-use Pingpong\Modules\Commands;
 
 class ModulesServiceProvider extends ServiceProvider
 {
-
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -17,8 +17,6 @@ class ModulesServiceProvider extends ServiceProvider
 
     /**
      * Booting the package.
-     *
-     * @return void
      */
     public function boot()
     {
@@ -27,6 +25,9 @@ class ModulesServiceProvider extends ServiceProvider
         $this->registerModules();
     }
 
+    /**
+     * Register all modules.
+     */
     protected function registerModules()
     {
         $this->app->register('Pingpong\Modules\Providers\BootstrapServiceProvider');
@@ -34,8 +35,6 @@ class ModulesServiceProvider extends ServiceProvider
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register()
     {
@@ -46,13 +45,11 @@ class ModulesServiceProvider extends ServiceProvider
 
     /**
      * Setup stub path.
-     *
-     * @return void
      */
     public function setupStubPath()
     {
         $this->app->booted(function ($app) {
-            Stub::setBasePath(__DIR__ . '/Commands/stubs');
+            Stub::setBasePath(__DIR__.'/Commands/stubs');
 
             if ($app['modules']->config('stubs.enabled') === true) {
                 Stub::setBasePath($app['modules']->config('stubs.path'));
@@ -62,20 +59,16 @@ class ModulesServiceProvider extends ServiceProvider
 
     /**
      * Register package's namespaces.
-     *
-     * @return void
      */
     protected function registerNamespaces()
     {
-        $configPath = __DIR__ . '/src/config/config.php';
+        $configPath = __DIR__.'/src/config/config.php';
         $this->mergeConfigFrom($configPath, 'modules');
         $this->publishes([$configPath => config_path('modules.php')]);
     }
 
     /**
      * Register laravel html package.
-     *
-     * @return void
      */
     protected function registerHtml()
     {
@@ -92,8 +85,6 @@ class ModulesServiceProvider extends ServiceProvider
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     protected function registerServices()
     {
@@ -116,12 +107,10 @@ class ModulesServiceProvider extends ServiceProvider
 
     /**
      * Register providers.
-     *
-     * @return void
      */
     protected function registerProviders()
     {
-        $this->app->register(__NAMESPACE__ . '\\Providers\\ConsoleServiceProvider');
+        $this->app->register(__NAMESPACE__.'\\Providers\\ConsoleServiceProvider');
         $this->app->register('Pingpong\Modules\Providers\ContractsServiceProvider');
     }
 }

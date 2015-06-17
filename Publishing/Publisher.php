@@ -1,4 +1,6 @@
-<?php namespace Pingpong\Modules\Publishing;
+<?php
+
+namespace Pingpong\Modules\Publishing;
 
 use Illuminate\Console\Command;
 use Pingpong\Modules\Contracts\PublisherInterface;
@@ -7,7 +9,6 @@ use Pingpong\Modules\Repository;
 
 abstract class Publisher implements PublisherInterface
 {
-
     /**
      * The name of module will used.
      *
@@ -44,6 +45,13 @@ abstract class Publisher implements PublisherInterface
     protected $error = '';
 
     /**
+     * Determine whether the result message will shown in the console.
+     *
+     * @var bool
+     */
+    protected $showMessage = true;
+
+    /**
      * The constructor.
      *
      * @param Module $module
@@ -51,6 +59,30 @@ abstract class Publisher implements PublisherInterface
     public function __construct(Module $module)
     {
         $this->module = $module;
+    }
+
+    /**
+     * Show the result message.
+     *
+     * @return self
+     */
+    public function showMessage()
+    {
+        $this->showMessage = true;
+
+        return $this;
+    }
+
+    /**
+     * Hide the result message.
+     *
+     * @return self
+     */
+    public function hideMessage()
+    {
+        $this->showMessage = false;
+
+        return $this;
     }
 
     /**
@@ -67,6 +99,7 @@ abstract class Publisher implements PublisherInterface
      * Set modules repository instance.
      *
      * @param \Pingpong\Modules\Repository $repository
+     *
      * @return $this
      */
     public function setRepository(Repository $repository)
@@ -90,6 +123,7 @@ abstract class Publisher implements PublisherInterface
      * Set console instance.
      *
      * @param \Illuminate\Console\Command $console
+     *
      * @return $this
      */
     public function setConsole(Command $console)
@@ -135,27 +169,27 @@ abstract class Publisher implements PublisherInterface
 
     /**
      * Publish something.
-     *
-     * @return void
      */
     public function publish()
     {
-        if (! $this->console instanceof Command) {
+        if (!$this->console instanceof Command) {
             $message = "The 'console' property must instance of \\Illuminate\\Console\\Command.";
 
             throw new \RuntimeException($message);
         }
 
-        if (! $this->getFilesystem()->isDirectory($sourcePath = $this->getSourcePath())) {
+        if (!$this->getFilesystem()->isDirectory($sourcePath = $this->getSourcePath())) {
             return;
         }
 
-        if (! $this->getFilesystem()->isDirectory($destinationPath = $this->getDestinationPath())) {
+        if (!$this->getFilesystem()->isDirectory($destinationPath = $this->getDestinationPath())) {
             $this->getFilesystem()->makeDirectory($destinationPath, 0775, true);
         }
 
         if ($this->getFilesystem()->copyDirectory($sourcePath, $destinationPath)) {
-            $this->console->line("<info>Published</info>: {$this->module->getStudlyName()}");
+            if ($this->showMessage == true) {
+                $this->console->line("<info>Published</info>: {$this->module->getStudlyName()}");
+            }
         } else {
             $this->console->error($this->error);
         }

@@ -1,12 +1,14 @@
-<?php namespace Pingpong\Modules\Commands;
+<?php
+
+namespace Pingpong\Modules\Commands;
 
 use Illuminate\Console\Command;
+use Pingpong\Modules\Migrations\Migrator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 class MigrateCommand extends Command
 {
-
     /**
      * The console command name.
      *
@@ -41,28 +43,30 @@ class MigrateCommand extends Command
             return $this->migrate($name);
         }
 
-        foreach ($this->module->getOrdered($this->option('direction')) as $name) {
-            $this->migrate($name);
+        foreach ($this->module->getOrdered($this->option('direction')) as $module) {
+            $this->line('Running for module: <info>'.$module->getName().'</info>');
+
+            $this->migrate($module);
         }
     }
 
     /**
      * Run the migration from the specified module.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return mixed
      */
     protected function migrate($name)
     {
-        $this->line("<comment>Migrating module</comment> : {$name}");
-
         $module = $this->module->findOrFail($name);
-
-        $path = $module->getExtraPath($this->module->config('paths.generator.migration'));
-
-        $path = str_replace(base_path(), '', $path);
-
-        $this->call('migrate', $this->getParameter($path));
+        
+        $this->call('migrate', [
+            '--path' => $this->getPath($module),
+            '--database' => $this->option('database'),
+            '--pretend' => $this->option('pretend'),
+            '--force' => $this->option('force'),
+        ]);
 
         if ($this->option('seed')) {
             $this->call('module:seed', ['module' => $name]);
@@ -70,30 +74,16 @@ class MigrateCommand extends Command
     }
 
     /**
-     * Get console paramenter.
+     * Get migration path for specific module.
      *
-     * @param  string $path
-     * @return array
+     * @param  \Pingpong\Modules\Module $module
+     * @return string
      */
-    protected function getParameter($path)
+    protected function getPath($module)
     {
-        $params = array();
-
-        $params['--path'] = $path;
-
-        if ($option = $this->option('database')) {
-            $params['--database'] = $option;
-        }
-
-        if ($option = $this->option('pretend')) {
-            $params['--pretend'] = $option;
-        }
-
-        if ($option = $this->option('force')) {
-            $params['--force'] = $option;
-        }
-
-        return $params;
+        $path = $module->getExtraPath(config('modules.paths.generator.migration'));
+        
+        return str_replace(base_path(), '', $path);
     }
 
     /**
