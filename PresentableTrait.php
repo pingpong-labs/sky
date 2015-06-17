@@ -1,10 +1,11 @@
-<?php namespace Pingpong\Presenters;
+<?php
+
+namespace Pingpong\Presenters;
 
 use Illuminate\Container\Container;
 
 trait PresentableTrait
 {
-
     /**
      * The container instance.
      *
@@ -16,12 +17,13 @@ trait PresentableTrait
      * Present the presenter object.
      *
      * @return object
+     *
      * @throws \InvalidArgumentException
      */
     public function present()
     {
         if (is_null($this->presenter)) {
-            throw new \InvalidArgumentException("Presenter is not defined.");
+            throw new \InvalidArgumentException('Presenter is not defined.');
         }
 
         return $this->getContainer()->make($this->presenter, array($this));
@@ -31,6 +33,7 @@ trait PresentableTrait
      * Set the presenter class.
      *
      * @param string $presenter
+     *
      * @return $this
      */
     public function setPresenter($presenter)
@@ -67,6 +70,6 @@ trait PresentableTrait
      */
     public function getContainer()
     {
-        return $this->container ?: new Container;
+        return $this->container ?: new Container();
     }
 }
