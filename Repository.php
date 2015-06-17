@@ -1,14 +1,16 @@
-<?php namespace Pingpong\Themes;
+<?php
+
+namespace Pingpong\Themes;
 
 use Illuminate\Cache\Repository as Cache;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Str;
 use Illuminate\Translation\Translator;
 use Illuminate\View\Factory;
 
 class Repository implements Arrayable
 {
-
     /**
      * The Pingpong Themes Finder Object.
      *
@@ -54,10 +56,11 @@ class Repository implements Arrayable
     /**
      * The constructor.
      *
-     * @param Finder $finder
-     * @param Config $config
-     * @param Factory $views
+     * @param Finder     $finder
+     * @param Config     $config
+     * @param Factory    $views
      * @param Translator $lang
+     *
      * @internal param Factory $view
      */
     public function __construct(
@@ -83,13 +86,16 @@ class Repository implements Arrayable
             foreach (array('views', 'lang') as $hint) {
                 $this->{$hint}->addNamespace($theme->getLowerName(), $theme->getPath($hint));
             }
+
+            $theme->boot();
         }
     }
 
     /**
      * Find the specified theme.
      *
-     * @param  string $search
+     * @param string $search
+     *
      * @return \Pingpong\Themes\Theme|null
      */
     public function find($search)
@@ -100,18 +106,19 @@ class Repository implements Arrayable
             }
         }
 
-        return null;
+        return;
     }
 
     /**
      * Get theme path by given theme name.
      *
      * @param $theme
+     *
      * @return null|string
      */
     public function getThemePath($theme)
     {
-        return $this->path . "/{$theme}";
+        return $this->path."/{$theme}";
     }
 
     /**
@@ -128,6 +135,7 @@ class Repository implements Arrayable
      * Set current theme.
      *
      * @param string $current
+     *
      * @return $this
      */
     public function setCurrent($current)
@@ -141,6 +149,7 @@ class Repository implements Arrayable
      * The alias "setCurrent" method.
      *
      * @param $theme
+     *
      * @return $this
      */
     public function set($theme)
@@ -190,7 +199,7 @@ class Repository implements Arrayable
     /**
      * Determine whether the cache is enabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function useCache()
     {
@@ -220,7 +229,7 @@ class Repository implements Arrayable
     /**
      * Get cache status.
      *
-     * @return boolean
+     * @return bool
      */
     public function getCacheStatus()
     {
@@ -230,7 +239,8 @@ class Repository implements Arrayable
     /**
      * Format for each cached theme to a Theme instance.
      *
-     * @param  array|string $cached
+     * @param array|string $cached
+     *
      * @return array
      */
     protected function formatCache($cached)
@@ -248,8 +258,6 @@ class Repository implements Arrayable
 
     /**
      * Cache the themes.
-     *
-     * @return void
      */
     public function cache()
     {
@@ -262,8 +270,6 @@ class Repository implements Arrayable
 
     /**
      * Forget cached themes.
-     *
-     * @return void
      */
     public function forgetCache()
     {
@@ -296,17 +302,19 @@ class Repository implements Arrayable
      * Check whether the given theme in all themes.
      *
      * @param $theme
+     *
      * @return bool
      */
     public function has($theme)
     {
-        return ! is_null($this->find($theme));
+        return !is_null($this->find($theme));
     }
 
     /**
      * Alias for "has" method.
      *
      * @param $theme
+     *
      * @return bool
      */
     public function exists($theme)
@@ -318,6 +326,7 @@ class Repository implements Arrayable
      * Set theme path on runtime.
      *
      * @param $path
+     *
      * @return Finder
      */
     public function setPath($path)
@@ -341,6 +350,7 @@ class Repository implements Arrayable
      * @param $view
      * @param array $data
      * @param array $mergeData
+     *
      * @return mixed
      */
     public function view($view, $data = array(), $mergeData = array())
@@ -353,11 +363,21 @@ class Repository implements Arrayable
      *
      * @param $key
      * @param null $default
+     *
      * @return mixed
      */
     public function config($key, $default = null)
     {
-        return $this->config->get($this->getThemeNamespace($key), $default);
+        if (Str::contains($key, '::')) {
+            list($theme, $config) = explode('::', $key);
+        } else {
+            $theme = $this->getCurrent();
+            $config = $key;
+        }
+
+        $theme = $this->find($theme);
+
+        return $theme ? $theme->config($config) : $default;
     }
 
     /**
@@ -365,7 +385,8 @@ class Repository implements Arrayable
      *
      * @param $key
      * @param array $replace
-     * @param null $locale
+     * @param null  $locale
+     *
      * @return string
      */
     public function lang($key, $replace = array(), $locale = null)
@@ -377,17 +398,19 @@ class Repository implements Arrayable
      * Get theme namespace by given key.
      *
      * @param $key
+     *
      * @return string
      */
     protected function getThemeNamespace($key)
     {
-        return $this->getCurrent() . "::{$key}";
+        return $this->getCurrent()."::{$key}";
     }
 
     /**
      * Get theme namespace.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return string
      */
     public function getNamespace($key)
@@ -398,15 +421,14 @@ class Repository implements Arrayable
     /**
      * Register a view composer to current theme.
      *
-     * @param  string|array $views
-     * @param  string|callable $callback
-     * @param  int|null $priority
-     * @return void
+     * @param string|array    $views
+     * @param string|callable $callback
+     * @param int|null        $priority
      */
     public function composer($views, $callback, $priority = null)
     {
         $theViews = [];
-        
+
         foreach ((array) $views as $view) {
             $theViews[] = $this->getThemeNamespace($view);
         }
