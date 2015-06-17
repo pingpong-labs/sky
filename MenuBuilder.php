@@ -1,4 +1,6 @@
-<?php namespace Pingpong\Menus;
+<?php
+
+namespace Pingpong\Menus;
 
 use Countable;
 use Illuminate\Config\Repository;
@@ -6,7 +8,6 @@ use Illuminate\View\Factory as ViewFactory;
 
 class MenuBuilder implements Countable
 {
-
     /**
      * Menu name.
      *
@@ -57,9 +58,16 @@ class MenuBuilder implements Countable
     protected $views;
 
     /**
+     * Determine whether the ordering feature is enabled or not.
+     *
+     * @var boolean
+     */
+    protected $ordering = false;
+
+    /**
      * Constructor.
      *
-     * @param  string $menu
+     * @param string $menu
      */
     public function __construct($menu, Repository $config)
     {
@@ -68,9 +76,52 @@ class MenuBuilder implements Countable
     }
 
     /**
+     * Get menu name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->menu;
+    }
+
+    /**
+     * Find menu item by given its title.
+     *
+     * @param  string        $title
+     * @param  callable|null $callback
+     * @return mixed
+     */
+    public function whereTitle($title, callable $callback = null)
+    {
+        $item = $this->findBy('title', $title);
+
+        if (is_callable($callback)) {
+            return call_user_func($callback, $item);
+        }
+
+        return $item;
+    }
+
+    /**
+     * Find menu item by given key and value.
+     *
+     * @param  string $key
+     * @param  string $value
+     * @return \Pingpong\Menus\MenuItem
+     */
+    public function findBy($key, $value)
+    {
+        return collect($this->items)->filter(function ($item) use ($key, $value) {
+            return $item->{$key} == $value;
+        })->first();
+    }
+
+    /**
      * Set view factory instance.
      *
      * @param ViewFactory $views
+     *
      * @return $this
      */
     public function setViewFactory(ViewFactory $views)
@@ -83,7 +134,8 @@ class MenuBuilder implements Countable
     /**
      * Set view.
      *
-     * @param  string $view
+     * @param string $view
+     *
      * @return $this
      */
     public function setView($view)
@@ -97,6 +149,7 @@ class MenuBuilder implements Countable
      * Set Prefix URL.
      *
      * @param string $prefixUrl
+     *
      * @return $this
      */
     public function setPrefixUrl($prefixUrl)
@@ -119,8 +172,7 @@ class MenuBuilder implements Countable
     /**
      * Set new presenter class.
      *
-     * @param  string $presenter
-     * @return void
+     * @param string $presenter
      */
     public function setPresenter($presenter)
     {
@@ -134,13 +186,14 @@ class MenuBuilder implements Countable
      */
     public function getPresenter()
     {
-        return new $this->presenter;
+        return new $this->presenter();
     }
 
     /**
      * Set new presenter class by given style name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return self
      */
     public function style($name)
@@ -156,6 +209,7 @@ class MenuBuilder implements Countable
      * Determine if the given name in the presenter style.
      *
      * @param $name
+     *
      * @return bool
      */
     public function hasStyle($name)
@@ -177,6 +231,7 @@ class MenuBuilder implements Countable
      * Get the presenter class name by given alias name.
      *
      * @param $name
+     *
      * @return mixed
      */
     public function getStyle($name)
@@ -199,7 +254,8 @@ class MenuBuilder implements Countable
     /**
      * Add new child menu.
      *
-     * @param  array $attributes
+     * @param array $attributes
+     *
      * @return \Pingpong\Menus\MenuItem
      */
     public function add(array $attributes = array())
@@ -216,7 +272,8 @@ class MenuBuilder implements Countable
      *
      * @param $title
      * @param callable $callback
-     * @param array $attributes
+     * @param array    $attributes
+     *
      * @return $this
      */
     public function dropdown($title, \Closure $callback, $order = 0, array $attributes = array())
@@ -237,13 +294,16 @@ class MenuBuilder implements Countable
      * @param $title
      * @param array $parameters
      * @param array $attributes
+     *
      * @return static
      */
-    public function route($route, $title, $parameters = array(), $attributes = array())
+    public function route($route, $title, $parameters = array(), $order = null, $attributes = array())
     {
         $route = array($route, $parameters);
 
-        $item = MenuItem::make(compact('route', 'title', 'parameters', 'attributes'));
+        $item = MenuItem::make(
+            compact('route', 'title', 'parameters', 'attributes', 'order')
+        );
 
         $this->items[] = $item;
 
@@ -253,13 +313,14 @@ class MenuBuilder implements Countable
     /**
      * Format URL.
      *
-     * @param  string $url
+     * @param string $url
+     *
      * @return string
      */
     protected function formatUrl($url)
     {
-        $uri = ! is_null($this->prefixUrl) ? $this->prefixUrl . $url : $url;
-            
+        $uri = !is_null($this->prefixUrl) ? $this->prefixUrl.$url : $url;
+
         return $uri == '/' ? '/' : ltrim(rtrim($uri, '/'), '/');
     }
 
@@ -269,6 +330,7 @@ class MenuBuilder implements Countable
      * @param $url
      * @param $title
      * @param array $attributes
+     *
      * @return static
      */
     public function url($url, $title, $order = 0, $attributes = array())
@@ -285,11 +347,12 @@ class MenuBuilder implements Countable
     /**
      * Add new divider item.
      *
+     * @param int $order
      * @return \Pingpong\Menus\MenuItem
      */
-    public function addDivider()
+    public function addDivider($order = null)
     {
-        $this->items[] = new MenuItem(array('name' => 'divider'));
+        $this->items[] = new MenuItem(array('name' => 'divider', 'order' => $order));
 
         return $this;
     }
@@ -299,11 +362,12 @@ class MenuBuilder implements Countable
      *
      * @return \Pingpong\Menus\MenuItem
      */
-    public function addHeader($title)
+    public function addHeader($title, $order = null)
     {
         $this->items[] = new MenuItem(array(
             'name' => 'header',
-            'title' => $title
+            'title' => $title,
+            'order' => $order
         ));
 
         return $this;
@@ -312,7 +376,8 @@ class MenuBuilder implements Countable
     /**
      * Alias for "addHeader" method.
      *
-     * @param  string $title
+     * @param string $title
+     *
      * @return $this
      */
     public function header($title)
@@ -342,8 +407,6 @@ class MenuBuilder implements Countable
 
     /**
      * Empty the current menu items.
-     *
-     * @return void
      */
     public function destroy()
     {
@@ -355,12 +418,13 @@ class MenuBuilder implements Countable
     /**
      * Render the menu to HTML tag.
      *
-     * @param  string $presenter
+     * @param string $presenter
+     *
      * @return string
      */
     public function render($presenter = null)
     {
-        if (! is_null($this->view)) {
+        if (!is_null($this->view)) {
             return $this->renderView($presenter);
         }
 
@@ -368,7 +432,7 @@ class MenuBuilder implements Countable
             $this->setPresenterFromStyle($presenter);
         }
 
-        if (! is_null($presenter) && ! $this->hasStyle($presenter)) {
+        if (!is_null($presenter) && !$this->hasStyle($presenter)) {
             $this->setPresenter($presenter);
         }
 
@@ -383,7 +447,7 @@ class MenuBuilder implements Countable
     public function renderView($presenter = null)
     {
         return $this->views->make($presenter ?: $this->view, [
-            'items' => $this->getOrderedItems()
+            'items' => $this->getOrderedItems(),
         ]);
     }
 
@@ -418,13 +482,37 @@ class MenuBuilder implements Countable
     }
 
     /**
+     * Enable menu ordering.
+     *
+     * @return self
+     */
+    public function enableOrdering()
+    {
+        $this->ordering = true;
+
+        return $this;
+    }
+
+    /**
+     * Disable menu ordering.
+     *
+     * @return self
+     */
+    public function disableOrdering()
+    {
+        $this->ordering = true;
+
+        return $this;
+    }
+
+    /**
      * Get menu items and order it by 'order' key.
      *
      * @return array
      */
     public function getOrderedItems()
     {
-        if (config('menus.ordering')) {
+        if (config('menus.ordering') || $this->ordering) {
             return $this->toCollection()->sortBy(function ($item) {
                 return $item->order;
             })->all();
