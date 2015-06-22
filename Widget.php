@@ -76,12 +76,23 @@ class Widget
     protected function registerBlade($name)
     {
         $this->blade->extend(function ($view, $compiler) use ($name) {
-            $pattern = $compiler->createMatcher($name);
+            $pattern = $this->createMatcher($name);
 
             $replace = '$1<?php echo Widget::'.$name.'$2; ?>';
 
             return preg_replace($pattern, $replace, $view);
         });
+    }
+
+    /**
+     * Get the regular expression for a generic Blade function.
+     *
+     * @param  string  $function
+     * @return string
+     */
+    protected function createMatcher($function)
+    {
+        return '/(?<!\w)(\s*)@'.$function.'(\s*\(.*\))/';
     }
 
     /**
@@ -129,7 +140,7 @@ class Widget
             return $this->getCallback($callback, $parameters);
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -241,10 +252,8 @@ class Widget
 
         $result = '';
 
-        $widgets = $this->reorderWidgets($this->groups[$name]);
-
-        foreach ($widgets as $key => $widget) {
-            $result .= $this->get($widget['name'], array_get($parameters, $key, array()));
+        foreach ($this->groups[$name] as $key => $widget) {
+            $result .= $this->get($widget, array_get($parameters, $key, array()));
         }
 
         return $result;
