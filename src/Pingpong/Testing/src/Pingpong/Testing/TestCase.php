@@ -223,10 +223,18 @@ abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase
      */
     protected function bootstrap(Application $app)
     {
-        $app->make('Illuminate\Foundation\Bootstrap\ConfigureLogging')->bootstrap($app);
-        $app->make('Illuminate\Foundation\Bootstrap\HandleExceptions')->bootstrap($app);
-        $app->make('Illuminate\Foundation\Bootstrap\RegisterFacades')->bootstrap($app);
-        $app->make('Illuminate\Foundation\Bootstrap\SetRequestForConsole')->bootstrap($app);
-        $app->make('Illuminate\Foundation\Bootstrap\RegisterProviders')->bootstrap($app);
+        $bootstrappers = [
+            'Illuminate\Foundation\Bootstrap\DetectEnvironment',
+            'Illuminate\Foundation\Bootstrap\LoadConfiguration',
+            'Illuminate\Foundation\Bootstrap\ConfigureLogging',
+            'Illuminate\Foundation\Bootstrap\HandleExceptions',
+            'Illuminate\Foundation\Bootstrap\RegisterFacades',
+            'Illuminate\Foundation\Bootstrap\RegisterProviders',
+            'Illuminate\Foundation\Bootstrap\BootProviders',
+        ];
+
+        foreach ($bootstrappers as $class) {
+            $app->make($class)->bootstrap($app);
+        }
     }
 }
