@@ -75,7 +75,7 @@ class RepositoryTest extends PingpongTestCase {
         $this->assertEquals('user', $used->getLowerName());
     }
 
-    public function addPath()
+    public function testAddPath()
     {
         $this->repository->addLocation(__DIR__ . '/../../../fixture/app/modules');
         $this->repository->addPath(__DIR__ . '/../../../fixture/vendor');
