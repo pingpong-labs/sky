@@ -61,19 +61,19 @@ class MenuTest extends PHPUnit_Framework_TestCase {
 
     public function testCreateMenu()
     {
-        $topMenu = $this->menu->make('top-menu');
-        $topMenu->add([
-            'title' => 'Home',
-            'url' => '/',
-            'icon' => 'fa fa-dashboard'
-        ]);
-        $topMenu->add([
-            'title' => 'Profile',
-            'url' => '/profile',
-            'icon' => 'fa fa-profile'
-        ]);
-
-        $this->assertEquals(1, $this->menu->count());
+        $this->menu->make('foo', function ($menu)
+        {
+            $menu->addHeader('Main');
+            $menu->url('/', 'Bar');
+            $menu->addDivider();
+            $menu->url('/home', 'Home');
+            $menu->divider();
+            $menu->header('SETTINGS');
+            $menu->dropdown('Baz', function ($sub)
+            {
+                $sub->url('/', 'Lorem');
+            });
+        });
     }
 
     public function testMultiLevelMenu()
