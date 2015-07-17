@@ -276,15 +276,26 @@ class MenuBuilder implements Countable
      *
      * @return $this
      */
-    public function dropdown($title, \Closure $callback, $order = 0, array $attributes = array())
+    public function dropdown($title, \Closure $callback, $order = null, array $attributes = array())
     {
-        $item = MenuItem::make(compact('title', 'order') + $attributes);
+        $properties = compact('title', 'order', 'attributes');
+
+        if (func_num_args() == 3) {
+            $arguments = func_get_args();
+            
+            $title = array_get($arguments, 0);
+            $attributes = array_get($arguments, 2);
+            
+            $properties = compact('title', 'attributes');
+        }
+
+        $item = MenuItem::make($properties);
 
         call_user_func($callback, $item);
 
         $this->items[] = $item;
 
-        return $this;
+        return $item;
     }
 
     /**
@@ -299,6 +310,16 @@ class MenuBuilder implements Countable
      */
     public function route($route, $title, $parameters = array(), $order = null, $attributes = array())
     {
+        if (func_num_args() == 4) {
+            $arguments = func_get_args();
+
+            return $this->add([
+                'route' => [array_get($arguments, 0), array_get($arguments, 2)],
+                'title' => array_get($arguments, 1),
+                'attributes' => array_get($arguments, 3)
+            ]);
+        }
+
         $route = array($route, $parameters);
 
         $item = MenuItem::make(
@@ -335,8 +356,18 @@ class MenuBuilder implements Countable
      */
     public function url($url, $title, $order = 0, $attributes = array())
     {
-        $url = $this->formatUrl($url);
+        if (func_num_args() == 3) {
+            $arguments = func_get_args();
 
+            return $this->add([
+                'url' => $this->formatUrl(array_get($arguments, 0)),
+                'title' => array_get($arguments, 1),
+                'attributes' => array_get($arguments, 2)
+            ]);
+        }
+
+        $url = $this->formatUrl($url);
+        
         $item = MenuItem::make(compact('url', 'title', 'order', 'attributes'));
 
         $this->items[] = $item;
