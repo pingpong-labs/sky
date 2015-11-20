@@ -30,9 +30,6 @@
     ],
     "files": [
       "src/Pingpong/Support/helpers.php"
-    ],
-    "classmap": [
-      "tests/PingpongTestCase.php"
     ]
   },
   "suggest": {
